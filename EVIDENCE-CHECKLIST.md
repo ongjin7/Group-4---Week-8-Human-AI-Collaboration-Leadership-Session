@@ -55,9 +55,10 @@ seven-step workflow, check (who, what, when, if it fails), placement reasoning, 
 - [x] One run, shown as a five-stop journey (test passenger Kerry Tan): form (`form-top.jpg`, `form-answers.jpg`,
       email and phone redacted), manager’s inbox and report (`manager-inbox.jpg`, `manager-report.jpg`, sender address
       redacted), reply draft (`reply-draft.jpg`)
-- [ ] **Zap history record of the Kerry Tan run**, with its run ID or time visible: the last piece that proves the
-      form, report and draft all come from the same run
-- [ ] Shared run ID or timestamp shown on the “Same run, in Zap history” slide
+- [x] **Zap history record** (`zap-run-history.jpg`): one successful run on 18 Oct 2026 at 10:40 pm, every step green
+- [x] Run time shown on the “Same run, in Zap history” slide
+- [ ] Optional, to tie the screenshots to that exact run: the run’s step details showing Kerry Tan’s data
+      (can go in the appendix as extra proof)
 - [ ] Testing lessons (appendix A2):
   - [ ] Consent reversal: annotated before/after screenshot (reported in Jin’s write-up)
   - [ ] Retest showing Email: Yes, Mobile: No: screenshot (reported in write-up)

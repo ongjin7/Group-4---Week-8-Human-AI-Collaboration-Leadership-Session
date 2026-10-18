@@ -353,7 +353,9 @@
       cls: 'agent', q: a.quadrant, theme: a.theme,
       html: `${agentHead(a, 'The same run, in *Zap history*')}
         <div class="matchbar"><span class="k">Same run?</span><span>${esc(r.matchKey.label)}: ${t(r.matchKey.value)}</span></div>
-        ${ev(r.record)}`
+        ${Array.isArray(r.recordShots) && r.recordShots.length
+          ? `<div class="jshots">${r.recordShots.map((sh) => ev(sh, sh.caption)).join('')}</div>`
+          : ev(r.record)}`
     };
   };
 

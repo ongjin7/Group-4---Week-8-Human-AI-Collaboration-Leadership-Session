@@ -543,3 +543,4 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 }
 .tcard.speak .tc-bubble { opacity: 1; transform: none; }
 @media print { .tc-bubble { display: none; } }
+.slide.agent > .jshots { flex: 1; min-height: 0; }

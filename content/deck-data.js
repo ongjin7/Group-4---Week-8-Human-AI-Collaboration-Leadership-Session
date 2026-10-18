@@ -300,10 +300,19 @@ window.DECK_DATA = {
         { src: null, caption: "Gmail: Create Draft, not Send", missing: "Screenshot of the Gmail action event setting" }
       ],
       run: {
-        matchKey: { label: "Zap run ID / timestamp", value: "TBC: the run ID or time of the Kerry Tan test run, as shown in Zap history" },
+        matchKey: { label: "Zap run", value: "18 Oct 2026, 10:40 pm: the only run in the last 30 days, every step successful" },
         input: { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Input: Kerry Tan’s feedback form" },
         output: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Output: the manager’s report" },
-        record: { src: null, caption: "Zap history: same run", missing: "Zap history run detail for the Kerry Tan test run, showing its run ID and time" }
+        record: { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "Zap history: the run and each step’s result" },
+        /* The same screenshot, shown as two zoomed views: the run entry, and each step's outcome. */
+        recordShots: [
+          { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "The run: successful, 18 Oct, 10:40 pm",
+            alt: "Zap runs panel: 1 run in the last 30 days, Successful, Oct 18, 2026 10:40 pm", focus: "20% 45%", zoom: 2.2,
+            pins: [{ x: 37.5, y: 44.8, n: 1, ring: false, text: "Successful run, 18 Oct 2026, 10:40 pm" }] },
+          { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "Each step of that run: done",
+            alt: "Each Zap step marked done: found 1 form response, AI results, email sent, passed the filter, AI draft, draft sent to Gmail", focus: "80% 67%", zoom: 2.2,
+            pins: [{ x: 95, y: 51, n: 2, ring: false, text: "Report email sent" }, { x: 95, y: 67, n: 3, ring: false, text: "Passed the filter" }, { x: 95, y: 83, n: 4, ring: false, text: "AI drafted the reply" }] }
+        ]
       },
       /* One run, start to finish. Each stop is its own slide; → moves along the timeline.
          Shots: focus = the point to zoom into, zoom = how far, pins = numbered markers (x/y in % of the image). */
@@ -392,7 +401,7 @@ window.DECK_DATA = {
         card: "Meet the MBairline assistant. Tap the card five times: its mission, what wakes it up (a new feedback form), its gear, its forbidden move (it can never send a reply: the Gmail step is Create Draft, not Send Email), and where it calls a human (the manager).",
         build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
-        record: "Same run in Zap history. Read the run ID / timestamp aloud and point back to it on the output.",
+        record: "The proof: Zap history shows one successful run on 18 October at 10:40 pm. Every step is green: it found Kerry’s form, sent the report, passed the filter, drafted the reply and saved it as a draft. That is the run we just followed.",
         person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: the consent mix-up in appendix A2."
       }
     }
