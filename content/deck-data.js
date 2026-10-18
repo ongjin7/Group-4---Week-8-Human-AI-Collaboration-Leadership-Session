@@ -465,7 +465,7 @@ window.DECK_DATA = {
         { id: "moves", type: "moves", seconds: 60, title: "What would move each agent?",
           notes: "Hypothetical redesigns, not things our agents do today. For each card: the change, which question flips, and where it lands. One answer changes, the other stays. Only Question 1 moves the HR agent; the other three change Question 2. Removing an approval does not by itself move an agent: the work has to change.",
           cue: "Say “hypothetical” once, then read the four destinations." },
-        { id: "closing", type: "closing", seconds: 15, title: "Your turn",
+        { id: "closing", type: "closing", seconds: 15, title: "Takeaway and Q&A",
           notes: "Read the takeaway, then the question, and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
           cue: "Read the question exactly, then pause." }
       ]

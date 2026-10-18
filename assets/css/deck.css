@@ -760,3 +760,29 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .compare .qcell .an { padding-right: 0; }
 .compare .qcell .qt { padding-right: 70px; }
 .compare .qcell .role { padding-top: 0; }
+
+/* ---------------------------------------- the ending: four agents line up */
+.s-closing { justify-content: flex-start; gap: 22px; padding-top: 64px; }
+.s-closing .close-take { font-size: 28px; max-width: 1380px; }
+.s-closing h1 { font-size: 76px; max-width: 1380px; line-height: 1.05; }
+.lineup { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: end; }
+.lu-agent { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.lu-face { width: 168px; height: 168px; border-radius: 50%; background: var(--qsoft); box-shadow: 0 0 0 6px #fff, 0 18px 36px -16px rgba(0,0,0,.35); padding: 14px; }
+.lu-face svg { width: 100%; height: 100%; }
+.lu-name { font: 600 21px/1.2 var(--sans); color: var(--ink); margin-top: 12px; }
+.lu-q { font-size: 17px; color: var(--qc); font-weight: 600; }
+.lu-bubble { position: absolute; top: -34px; left: 58%; background: #fff; border: 2.5px solid var(--qdot); border-radius: 16px 16px 16px 4px; padding: 6px 14px; font: 700 18px/1.2 var(--sans); color: var(--qc); white-space: nowrap; box-shadow: 0 8px 18px -10px rgba(0,0,0,.3); }
+@media (prefers-reduced-motion: no-preference) {
+  .slide.active .lu-agent { animation: lu-in .6s cubic-bezier(.3,1.5,.5,1) both; animation-delay: var(--d); }
+  .slide.active .lu-face { animation: lu-bob 2.6s ease-in-out infinite; animation-delay: calc(var(--d) + .7s); }
+  .slide.active .lu-bubble { animation: lu-pop .4s cubic-bezier(.3,1.6,.5,1) both; animation-delay: calc(var(--d) + .55s); }
+}
+@keyframes lu-in { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: none; } }
+@keyframes lu-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes lu-pop { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: none; } }
+@media print { .lu-agent, .lu-face, .lu-bubble { animation: none !important; opacity: 1 !important; transform: none !important; } }
+.s-closing h1 { font-size: 86px; }
+.lu-face { width: 210px; height: 210px; padding: 16px; }
+.lineup { position: relative; padding-bottom: 6px; }
+.lineup::before { content: ""; position: absolute; left: 4%; right: 4%; bottom: 72px; height: 2px; background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent); z-index: -1; }
+.lu-bubble { top: -30px; font-size: 20px; }

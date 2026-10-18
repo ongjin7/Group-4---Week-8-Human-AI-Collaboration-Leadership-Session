@@ -490,12 +490,22 @@
       }).join('')}</div>`
   });
 
+  /* The ending: the takeaway, the question, and the four agents lined up asking to be moved. */
   R.closing = () => ({
     cls: 's-closing',
-    html: `<p class="eyebrow">Takeaway</p>
+    html: `<p class="eyebrow">Takeaway &amp; Q&amp;A</p>
       ${D.meta.closingTakeaway ? `<p class="close-take">${md(D.meta.closingTakeaway)}</p>` : ''}
       <h1>${md(D.meta.closingQuestion)}</h1>
-      ${glyph(130)}`
+      <div class="lineup">${ORDER.map((q, k) => {
+        const a = byQ(q);
+        if (!a) return '';
+        return `<div class="lu-agent" data-q="${q}" style="--d:${k * 0.14}s">
+          <span class="lu-bubble" aria-hidden="true">${k % 2 ? 'Move me?' : 'Me?'}</span>
+          <div class="lu-face">${face(a)}</div>
+          <span class="lu-name">${esc(nameOf(a))}</span>
+          <span class="lu-q">${esc(QS[q].title)}</span>
+        </div>`;
+      }).join('')}</div>`
   });
 
   /* ----------------------------------------------------------- appendix */
