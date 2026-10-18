@@ -740,3 +740,11 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .cmp-qs p { grid-template-columns: 112px 1fr; }
 .cmp-qs b { white-space: nowrap; }
 .cmp-qs em { white-space: nowrap; }
+/* "How the job changes": full-width, two cards side by side */
+.cmp-foot { grid-template-columns: 1fr; margin-top: 18px; }
+.cmp-qs { display: grid; grid-template-columns: auto 1fr 1fr; gap: 18px; align-items: stretch; }
+.cmp-qs .cmp-label { align-self: center; margin: 0; writing-mode: horizontal-tb; max-width: 120px; line-height: 1.4; }
+.cmp-qs p { display: flex; flex-direction: column; gap: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 22px; box-shadow: var(--shadow); font-size: 20px; line-height: 1.4; }
+.cmp-qs p b { font-size: 24px; }
+.cmp-qs { grid-template-columns: 140px 1fr 1fr; gap: 12px; }
+.cmp-qs .cmp-label { background: none; border: 0; box-shadow: none; padding: 0 14px 0 0; display: block; font-size: 15px; line-height: 1.5; max-width: none; }
