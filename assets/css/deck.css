@@ -827,3 +827,15 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .s-intro .banner { filter: sepia(.15) saturate(.9) brightness(1.12) contrast(.82); opacity: .9; }
 .s-intro .banner::before { background: linear-gradient(180deg, #F3C6C6 0%, #F8E0D6 60%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: 1; }
 .s-intro .banner::after { background: linear-gradient(90deg, #E9B7B7, #F2D3B8); mix-blend-mode: color; opacity: .42; }
+
+/* takeaway as the closing line of the moves slide */
+.moves { gap: 14px; }
+.moves .move { gap: 6px; padding: 16px 22px 14px; }
+.mv-change, .mv-flip { font-size: 19px; line-height: 1.34; }
+.mv-take { margin-top: 18px; display: flex; gap: 18px; align-items: baseline; font: italic 400 25px/1.35 var(--serif); color: var(--accent); border-top: 1px solid var(--line); padding-top: 14px; }
+.mv-take b { flex: none; font: 600 15px/1 var(--sans); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* Q&A ending: question and agents only */
+.s-closing { justify-content: center; gap: 0; padding-top: 72px; }
+.s-closing h1 { font-size: 96px; margin: 18px 0 0; }
+.s-closing .lineup { margin-top: 80px; }

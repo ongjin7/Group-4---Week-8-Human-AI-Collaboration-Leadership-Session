@@ -487,14 +487,14 @@
           </div>
           <span class="mv-keep" title="${esc(QLABEL[other].name)} unchanged"></span>
         </div>`;
-      }).join('')}</div>`
+      }).join('')}</div>
+      ${D.meta.closingTakeaway ? `<p class="mv-take"><b>Takeaway</b> ${md(D.meta.closingTakeaway)}</p>` : ''}`
   });
 
   /* The ending: the takeaway, the question, and the four agents lined up asking to be moved. */
   R.closing = () => ({
     cls: 's-closing',
-    html: `<p class="eyebrow">Takeaway &amp; Q&amp;A</p>
-      ${D.meta.closingTakeaway ? `<p class="close-take">${md(D.meta.closingTakeaway)}</p>` : ''}
+    html: `<p class="eyebrow">Q&amp;A</p>
       <h1>${md(D.meta.closingQuestion)}</h1>
       <div class="lineup">${ORDER.map((q, k) => {
         const a = byQ(q);

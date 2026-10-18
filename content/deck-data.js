@@ -463,10 +463,10 @@ window.DECK_DATA = {
           notes: "Back to the full map. Point at the answers in each cell: our two answers placed each agent (expense: yes, yes; CRM: no, yes; HR: yes, no; MBairline: no, no). Then how the job changes: across, losing the right answer turns verifying into choosing between options (signs off → judges); down, no longer having to work together turns being needed in every case into spot-checking or deciding independently. If asked: task complexity, clarity of rules, available evidence and the consequences of error shape how work is designed and checked. They inform the two questions; they are not extra axes. High importance does not automatically mean people and AI must work together. And missing data does not automatically mean there is no single right answer: separate an answer that cannot yet be verified from a decision with several reasonable outcomes.",
           cue: "“We will now look at how our answers to the map’s two questions placed each of our four agents, and what would move each one to another quadrant.”" },
         { id: "moves", type: "moves", seconds: 60, title: "What would move each agent?",
-          notes: "Hypothetical redesigns, not things our agents do today. For each card: the change, which question flips, and where it lands. One answer changes, the other stays. Only Question 1 moves the HR agent; the other three change Question 2. Removing an approval does not by itself move an agent: the work has to change.",
+          notes: "Hypothetical redesigns, not things our agents do today. End on the takeaway line at the bottom. For each card: the change, which question flips, and where it lands. One answer changes, the other stays. Only Question 1 moves the HR agent; the other three change Question 2. Removing an approval does not by itself move an agent: the work has to change.",
           cue: "Say “hypothetical” once, then read the four destinations." },
-        { id: "closing", type: "closing", seconds: 15, title: "Takeaway and Q&A",
-          notes: "Read the takeaway, then the question, and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
+        { id: "closing", type: "closing", seconds: 15, title: "Q&A",
+          notes: "Read the question and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
           cue: "Read the question exactly, then pause." }
       ]
     }
