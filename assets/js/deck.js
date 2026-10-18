@@ -148,10 +148,10 @@
           <div class="wide btn-row"><button class="btn" data-unfocus>← Back to the map</button><button class="btn solid" data-goto="${a.id}-intro">Go to this agent →</button></div>
         </div></div>`;
     };
-    const xh = (v) => `<div class="xh"><span class="ax">Q1 · ${yn(v)}</span><span class="av">${esc(ans('q1', v))}</span></div>`;
-    const yh = (v) => `<div class="yh"><span class="ax">Q2 · ${yn(v)}</span><span class="av">${esc(ans('q2', v))}</span></div>`;
+    const xh = (v) => `<div class="xh"><span class="av">${esc(ans('q1', v))}</span></div>`;
+    const yh = (v) => `<div class="yh"><span class="av">${esc(ans('q2', v))}</span></div>`;
     return `<div class="qmap"${mode === 'interactive' ? ' data-map' : ''}>
-      <div class="corner">Q1 across<br>Q2 down</div>${xh('yes')}${xh('no')}
+      <div class="corner"></div>${xh('yes')}${xh('no')}
       ${yh('yes')}${cell('tl')}${cell('tr')}
       ${yh('no')}${cell('bl')}${cell('br')}
     </div>`;

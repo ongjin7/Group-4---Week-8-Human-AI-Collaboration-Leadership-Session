@@ -658,3 +658,8 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .qmap:not(.focused) .qcell .dm { font-size: 19px; }
 .qmap:not(.focused) .qcell .hint { display: none; }
 .qmap:not(.focused) .qcell .num { font-size: 52px; top: 10px; }
+/* slimmer axes: just the axis values */
+.qmap { grid-template-columns: 150px 1fr 1fr; grid-template-rows: 42px 1fr 1fr; gap: 14px; }
+.qmap .xh { padding-bottom: 8px; }
+.qmap .av { font-size: 22px; }
+.compare .qmap { grid-template-columns: 140px 1fr 1fr; grid-template-rows: 40px 1fr 1fr; }
