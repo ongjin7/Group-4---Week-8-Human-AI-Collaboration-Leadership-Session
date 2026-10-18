@@ -256,11 +256,11 @@
     const c = a.card;
     const q = QS[a.quadrant];
     const abilities = [
-      ['mission', 'Mission', t(c.job), ''],
-      ['trigger', 'Activates when', t(c.trigger), ''],
-      ['gear', 'Gear', t(c.tools), ''],
-      ['lock', 'Forbidden move', `${t(c.never.rule)}<span class="set">Locked by: ${t(c.never.setting)}</span>`, 'never'],
-      ['human', 'Calls a human', t(c.checkpoint), 'human']
+      ['mission', 'The job', t(c.job), ''],
+      ['trigger', 'The trigger', t(c.trigger), ''],
+      ['gear', 'The tools', t(c.tools), ''],
+      ['lock', 'It must never', `${t(c.never.rule)}<span class="set">Locked by: ${t(c.never.setting)}</span>`, 'never'],
+      ['human', 'Where a person checks', t(c.checkpoint), 'human']
     ];
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme, steps: abilities.length,

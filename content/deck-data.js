@@ -417,7 +417,7 @@ window.DECK_DATA = {
       ],
       notes: {
         intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. It helps dedicated priority-service teams and the passengers who need personal attention. It cuts preparation effort while the manager keeps full control (expected, not measured). The same pattern fits private banking, facilities defects and luxury hotels; it is not meant for high-volume general enquiries, which need different triage.",
-        card: "Meet the MBairline assistant. Tap the card five times: its mission, what wakes it up (a new feedback form), its gear, its forbidden move (it can never send a reply: the Gmail step is Create Draft, not Send Email), and where it calls a human (the manager).",
+        card: "Meet the MBairline assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
         build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
         record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A5.",

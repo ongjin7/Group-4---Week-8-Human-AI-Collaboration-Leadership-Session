@@ -13,7 +13,7 @@
       notes: 'Name the business problem in plain words, who it helps and the expected benefit (say “expected”: nothing is measured). Say the quadrant and read both answers on the chips.',
       cue: 'Problem first, before any Zap.' },
     { key: 'card', type: 'agent-card', label: 'the agent card',
-      notes: 'Introduce the agent like a character. Each tap unlocks one line of its card: mission, when it activates, its gear, its forbidden move (and the setting that locks it), and where it calls a human.',
+      notes: 'Introduce the agent like a character. Each tap unlocks one line of its card: the job, the trigger, the tools, what it must never do (and the setting that locks it), and where a person checks.',
       cue: 'Press → (or click the card) to tap it: each tap unlocks one of the five lines.' },
     { key: 'build', type: 'agent-build', label: 'how it runs',
       notes: 'Press → to reveal each step. Say which steps are AI (output can vary) and which are fixed rules. End on the gold step: the person.',
