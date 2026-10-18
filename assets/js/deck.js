@@ -291,6 +291,34 @@
     const cols = n <= 5 ? n : 4;
     const shot = (a.config || []).find((c) => c.src);
     const evId = shot ? EV.push(shot) - 1 : -1;
+    const foot = `<div class="build-foot no-print">
+          <span class="small">Press → to reveal each step</span>
+          <div class="btn-row">${evId >= 0 ? `<button class="btn small-btn" data-ev="${evId}">See it in Zapier ↗</button>` : `<span class="small">${tbc('Zap editor screenshot not added yet')}</span>`}
+          <button class="btn small-btn" data-showall>Show all steps</button></div>
+        </div>`;
+    const P = a.buildPanel;
+    if (P) {
+      /* automated steps grouped as "AI assistance", the person in their own panel (revealed last) */
+      return {
+        cls: 'agent build-panel', q: a.quadrant, theme: a.theme, steps: n,
+        html: `${agentHead(a, 'How it *runs*')}
+        <div class="bp">
+          <div class="bp-ai">
+            <p class="bp-label"><i aria-hidden="true"></i>${esc(P.groupLabel)}</p>
+            <div class="steps" style="grid-template-columns:repeat(3, 1fr);row-gap:34px">${a.workflow.map((w, i) => `
+              <div class="step ${w.type}" data-frag="${i}"><span class="no">${i + 1}</span><span class="type">${TYPE[w.type] || esc(w.type)}</span><span class="lbl">${t(w.label)}</span><span class="det">${t(w.detail)}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="bp-owner step human" data-frag="${n}">
+            <span class="type">The person</span>
+            <h3>${esc(P.title)}</h3>
+            <p>${t(P.text)}</p>
+          </div>
+        </div>
+        <p class="bp-caption">${t(P.caption)}</p>
+        ${foot}`
+      };
+    }
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme, steps: n - 1,
       html: `${agentHead(a, 'How it *runs*')}
