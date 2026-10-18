@@ -25,6 +25,20 @@
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const isTBC = F.isTBC;
   const tbc = (m) => `<span class="tbc"><b>TBC</b>${esc(m)}</span>`;
+  /* *word* in a heading becomes the italic accent, as on the group site */
+  const md = (s) => esc(s).replace(/\*(.+?)\*/g, '<em>$1</em>');
+  const plainText = (s) => String(s).replace(/\*/g, '');
+  const pad2 = (n) => String(n).padStart(2, '0');
+
+  /* Simple line drawings that hint at each agent's business scene.
+     An agent can use one with `motif: "receipt" | "chat" | "calendar" | "plane"`. */
+  const MOTIFS = {
+    receipt: '<path d="M26 8h48v84l-8-6-8 6-8-6-8 6-8-6-8 6z"/><path d="M36 26h28M36 38h28M36 50h18M36 66h28"/><circle cx="64" cy="66" r="0.5"/>',
+    chat: '<path d="M10 16h52a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H34l-14 12V54H10a6 6 0 0 1-6-6V22a6 6 0 0 1 6-6z"/><path d="M74 38h14a6 6 0 0 1 6 6v22a6 6 0 0 1-6 6h-6v12L70 72H52a6 6 0 0 1-6-6v-4"/><path d="M18 30h36M18 40h24"/>',
+    calendar: '<rect x="10" y="18" width="80" height="72" rx="6"/><path d="M10 36h80M30 10v16M70 10v16"/><path d="M22 50h10M45 50h10M68 50h10M22 64h10M45 64h10M68 64h10M22 78h10M45 78h10"/>',
+    plane: '<path d="M8 58l30-6 22-30 8 2-12 28 26-4 8-10 6 2-4 16 4 16-6 2-8-10-26-4 12 28-8 2-22-30-30-6z"/>'
+  };
+  const motif = (name) => (MOTIFS[name] ? `<svg class="motif" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${MOTIFS[name]}</svg>` : '');
   function t(s) {
     if (s == null || s === '') return tbc('not supplied');
     if (isTBC(s)) return tbc(String(s).replace(/^\s*TBC:?\s*/, '') || 'to confirm');
@@ -57,17 +71,17 @@
       <span class="chip">Must work together? <b>${yn(a.placement.q2.answer)}</b></span></div>`;
 
   function head(eyebrow, title, right) {
-    return `<header class="head"><div class="titles"><p class="eyebrow">${esc(eyebrow)}</p><h2>${esc(title)}</h2></div>${right || ''}</header>`;
+    return `<header class="head"><div class="titles"><p class="eyebrow">${esc(eyebrow)}</p><h2>${md(title)}</h2></div>${right || ''}</header>`;
   }
 
   /* Header for the agent's inner slides: quadrant, agent, presenter, then a big title. */
   function agentHead(a, title) {
     const q = QS[a.quadrant];
-    const brand = a.theme === 'mbairline' ? '<span class="brand">MBairline</span>' : '';
+    const brand = a.theme === 'mbairline' ? '<div class="brandmark" role="img" aria-label="MBairline"></div>' : '';
     return `<header class="head"><div class="titles">
         <div class="who-line"><span class="qchip" data-q="${a.quadrant}">${esc(q.title)}</span>&ensp;·&ensp;<b>${esc(nameOf(a))}</b>&ensp;·&ensp;${t(a.presenter)}</div>
-        <h2>${esc(title)}</h2></div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">${brand}${mini(a.quadrant)}</div></header>`;
+        <h2>${md(title)}</h2></div>
+        <div class="head-right">${brand}${mini(a.quadrant)}</div></header>`;
   }
 
   /* ----------------------------------------------------------- evidence */
@@ -117,9 +131,11 @@
       const a = byQ(q);
       const Qd = QS[q];
       if (!a) return `<div class="qcell" data-q="${q}"><span class="qt">${esc(Qd.title)}</span>${tbc('no agent placed here yet')}</div>`;
-      const basics = `<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(nameOf(a))}</span><span class="dm">${t(a.domain)} · ${t(a.presenter)}</span>`;
+      const num = `<span class="num" aria-hidden="true">${pad2(ORDER.indexOf(q) + 1)}</span>`;
+      const tag = `<span class="tag">${Qd.q1 === 'yes' ? 'Right answer' : 'No single answer'} · ${Qd.q2 === 'yes' ? 'Work together' : 'Either alone'}</span>`;
+      const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(nameOf(a))}</span><span class="dm">${t(a.domain)} · ${t(a.presenter)}</span>`;
       if (mode === 'compare') {
-        return `<div class="qcell" data-q="${q}">${basics.replace(/<span class="dm">.*<\/span>$/, '')}
+        return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(nameOf(a))}</span>
           <span class="role"><b>The person</b> ${esc(lc(Qd.role))}</span></div>`;
       }
       return `<div class="qcell" data-q="${q}" data-focus-q="${q}" role="button" tabindex="0" aria-label="Zoom into ${esc(Qd.title)}: ${esc(nameOf(a))}">${basics}
@@ -143,16 +159,18 @@
   /* ---------------------------------------------------------- renderers */
   const R = {};
 
+  const glyph = (size) => `<div class="glyph" aria-hidden="true"${size ? ` style="width:${size}px;height:${size}px"` : ''}>${ORDER.map((q, k) => `<span style="background:var(--${q}-soft);color:var(--${q})"><b>${pad2(k + 1)}</b></span>`).join('')}</div>`;
+
   R.title = () => ({
     cls: 's-title',
     html: `<p class="eyebrow">${esc(D.meta.course)} · ${esc(D.meta.date)}</p>
-      <div><h1>${esc(D.meta.title)}</h1><p class="lead">${esc(D.meta.subtitle)}</p></div>
+      <div><h1>${md(D.meta.title)}</h1><p class="lead">${esc(D.meta.subtitle)}</p></div>
       <div class="foot"><div class="members"><span class="member group">${esc(D.meta.group)}</span>${D.members.map((m) => `<span class="member">${esc(m.name)}</span>`).join('')}</div>
-      <div class="glyph" aria-hidden="true">${ORDER.map((q) => `<span style="background:var(--${q})"></span>`).join('')}</div></div>`
+      ${glyph()}</div>`
   });
 
   R.axes = () => ({
-    html: `${head('Before the agents', 'Two questions place every agent')}
+    html: `${head('Before the agents', 'Two questions place *every* agent')}
       <div class="axes">${['q1', 'q2'].map((k, i) => `
         <div class="axis"><span class="num">Question ${i + 1}</span><h3>${esc(AX[k].question)}</h3>
           <div class="answers2"><div><div class="yn">Yes</div><div class="v">${esc(AX[k].yes)}</div></div><div><div class="yn">No</div><div class="v">${esc(AX[k].no)}</div></div></div>
@@ -162,22 +180,24 @@
   });
 
   R.map = () => ({
-    html: `${head('Four agents, one map', 'Our four agents, one per quadrant')}${qmapHTML('interactive')}`
+    html: `${head('Four agents, one map', 'Our four agents, *one* per quadrant')}${qmapHTML('interactive')}`
   });
 
-  /* 1 · bold coloured opener: quadrant, both answers, the business problem */
+  /* 1 · the opener: quadrant, both answers, the business problem, and the scene */
   R['agent-intro'] = (s) => {
     const a = AG[s.agentId];
     const q = QS[a.quadrant];
+    const banner = a.banner && a.banner.src
+      ? `<div class="banner" role="img" aria-label="${esc(a.banner.alt || '')}" style="background-image:url('${esc(a.banner.src)}')${a.banner.position ? `;background-position:${esc(a.banner.position)}` : ''}"></div>`
+      : '';
     return {
-      cls: 's-intro', q: a.quadrant, theme: a.theme,
-      html: `<div class="left">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <p class="eyebrow">Quadrant ${s.quadrantNo} of 4 · ${esc(q.position)}</p>${a.theme === 'mbairline' ? '<span class="brand">MBairline</span>' : ''}</div>
+      cls: 's-intro' + (banner ? ' has-banner' : ''), q: a.quadrant, theme: a.theme,
+      html: `${banner}${banner ? '' : `<span class="ghost" aria-hidden="true">${pad2(s.quadrantNo)}</span>${motif(a.motif)}`}
+        <div class="left">
+          <p class="eyebrow">Quadrant ${s.quadrantNo} of 4 · ${esc(q.position)}</p>
           <h1>${esc(q.title)}</h1>
           ${chips(a)}
           <p class="who-line"><b>${esc(a.name)}</b><br>${t(a.domain)} · presented by ${t(a.presenter)}</p>
-          ${mini(a.quadrant)}
         </div>
         <div class="card">
           <span class="k">The business problem</span>
@@ -195,7 +215,7 @@
     const c = a.card;
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${agentHead(a, 'The agent card')}
+      html: `${agentHead(a, 'The agent *card*')}
         <ol class="five" aria-label="Five-line agent card">
           <li><span class="n">1</span><span class="k">Job</span><span class="v">${t(c.job)}</span></li>
           <li><span class="n">2</span><span class="k">Trigger</span><span class="v">${t(c.trigger)}</span></li>
@@ -216,7 +236,7 @@
     const evId = shot ? EV.push(shot) - 1 : -1;
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme, steps: n - 1,
-      html: `${agentHead(a, 'How it runs')}
+      html: `${agentHead(a, 'How it *runs*')}
         <div class="legend"><span><i class="ai"></i>AI generates: output can vary</span><span><i class="rule"></i>Fixed rule: same input, same result</span><span><i class="human"></i>The person</span></div>
         <div class="steps" style="grid-template-columns:repeat(${cols}, 1fr);row-gap:34px">${a.workflow.map((w, i) => `
           <div class="step ${w.type}" data-frag="${i}"><span class="no">${i + 1}</span><span class="type">${TYPE[w.type] || esc(w.type)}</span><span class="lbl">${t(w.label)}</span><span class="det">${t(w.detail)}</span></div>`).join('')}
@@ -234,7 +254,7 @@
     const a = AG[s.agentId];
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${agentHead(a, 'One real run')}
+      html: `${agentHead(a, 'One *real* run')}
         <div class="pair">${ev(a.run.input, a.run.input.caption || 'What came in', 1)}<span class="arrow" aria-hidden="true">→</span>${ev(a.run.output, a.run.output.caption || 'What the agent produced', 2)}</div>`
     };
   };
@@ -245,7 +265,7 @@
     const r = a.run;
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${agentHead(a, 'The same run, in Zap history')}
+      html: `${agentHead(a, 'The same run, in *Zap history*')}
         <div class="matchbar"><span class="k">Same run?</span><span>${esc(r.matchKey.label)}: ${t(r.matchKey.value)}</span></div>
         ${ev(r.record)}`
     };
@@ -253,10 +273,10 @@
 
   /* 6 · the person in the loop, and why this quadrant */
   const PERSON = {
-    tl: { title: 'The person signs off', rows: (c) => [['Who signs off', c.who, true], ['What they check', c.what], ['When', c.when], ['If they reject it', c.ifFails]] },
-    tr: { title: 'The person judges', rows: (c) => [['Who judges', c.who], ['Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['When', c.when], ['If no option fits', c.ifFails]] },
-    bl: { title: 'The spot check', rows: (c) => [['Who checks', c.who], ['How often', c.when, true], ['What they inspect', c.what], ['If it is wrong', c.ifFails]] },
-    br: { title: 'AI prepares, the person decides', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
+    tl: { title: 'The person *signs off*', rows: (c) => [['Who signs off', c.who, true], ['What they check', c.what], ['When', c.when], ['If they reject it', c.ifFails]] },
+    tr: { title: 'The person *judges*', rows: (c) => [['Who judges', c.who], ['Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['When', c.when], ['If no option fits', c.ifFails]] },
+    bl: { title: 'The *spot check*', rows: (c) => [['Who checks', c.who], ['How often', c.when, true], ['What they inspect', c.what], ['If it is wrong', c.ifFails]] },
+    br: { title: 'AI prepares, the person *decides*', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
   };
   R['agent-person'] = (s) => {
     const a = AG[s.agentId];
@@ -279,7 +299,7 @@
 
   R.compare = () => ({
     cls: 'compare',
-    html: `${head('Back to the map', 'How the person’s job changes')}${qmapHTML('compare')}
+    html: `${head('Back to the map', 'How the person’s *job* changes')}${qmapHTML('compare')}
       <div class="takeaway">
         <p><b>Q1, right answer?</b> Yes: the person verifies. No: the person judges.</p>
         <p><b>Q2, together?</b> Yes: the person is inside the work. No: they check or decide from outside.</p>
@@ -287,7 +307,7 @@
   });
 
   R.moves = () => ({
-    html: `${head('What would move each agent?', 'Change the work, and the quadrant follows')}
+    html: `${head('What would move each agent?', 'Change the work, and the *quadrant* follows')}
       <div class="moves">${ORDER.map((q) => {
         const a = byQ(q);
         if (!a) return '';
@@ -307,9 +327,9 @@
 
   R.closing = () => ({
     cls: 's-closing',
-    html: `<p class="eyebrow">Questions</p><h1>${esc(D.meta.closingQuestion)}</h1>
+    html: `<p class="eyebrow">Questions</p><h1>${md(D.meta.closingQuestion)}</h1>
       <p class="lead">We will answer with evidence from our runs and their Zap history records.</p>
-      <div class="glyph" aria-hidden="true" style="width:120px;height:120px">${ORDER.map((q) => `<span style="background:var(--${q})"></span>`).join('')}</div>`
+      ${glyph(130)}`
   });
 
   /* ----------------------------------------------------------- appendix */

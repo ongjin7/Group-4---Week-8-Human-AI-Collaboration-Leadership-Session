@@ -23,13 +23,13 @@
  */
 window.DECK_DATA = {
   meta: {
-    title: "How does the task decide the person’s role?",
+    title: "How does the *task* decide the person’s role?",
     subtitle: "Four Problem Set 5 agents, one per quadrant of the map",
     course: "Week 8 · Human–AI Collaboration · Problem-solving session",
     date: "Wednesday 21 October 2026",
     group: "Group 4",
     sessionSeconds: 1200,
-    closingQuestion: "Which of our four agents would you place in a different quadrant, and why?"
+    closingQuestion: "Which of our four agents would you place in a *different* quadrant, and why?"
   },
 
   members: [
@@ -71,6 +71,7 @@ window.DECK_DATA = {
       name: "Expense claims agent",
       presenter: "TBC: Revan, Minh or Adithi",
       domain: "Finance",
+      motif: "receipt",
       oneLiner: "Checks expense claims for out-of-pocket business spending.",
       problem: {
         statement: "TBC: The business problem in one plain sentence (what goes wrong with expense claims today?)",
@@ -133,6 +134,7 @@ window.DECK_DATA = {
       name: "CRM scenario agent",
       presenter: "TBC: Revan, Minh or Adithi",
       domain: "Customer relationship management",
+      motif: "chat",
       oneLiner: "Recommends how to act in different customer scenarios, for a person to judge and choose.",
       problem: {
         statement: "TBC: The business problem in one plain sentence",
@@ -197,6 +199,7 @@ window.DECK_DATA = {
       name: "HR leave report agent",
       presenter: "TBC: Revan, Minh or Adithi",
       domain: "Human resources",
+      motif: "calendar",
       oneLiner: "Shares the HR leave report every day at a scheduled time.",
       problem: {
         statement: "TBC: The business problem in one plain sentence",
@@ -258,6 +261,8 @@ window.DECK_DATA = {
       id: "mbairline",
       quadrant: "br",
       theme: "mbairline",
+      motif: "plane",
+      banner: { src: "assets/brand/mbairline-banner.jpg", alt: "MBairline aircraft above the clouds at sunset, with the MBairline Customer Feedback wordmark", position: "center 40%" },
       name: "MBairline Priority Guest Relations Assistant",
       shortName: "MBairline assistant",
       presenter: "Jin",

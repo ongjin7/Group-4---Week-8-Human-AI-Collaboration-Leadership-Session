@@ -83,6 +83,9 @@ timings in `deck-data.js` stop adding up to 20:00.
 Everything is in `content/deck-data.js`, one block per agent, in this shape:
 
 - `name`, `presenter`, `domain`, `oneLiner`
+- `motif`: a faint line drawing on the agent’s opening slide: `"receipt"`, `"chat"`, `"calendar"` or `"plane"`
+- `banner` (optional): a wide brand image across the top of the opening slide, like MBairline’s.
+  Put a 1600 × 400 image in `assets/brand/` and set `banner: { src: "assets/brand/your-banner.jpg", alt: "…" }`
 - `problem`: statement, who is affected, what is hard today, expected benefit
 - `card`: job, trigger, tools, `never` (rule plus the setting that enforces it), checkpoint
 - `workflow`: steps typed `trigger`, `ai`, `rule`, `action` or `human`
