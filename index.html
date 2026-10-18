@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Group 4 · Week 8 · Human–AI Collaboration</title>
+  <meta name="description" content="Group 4’s Week 8 session: four Problem Set 5 agents, one per quadrant of the human–AI collaboration map.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/deck.css">
+</head>
+<body>
+  <noscript>
+    <div style="background:#FAF6EC;color:#14213D;font:20px/1.5 Georgia,serif;padding:48px;max-width:900px">
+      <h1>This deck needs JavaScript.</h1>
+      <p>Use the PDF export as the static fallback (see README: “Static fallback”).</p>
+    </div>
+  </noscript>
+
+  <main class="viewport" aria-label="Presentation">
+    <div class="stage" id="stage"></div>
+  </main>
+
+  <nav class="chrome" aria-label="Slide controls">
+    <button id="btn-prev" class="nav-btn" aria-label="Previous slide or step">←</button>
+    <button id="btn-next" class="nav-btn" aria-label="Next slide or step">→</button>
+    <span class="where" id="where" aria-live="polite"></span>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <button id="btn-map" aria-label="Go to the map">Map</button>
+    <button id="btn-overview" aria-label="All slides">Slides</button>
+    <button id="btn-reading" aria-pressed="false" aria-label="Reading mode: all slides in one scrolling page">Read</button>
+    <button id="btn-presenter" aria-label="Open presenter view">Presenter</button>
+    <button id="btn-full" aria-label="Full screen">⛶</button>
+    <button id="btn-help" aria-label="Keyboard shortcuts">?</button>
+  </nav>
+
+  <div class="overlay lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged evidence" aria-hidden="true">
+    <div class="lb-inner"></div>
+    <div class="lb-bar"><span class="lb-cap"></span><button data-close>Close (Esc)</button></div>
+  </div>
+
+  <div class="overlay overview" id="overview" role="dialog" aria-modal="true" aria-label="All slides" aria-hidden="true">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h2>All slides</h2><button class="btn" data-close style="color:#fff;border-color:#fff">Close (Esc)</button></div>
+    <div class="ov-grid"></div>
+  </div>
+
+  <div class="overlay help" id="help" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts" aria-hidden="true">
+    <div class="box">
+      <h3>Keyboard</h3>
+      <table>
+        <tr><td><kbd>→</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd></td><td>Next step, then next slide</td></tr>
+        <tr><td><kbd>←</kbd> <kbd>PgUp</kbd></td><td>Back</td></tr>
+        <tr><td><kbd>Home</kbd> <kbd>End</kbd></td><td>First slide · last main slide</td></tr>
+        <tr><td><kbd>M</kbd></td><td>Jump to the map</td></tr>
+        <tr><td><kbd>1</kbd>–<kbd>4</kbd></td><td>On the map: focus a quadrant</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close · back to the full map</td></tr>
+        <tr><td><kbd>O</kbd></td><td>All slides</td></tr>
+        <tr><td><kbd>P</kbd></td><td>Presenter view (notes and timers)</td></tr>
+        <tr><td><kbd>F</kbd></td><td>Full screen</td></tr>
+        <tr><td><kbd>R</kbd></td><td>Reading mode</td></tr>
+      </table>
+      <p style="margin-top:16px"><button class="btn" data-close>Close</button></p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="content/deck-data.js"></script>
+  <script src="assets/js/flow.js"></script>
+  <script src="assets/js/deck.js"></script>
+</body>
+</html>

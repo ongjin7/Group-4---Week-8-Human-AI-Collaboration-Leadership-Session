@@ -1,0 +1,16 @@
+# Never publish raw run data or unredacted screenshots: keep them here, locally.
+private/
+*.har
+zap-history*.json
+*zap*export*.json
+assets/evidence/**/raw/
+assets/evidence/**/*-unredacted.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vercel
+.claude/settings.local.json
+
+# PDF exports (regenerate before the session; may contain TBC placeholders)
+exports/

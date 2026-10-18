@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Presenter view · Group 4 Week 8</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root { --bg:#0F1628; --panel:#18213A; --line:#2C385A; --text:#E8ECF4; --muted:#9AA6C2; --gold:#E2C27A; --warn:#F2A65A; --bad:#FF7A7A; --ok:#7FD1A8;
+      --tl:#6E9BDB; --tr:#E58A6B; --bl:#6CC29C; --br:#AE8FDB; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.45 Inter, system-ui, sans-serif; min-height:100vh; }
+    button { font:inherit; cursor:pointer; color:var(--text); background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }
+    button:hover { background:#222D4B; }
+    button.primary { background:var(--gold); color:#14213D; border-color:var(--gold); font-weight:700; }
+    :focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+    .top { display:flex; flex-wrap:wrap; gap:16px; align-items:center; padding:14px 20px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:2; }
+    .clock { font:600 44px/1 Fraunces, Georgia, serif; font-variant-numeric:tabular-nums; }
+    .clock small { font:500 18px Inter, sans-serif; color:var(--muted); margin-left:6px; }
+    .drift { font-weight:700; padding:6px 12px; border-radius:999px; background:var(--panel); }
+    .drift.ahead { color:var(--ok); } .drift.behind { color:var(--warn); } .drift.late { color:var(--bad); }
+    .spacer { flex:1; }
+    .sync { font-size:13px; color:var(--muted); }
+    .sync.on { color:var(--ok); }
+    main { display:grid; grid-template-columns:minmax(0, 2fr) minmax(320px, 1fr); gap:20px; padding:20px; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
+    .eyebrow { font:700 12px/1 Inter, sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+    h1 { font:600 30px/1.2 Fraunces, Georgia, serif; margin:0 0 6px; }
+    .who { color:var(--gold); font-weight:600; }
+    .bar { height:12px; background:#0B1120; border-radius:999px; overflow:hidden; margin:10px 0 6px; }
+    .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .25s; }
+    .bar i.warn { background:var(--warn); } .bar i.bad { background:var(--bad); }
+    .nums { display:flex; justify-content:space-between; font-variant-numeric:tabular-nums; color:var(--muted); }
+    .notes { font-size:24px; line-height:1.5; margin-top:16px; white-space:pre-wrap; }
+    .cue { margin-top:16px; border-left:4px solid var(--gold); background:#231F14; padding:12px 16px; border-radius:8px; font-size:20px; color:#F6E7C1; }
+    .cue::before { content:"Say / do"; display:block; font:700 12px/1 Inter; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+    .next h2 { font-size:20px; margin:0; }
+    .stack { display:grid; gap:16px; align-content:start; }
+    .warnbox { background:#3A1E1E; border:1px solid #7A3434; color:#FFD3D3; border-radius:10px; padding:10px 14px; font-size:14px; }
+    .okbox { color:var(--ok); font-size:14px; }
+    .sheet { list-style:none; margin:0; padding:0; display:grid; gap:2px; max-height:46vh; overflow:auto; }
+    .sheet button { width:100%; text-align:left; display:grid; grid-template-columns:52px 1fr 52px; gap:8px; padding:6px 10px; border-radius:8px; background:transparent; border:0; border-left:4px solid var(--q, #44506E); font-size:14px; }
+    .sheet button.cur { background:#25304F; }
+    .sheet .t { color:var(--muted); font-variant-numeric:tabular-nums; }
+    .sheet .appx { opacity:.6; }
+    .controls { display:flex; gap:8px; flex-wrap:wrap; }
+    kbd { font:600 12px Inter; background:#0B1120; border:1px solid var(--line); border-radius:5px; padding:2px 6px; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div><p class="eyebrow">Session</p><div class="clock" id="session">0:00<small>/ 20:00</small></div></div>
+    <span class="drift" id="drift">Not started</span>
+    <div class="controls">
+      <button class="primary" id="startstop">Start timer</button>
+      <button id="reset">Reset</button>
+    </div>
+    <span class="spacer"></span>
+    <div class="controls">
+      <button id="prev" aria-label="Previous">← Back</button>
+      <button id="next" class="primary" aria-label="Next">Next →</button>
+    </div>
+    <span class="sync" id="sync">Waiting for the deck window…</span>
+  </header>
+
+  <main>
+    <section class="card" aria-live="polite">
+      <p class="eyebrow" id="cur-pos"></p>
+      <h1 id="cur-title"></h1>
+      <div class="who" id="cur-who"></div>
+      <div class="bar"><i id="slide-bar"></i></div>
+      <div class="nums"><span id="slide-time">0:00 on this slide</span><span id="slide-budget"></span></div>
+      <div class="notes" id="cur-notes"></div>
+      <div class="cue" id="cur-cue"></div>
+    </section>
+
+    <div class="stack">
+      <section class="card next"><p class="eyebrow">Next</p><h2 id="next-title"></h2></section>
+      <section class="card">
+        <p class="eyebrow">Segment</p>
+        <div id="seg-name" style="font-weight:600"></div>
+        <div class="bar"><i id="seg-bar"></i></div>
+        <div class="nums"><span id="seg-time"></span><span id="seg-budget"></span></div>
+      </section>
+      <section class="card"><p class="eyebrow">Timing check</p><div id="timing"></div></section>
+      <section class="card"><p class="eyebrow">Run sheet · planned start · budget</p><ul class="sheet" id="sheet"></ul></section>
+      <p class="sync" style="margin:0">Keys: <kbd>→</kbd> next · <kbd>←</kbd> back · <kbd>S</kbd> start/pause · these notes never appear on the audience screen.</p>
+    </div>
+  </main>
+
+  <script src="content/deck-data.js"></script>
+  <script src="assets/js/flow.js"></script>
+  <script src="assets/js/presenter.js"></script>
+</body>
+</html>
