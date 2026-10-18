@@ -633,3 +633,13 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .ps-agent .ps-icon { width: 84px; height: 84px; border-radius: 50%; background: var(--qsoft); padding: 6px; margin-bottom: 4px; }
 .ps-human .ps-icon { position: absolute; left: 22px; bottom: 0; width: 150px; height: 164px; }
 .ps-agent .face .eyes { animation: none; }
+/* fill the slide: the two boxes grow to meet the map questions */
+.psplit { flex: 1; min-height: 0; margin-bottom: 30px; }
+.psplit + .why, .psplit ~ .why { margin-top: 0; padding-top: 0; }
+.ps-agent { justify-content: center; }
+.ps-agent .ps-icon { width: 104px; height: 104px; }
+.ps-agent .v { font-size: 24px; }
+.ps-human { padding-left: 230px; gap: 14px; }
+.ps-human dl { gap: 18px 22px; }
+.ps-human dd { font-size: 26px; }
+.ps-human .ps-icon { width: 190px; height: 208px; left: 26px; }
