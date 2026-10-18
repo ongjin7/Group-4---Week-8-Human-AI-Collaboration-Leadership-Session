@@ -187,7 +187,7 @@
     const a = AG[s.agentId];
     const q = QS[a.quadrant];
     const banner = a.banner && a.banner.src
-      ? `<div class="banner" role="img" aria-label="${esc(a.banner.alt || '')}" style="background-image:linear-gradient(180deg, rgba(251,250,246,0) 0%, rgba(251,250,246,0) 40%, rgba(251,250,246,.55) 70%, #FBFAF6 100%), url('${esc(a.banner.src)}');background-position:center, ${esc(a.banner.position || 'center')}"></div>`
+      ? `<div class="banner" role="img" aria-label="${esc(a.banner.alt || '')}" style="background-image:linear-gradient(180deg, rgba(251,250,246,0) 0%, rgba(251,250,246,0) 32%, rgba(251,250,246,.18) 46%, rgba(251,250,246,.45) 58%, rgba(251,250,246,.75) 70%, rgba(251,250,246,.94) 80%, #FBFAF6 88%, #FBFAF6 100%), url('${esc(a.banner.src)}');background-position:center, ${esc(a.banner.position || 'center')}"></div>`
       : '';
     return {
       cls: 's-intro' + (banner ? ' has-banner' : ''), q: a.quadrant, theme: a.theme,
