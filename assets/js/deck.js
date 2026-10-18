@@ -414,14 +414,14 @@
     tl: { title: 'The person *signs off*', rows: (c) => [['Who signs off', c.who, true], ['What they check', c.what], ['When', c.when], ['If they reject it', c.ifFails]] },
     tr: { title: 'The person *judges*', rows: (c) => [['Who judges', c.who], ['Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['When', c.when], ['If no option fits', c.ifFails]] },
     bl: { title: 'The *spot check*', rows: (c) => [['Who checks', c.who], ['How often', c.when, true], ['What they inspect', c.what], ['If it is wrong', c.ifFails]] },
-    br: { title: 'AI prepares, the person *decides*', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
+    br: { title: 'The person *leads* and decides', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
   };
   R['agent-person'] = (s) => {
     const a = AG[s.agentId];
     const P = PERSON[a.quadrant];
     const c = a.check;
     const p = a.placement;
-    const fail = a.quadrant === 'br' ? `<p class="iffail"><b>If the check fails:</b> ${t(c.ifFails)}</p>` : '';
+    const fail = '';
     const who = a.quadrant === 'br' ? `<p class="iffail" style="margin:-14px 0 18px"><b style="color:var(--gold-text)">Who checks:</b> ${t(c.who)}</p>` : '';
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
@@ -429,8 +429,8 @@
         <div class="tiles">${P.rows(c).map(([k, v, hero, html]) => `<div class="tile${hero ? ' hero' : ''}"><span class="k">${esc(k)}</span><span class="v">${html || t(v)}</span></div>`).join('')}</div>
         ${fail}
         <div class="why">
-          <div><span class="q">Right answer? <b>${yn(p.q1.answer)}.</b></span><span class="r">${t(p.q1.why)}</span></div>
-          <div><span class="q">Must work together? <b>${yn(p.q2.answer)}.</b>${mismatchChip(a)}</span><span class="r">${t(p.q2.why)}</span></div>
+          <div><span class="q">Is there a right answer? <b>${yn(p.q1.answer)}.</b></span><span class="r">${t(p.q1.why)}</span></div>
+          <div><span class="q">Must agent and human work together? <b>${yn(p.q2.answer)}.</b>${mismatchChip(a)}</span><span class="r">${t(p.q2.why)}</span></div>
         </div>`
     };
   };

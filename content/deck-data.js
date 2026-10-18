@@ -396,7 +396,7 @@ window.DECK_DATA = {
         }
       ],
       check: {
-        who: "The customer service manager (played by Jin in testing).",
+        who: "The customer service manager.",
         what: "Original feedback, contact consent, factual accuracy, tone, urgency, and whether the recommendations follow airline policy.",
         when: "Each time a report arrives, before any reply leaves the drafts folder.",
         ifFails: "Nothing is sent: the manager edits or discards the draft and handles the follow-up directly.",
