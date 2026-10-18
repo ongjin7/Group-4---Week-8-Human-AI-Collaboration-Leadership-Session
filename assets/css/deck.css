@@ -647,3 +647,14 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .s-intro.has-banner .left { margin-top: 40px; }
 .s-intro.has-banner .card > div + div { margin-top: 30px; }
 .s-intro.has-banner .card hr + div { margin-top: 26px; }
+/* map cells: one sentence on each agent's domain and job */
+.qcell .job { font-size: 20px; line-height: 1.38; color: var(--ink-2); margin-top: 4px; }
+.qcell .job b { color: var(--qc); font-weight: 600; }
+.qmap.focused .qcell.sel .job { font-size: 27px; }
+/* make room for the job sentence in each map cell */
+.qmap:not(.focused) .qcell { padding: 20px 26px 18px; gap: 5px; }
+.qmap:not(.focused) .qcell .qt { font-size: 27px; }
+.qmap:not(.focused) .qcell .an { font-size: 24px; }
+.qmap:not(.focused) .qcell .dm { font-size: 19px; }
+.qmap:not(.focused) .qcell .hint { display: none; }
+.qmap:not(.focused) .qcell .num { font-size: 52px; top: 10px; }

@@ -271,7 +271,7 @@ window.DECK_DATA = {
       shortName: "MBairline assistant",
       presenter: "Jin",
       domain: "Airline customer service",
-      oneLiner: "Assesses Priority passenger feedback and prepares a report and reply draft for the customer service manager.",
+      oneLiner: "Assesses priority-passenger feedback to assist the manager in customer handling.",
       problem: {
         statement: "Priority passengers expect timely, personalised attention. Airlines need to understand passengers’ feedback quickly and respond appropriately.",
         affected: "Dedicated customer service teams supporting priority passengers, and passengers whose concerns require personalised attention.",
