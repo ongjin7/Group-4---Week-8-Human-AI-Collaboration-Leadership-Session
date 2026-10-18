@@ -141,7 +141,7 @@
           <span class="role"><b>The person</b> ${esc(lc(Qd.role))}</span></div>`;
       }
       return `<div class="qcell" data-q="${q}" data-focus-q="${q}" role="button" tabindex="0" aria-label="Zoom into ${esc(Qd.title)}: ${esc(nameOf(a))}">${basics}
-        <span class="hint no-print">Click to zoom in</span>
+        <span class="hint no-print">Click to zoom in</span><span class="zface" aria-hidden="true">${face(a)}</span>
         <div class="more">
           <div><div class="k">The person</div><div class="v">${esc(Qd.role)}</div></div>
           <div><div class="k">Our answers</div><div class="v">Right answer? <b>${yn(a.placement.q1.answer)}</b><br>Must work together? <b>${yn(a.placement.q2.answer)}</b>${mismatchChip(a)}</div></div>

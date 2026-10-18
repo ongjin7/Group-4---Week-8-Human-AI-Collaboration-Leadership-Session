@@ -668,3 +668,10 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .qmap .qcell .job { margin-top: 6px; }
 .qmap .qcell .dm { position: absolute; right: 24px; bottom: 16px; font-size: 16px; color: var(--muted); opacity: .8; }
 .qmap.focused .qcell.sel .dm { position: static; font-size: 22px; opacity: 1; }
+/* zoomed quadrant: the agent's card character, top-right */
+.qcell .zface { display: none; }
+.qmap.focused .qcell.sel .zface { display: block; position: absolute; top: 22px; right: 30px; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,.7); padding: 8px; box-shadow: 0 8px 20px -10px rgba(0,0,0,.25); }
+.qmap.focused .qcell.sel .zface svg { width: 100%; height: 100%; }
+.qmap.focused .qcell.sel .num { display: none; }
+@media (prefers-reduced-motion: no-preference) { .qmap.focused .qcell.sel .zface { animation: zpop .35s cubic-bezier(.3,1.6,.5,1); } }
+@keyframes zpop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
