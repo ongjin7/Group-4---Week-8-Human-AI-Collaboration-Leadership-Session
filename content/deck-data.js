@@ -32,7 +32,7 @@ window.DECK_DATA = {
     group: "Group 4",
     sessionSeconds: 1200,
     closingQuestion: "Which of our four agents would you place *differently*, and why?",
-    closingTakeaway: "No function belongs to just one quadrant. Place each task using the two questions, then explain the person’s role."
+    closingTakeaway: "Two questions about the task — is there a right answer, and must people and AI work together — shape the workflow we build and the person’s role in it."
   },
 
   members: [
