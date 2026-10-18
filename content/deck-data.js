@@ -14,6 +14,8 @@
  *      focus: "x% y%"   point to zoom into (cropped detail view)
  *      zoom:  1–3       how far to zoom into that point on the slide
  *      pins:  [{ x: 0–100, y: 0–100, n: 1, text: "what to look at" }]
+ *             x/y = the spot to circle; side: "left" puts the number tag on the left;
+ *             ring: false shows only the number tag (for small screenshots)
  *  - Timings are in seconds. The main flow must add up to exactly 1200
  *    (20 minutes); the presenter view warns you if it does not.
  *  - Notes are presenter-only. They appear in presenter.html, never on the
@@ -308,10 +310,10 @@ window.DECK_DATA = {
           who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback",
           note: "A test passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
           shots: [
-            { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 70%", zoom: 1.35,
-              pins: [{ x: 15, y: 77, n: 1, text: "1 star out of 5" }] },
+            { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 0%", zoom: 1.25,
+              pins: [{ x: 23, y: 76.7, n: 1, side: "left", text: "1 star out of 5" }] },
             { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Complaint and contact consent", alt: "Form answers: complaint about cabin crew and food; email contact Yes; mobile contact No", focus: "40% 74%", zoom: 1.6,
-              pins: [{ x: 22, y: 66.8, n: 2, text: "Email contact: Yes" }, { x: 20, y: 93, n: 3, text: "Mobile contact: No" }] }
+              pins: [{ x: 10, y: 66.8, n: 2, text: "Email contact: Yes" }, { x: 10, y: 93.1, n: 3, text: "Mobile contact: No" }] }
           ],
           say: "Meet Kerry, our test passenger. One star, a complaint about the crew and the food. Watch the two consent answers: email yes, mobile no."
         },
@@ -320,7 +322,7 @@ window.DECK_DATA = {
           note: "The new form response triggers the Zap. AI assesses the feedback, Gmail emails a report, a Filter checks the conditions, AI drafts a reply, and Gmail saves it as a draft.",
           shots: [
             { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "The six steps in the Zap editor", alt: "Zapier editor showing six steps",
-              pins: [{ x: 5, y: 23, n: 1, text: "AI assesses the feedback" }, { x: 5, y: 58.5, n: 2, text: "Filter: follow-up AND email = Yes" }, { x: 5, y: 74, n: 3, text: "AI drafts the reply" }, { x: 5, y: 89.5, n: 4, text: "Create Draft, never Send" }] }
+              pins: [{ x: 97, y: 23.3, n: 1, ring: false, text: "AI assesses the feedback" }, { x: 97, y: 58.2, n: 2, ring: false, text: "Filter: follow-up AND email = Yes" }, { x: 97, y: 73.8, n: 3, ring: false, text: "AI drafts the reply" }, { x: 97, y: 89.5, n: 4, ring: false, text: "Create Draft, never Send" }] }
           ],
           say: "No one presses a button. The form response starts the Zap: six steps, two of them AI."
         },
@@ -331,7 +333,7 @@ window.DECK_DATA = {
           shots: [
             { src: "assets/evidence/mbairline/manager-inbox.jpg", caption: "The manager’s inbox", alt: "Gmail inbox showing the email MBairline | Priority Guest Feedback Report — Kerry Tan", focus: "75% 92%", zoom: 1.7 },
             { src: "assets/evidence/mbairline/manager-report.jpg", caption: "The report, written by AI", alt: "Report email: personalised action Yes, urgent Yes, email contact Yes, mobile contact No, and two recommended next steps", focus: "28% 49%", zoom: 2,
-              pins: [{ x: 6.2, y: 41.3, n: 1, text: "Personalised action: Yes" }, { x: 6.2, y: 47, n: 2, text: "Email Yes, mobile No: matches the form" }, { x: 6.2, y: 58.2, n: 3, text: "Suggested next steps" }] }
+              pins: [{ x: 27.1, y: 41.3, n: 1, text: "Personalised action: Yes" }, { x: 24.3, y: 47, n: 2, text: "Email Yes, mobile No: matches the form" }, { x: 8.7, y: 57.2, n: 3, side: "left", text: "Suggested next steps" }] }
           ],
           say: "The manager gets this report. Point at the consent lines: email yes, mobile no, exactly what Kerry said. That is the consent bug we fixed in testing."
         },
@@ -340,7 +342,7 @@ window.DECK_DATA = {
           note: "Personalised action is Yes and email is allowed, so the Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft. Nothing is sent.",
           shots: [
             { src: "assets/evidence/mbairline/reply-draft.jpg", caption: "The personalised reply, saved as a draft", alt: "Gmail draft reply to Kerry Tan apologising and promising review by the Cabin Crew and Food and Beverage teams", focus: "50% 55%", zoom: 1.15,
-              pins: [{ x: 22, y: 95, n: 1, text: "Not sent: waits for the manager" }] }
+              pins: [{ x: 8.6, y: 95, n: 1, text: "Not sent: waits for the manager" }] }
           ],
           say: "The filter saw yes and yes, so the agent drafted a reply. It sits in Drafts: the agent cannot press Send."
         },

@@ -85,6 +85,9 @@
 
   /* ----------------------------------------------------------- evidence */
   const EV = [];
+  /* Markers: a see-through ring around the target, and a small numbered tag
+     beside it (side: "right" by default, or "left"), so nothing is covered. */
+  const pinHTML = (pins) => (pins || []).map((p) => `<span class="pin p-${p.side === 'left' ? 'left' : 'right'}${p.ring === false ? ' no-ring' : ''}" style="left:${p.x}%;top:${p.y}%"><i class="ring"></i><b class="tag">${esc(p.n)}</b></span>`).join('');
   function ev(item, label, num, opts) {
     item = item || { src: null, caption: '', missing: 'Not supplied' };
     const lab = label ? `<div class="ev-label">${num ? `<span class="num">${num}</span>` : ''}${esc(label)}</div>` : '';
@@ -93,7 +96,7 @@
       return `<figure class="ev">${lab}<div class="ev-frame"><div class="ev-missing"><span class="t">Screenshot goes here</span><span class="d">${esc(item.missing || 'Screenshot not supplied')}</span></div></div>${cap}</figure>`;
     }
     const id = EV.push(item) - 1;
-    const pins = (item.pins || []).map((p) => `<span class="pin" style="left:${p.x}%;top:${p.y}%">${esc(p.n)}</span>`).join('');
+    const pins = pinHTML(item.pins);
     const notes = (item.pins || []).length && !(opts && opts.noNotes) ? `<ul class="pin-notes">${item.pins.map((p) => `<li><b>${esc(p.n)}</b> ${esc(p.text || '')}</li>`).join('')}</ul>` : '';
     return `<figure class="ev">${lab}<button class="ev-frame" data-ev="${id}" aria-label="Enlarge: ${esc(item.alt || item.caption || 'evidence')}">
       <div class="ev-inner" data-focus="${esc(item.focus || '50% 0%')}" data-zoom="${Number(item.zoom) || 1}" style="position:absolute;left:0;top:0;width:100%;transform-origin:0 0">
@@ -118,7 +121,7 @@
           return Math.min(0, Math.max(frameSize - size * s, frameSize / 2 - f * size * s));
         };
         inner.style.transform = `translate(${place(iw, fw, fx)}px, ${place(ih, fh, fy)}px) scale(${s})`;
-        inner.querySelectorAll('.pin').forEach((p) => { p.style.transform = `translate(-50%, -50%) scale(${1 / s})`; });
+        inner.querySelectorAll('.pin').forEach((p) => { p.style.transform = `scale(${1 / s})`; });
       };
       if (img.complete) apply(); else img.addEventListener('load', apply, { once: true });
     });
@@ -671,7 +674,7 @@
   function openLightbox(id) {
     const item = EV[id];
     if (!item) return;
-    const pins = (item.pins || []).map((p) => `<span class="pin" style="left:${p.x}%;top:${p.y}%">${esc(p.n)}</span>`).join('');
+    const pins = pinHTML(item.pins);
     const inner = lb.querySelector('.lb-inner');
     inner.classList.remove('zoomed');
     inner.innerHTML = `<div class="lb-img-wrap"><img src="${esc(item.src)}" alt="${esc(item.alt || item.caption || '')}">${pins}</div>`;

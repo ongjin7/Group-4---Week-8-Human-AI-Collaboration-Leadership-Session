@@ -184,7 +184,7 @@ p { margin: 0; }
 .s-intro .motif { left: 96px; bottom: 44px; width: 190px; height: 190px; color: var(--qc); opacity: .2; }
 /* with a banner image (e.g. MBairline): banner across the top, content below */
 .s-intro.has-banner { background: var(--paper); grid-template-rows: 380px 1fr; grid-template-columns: 1fr 660px; padding: 0 96px 56px; row-gap: 0; align-items: start; }
-.s-intro .banner { grid-column: 1 / -1; margin: 0 -97px; height: 382px; background-repeat: no-repeat; background-size: 100% 100%, cover; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); }
+.s-intro .banner { grid-column: 1 / -1; margin: 0 -97px; height: 382px; background-repeat: no-repeat; background-size: 100% 100%, cover; opacity: .8; filter: saturate(.85); -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); }
 .s-intro.has-banner .left { padding-top: 0; gap: 20px; margin-top: -24px; }
 .s-intro.has-banner h1 { font-size: 72px; color: var(--mb-navy); }
 .s-intro.has-banner .eyebrow { color: var(--mb-navy); }
@@ -245,7 +245,6 @@ figure.ev { margin: 0; display: flex; flex-direction: column; gap: 12px; min-wid
 .ev-label .num { width: 38px; height: 38px; border-radius: 50%; background: var(--qsoft, #EFEBE2); color: var(--qc, var(--ink)); font: 500 20px/38px var(--serif); text-align: center; flex: none; }
 .ev-frame { position: relative; flex: 1; min-height: 0; border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid var(--line); padding: 0; display: block; width: 100%; text-align: left; box-shadow: var(--shadow); }
 button.ev-frame { cursor: zoom-in; }
-.ev-frame .pin, .lightbox .pin { position: absolute; transform: translate(-50%, -50%); width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--paper); font: 600 19px/40px var(--sans); text-align: center; box-shadow: 0 0 0 4px #fff; }
 .ev-frame .zoom-hint { position: absolute; right: 14px; bottom: 14px; background: rgba(29,27,24,.85); color: #fff; font-size: 16px; padding: 6px 14px; border-radius: 999px; }
 .ev-missing {
   position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 14px; padding: 28px 40px;
@@ -519,3 +518,16 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .jhuman li::before { content: "→"; color: #E9CF8E; flex: none; }
 .jhuman li:last-child::before { content: "✕"; color: var(--br-dot); }
 .jhuman .jh-foot { margin-top: auto; font-size: 22px; color: #CFC8BB; }
+
+/* ------------------------------------------ evidence markers (see-through) */
+.pin { position: absolute; width: 0; height: 0; transform-origin: 0 0; pointer-events: none; }
+.pin .ring { position: absolute; left: -26px; top: -26px; width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--qdot, #D47474); }
+.pin .tag { position: absolute; top: -15px; width: 30px; height: 30px; border-radius: 50%; background: var(--qdot, #D47474); color: #fff; font: 700 16px/30px var(--sans); text-align: center; box-shadow: 0 0 0 2px #fff, 0 4px 10px rgba(0,0,0,.18); }
+.pin.p-right .tag { left: 30px; }
+.pin.p-left .tag { right: 30px; }
+.lightbox .pin .ring { left: -32px; top: -32px; width: 64px; height: 64px; }
+.lightbox .pin.p-right .tag { left: 38px; } .lightbox .pin.p-left .tag { right: 38px; }
+.pin-dot { background: var(--qdot, var(--ink)); }
+.pin.no-ring .ring { display: none; }
+.pin.no-ring.p-right .tag { left: 8px; }
+.pin.no-ring.p-left .tag { right: 8px; }
