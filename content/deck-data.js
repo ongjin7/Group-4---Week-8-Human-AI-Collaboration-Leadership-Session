@@ -290,7 +290,7 @@ window.DECK_DATA = {
         trigger: "A new or updated response to the MB Airline Feedback Form (Google Forms).",
         tools: "Google Forms → AI by Zapier → Gmail report → Filter by Zapier → AI by Zapier → Gmail Create Draft",
         never: { rule: "Automatically send a customer reply.", setting: "The customer-facing Gmail step is Create Draft, not Send Email." },
-        checkpoint: "The manager reviews the original feedback, consent, assessment and draft, then decides how to engage."
+        checkpoint: "The manager checks the feedback and assessment and fully decides on service-recovery action. Agent only advises."
       },
       workflow: [
         { type: "trigger", label: "Feedback submitted", detail: "Google Forms: new or updated response" },
