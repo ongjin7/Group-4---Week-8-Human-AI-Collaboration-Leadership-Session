@@ -344,6 +344,25 @@
     };
   };
 
+  /* A friendly customer service manager: navy suit, gold tie, name badge, tablet in hand. */
+  const MANAGER_ART = `<svg class="jh-art" viewBox="0 0 240 260" aria-hidden="true">
+      <ellipse cx="120" cy="250" rx="92" ry="8" fill="#000" opacity=".25"/>
+      <path d="M36 250 Q36 168 120 162 Q204 168 204 250 Z" fill="#142544"/>
+      <path d="M100 164 L120 214 L140 164 Z" fill="#FBFAF6"/>
+      <path d="M100 164 L114 206 L102 196 L90 172 Z M140 164 L126 206 L138 196 L150 172 Z" fill="#0B1A33"/>
+      <path d="M115 168 h10 l-1 6 h-8 z M116 174 h8 l4 30 l-8 9 l-8 -9 z" fill="#C9A25A"/>
+      <rect x="146" y="186" width="30" height="12" rx="3" fill="#C9A25A"/>
+      <rect x="108" y="138" width="24" height="28" rx="10" fill="#F2C9A8"/>
+      <circle cx="120" cy="100" r="46" fill="#F6D3B5"/>
+      <path d="M74 98 Q72 52 120 50 Q170 52 166 100 Q160 74 132 70 Q108 84 80 82 Z" fill="#2B2420"/>
+      <circle cx="104" cy="104" r="5" fill="#1D1B18"/><circle cx="138" cy="104" r="5" fill="#1D1B18"/>
+      <circle cx="106" cy="102" r="1.6" fill="#fff"/><circle cx="140" cy="102" r="1.6" fill="#fff"/>
+      <circle cx="94" cy="120" r="7" fill="#EE9C8E" opacity=".55"/><circle cx="148" cy="120" r="7" fill="#EE9C8E" opacity=".55"/>
+      <path d="M108 124 Q121 136 134 124" fill="none" stroke="#1D1B18" stroke-width="4" stroke-linecap="round"/>
+      <g transform="rotate(-12 70 214)"><rect x="46" y="186" width="52" height="66" rx="7" fill="#E9E4D9"/><rect x="52" y="193" width="40" height="44" rx="3" fill="#5B83D1" opacity=".55"/><path d="M57 204 h28 M57 213 h22 M57 222 h26" stroke="#FBFAF6" stroke-width="3" stroke-linecap="round"/></g>
+      <circle cx="94" cy="226" r="11" fill="#F6D3B5"/>
+    </svg>`;
+
   /* 4b · the run as a journey: one stop per slide under a shared timeline */
   R['agent-journey'] = (s) => {
     const a = AG[s.agentId];
@@ -364,7 +383,8 @@
       stage = `<div class="jhuman"><span class="k">${esc(st.panelLabel || 'The person decides')}</span>
           <p class="jh-title">${st.panelTitle ? esc(st.panelTitle) : t(a.check.who)}</p>
           <ul>${(st.options || []).map((o) => `<li>${t(o)}</li>`).join('')}</ul>
-          ${st.panelFoot ? `<p class="jh-foot">${t(st.panelFoot)}</p>` : ''}</div>`;
+          ${st.panelFoot ? `<p class="jh-foot">${t(st.panelFoot)}</p>` : ''}
+          ${st.panelTitle ? MANAGER_ART : ''}</div>`;
     } else {
       stage = `<div class="jshots${st.layout === 'stack' ? ' stack' : ''}">${st.shots.map((sh) => ev(sh, sh.caption, null, { noNotes: true })).join('')}</div>`;
     }

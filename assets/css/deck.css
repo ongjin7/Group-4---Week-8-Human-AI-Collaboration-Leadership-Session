@@ -610,3 +610,9 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .jhuman .jh-title { font-size: 40px; }
 .jhuman ul { gap: 20px; }
 .jhuman li { font-size: 28px; }
+.jhuman { position: relative; overflow: hidden; }
+.jhuman > :not(.jh-art) { position: relative; z-index: 1; }
+.jhuman ul { max-width: 680px; }
+.jh-art { position: absolute; right: 26px; bottom: 0; width: 230px; height: 250px; z-index: 0; }
+@media (prefers-reduced-motion: no-preference) { .slide.active .jh-art { animation: jh-wave 3.2s ease-in-out infinite; transform-origin: 50% 100%; } }
+@keyframes jh-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-2deg) translateY(-3px); } }
