@@ -422,11 +422,24 @@
     const c = a.check;
     const p = a.placement;
     const fail = '';
-    const who = a.quadrant === 'br' ? `<p class="iffail" style="margin:-14px 0 18px"><b style="color:var(--gold-text)">Who checks:</b> ${t(c.who)}</p>` : '';
+    /* bottom-right: a small agent box beside a dominant manager box, so the person's role leads */
+    const body = a.quadrant === 'br' && c.prepares
+      ? `<div class="psplit">
+          <div class="ps-agent"><div class="ps-icon">${face(a)}</div>
+            <span class="k">The agent prepares</span><p class="v">${t(c.prepares)}</p></div>
+          <div class="ps-human"><div class="ps-icon">${MANAGER_ART}</div>
+            <span class="k">${t(c.who).replace(/\.$/, '')} · leads and decides</span>
+            <dl>
+              <dt>Decides</dt><dd>${t(c.decides)}</dd>
+              <dt>Checks</dt><dd>${t(c.what)}</dd>
+              <dt>When</dt><dd>${t(c.when)}</dd>
+            </dl></div>
+        </div>`
+      : `<div class="tiles">${P.rows(c).map(([k, v, hero, html]) => `<div class="tile${hero ? ' hero' : ''}"><span class="k">${esc(k)}</span><span class="v">${html || t(v)}</span></div>`).join('')}</div>`;
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${agentHead(a, P.title)}${who}
-        <div class="tiles">${P.rows(c).map(([k, v, hero, html]) => `<div class="tile${hero ? ' hero' : ''}"><span class="k">${esc(k)}</span><span class="v">${html || t(v)}</span></div>`).join('')}</div>
+      html: `${agentHead(a, P.title)}
+        ${body}
         ${fail}
         <div class="why">
           <div><span class="q">Is there a right answer? <b>${yn(p.q1.answer)}.</b></span><span class="r">${t(p.q1.why)}</span></div>

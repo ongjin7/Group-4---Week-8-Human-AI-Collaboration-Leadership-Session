@@ -616,3 +616,20 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .jh-art { position: absolute; right: 26px; bottom: 0; width: 230px; height: 250px; z-index: 0; }
 @media (prefers-reduced-motion: no-preference) { .slide.active .jh-art { animation: jh-wave 3.2s ease-in-out infinite; transform-origin: 50% 100%; } }
 @keyframes jh-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-2deg) translateY(-3px); } }
+
+/* bottom-right person slide: small agent box, dominant manager box */
+.psplit { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: stretch; position: relative; z-index: 1; margin-top: -6px; }
+.ps-agent, .ps-human { position: relative; border-radius: 20px; padding: 26px 30px; display: flex; flex-direction: column; gap: 10px; }
+.ps-agent { background: var(--card); border: 2px dashed var(--line); }
+.ps-agent .k { color: var(--muted); }
+.ps-agent .v { font-size: 22px; line-height: 1.42; color: var(--ink-2); }
+.ps-human { background: var(--ink); padding-left: 190px; min-height: 360px; justify-content: center; }
+.ps-human .k { color: #E9CF8E; }
+.ps-human dl { margin: 6px 0 0; display: grid; grid-template-columns: 120px 1fr; gap: 12px 18px; }
+.ps-human dt { font: 600 17px/1.5 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: #CFC8BB; }
+.ps-human dd { margin: 0; font-size: 24px; line-height: 1.4; color: var(--paper); }
+.ps-icon { width: 96px; height: 96px; }
+.ps-icon svg { width: 100%; height: 100%; }
+.ps-agent .ps-icon { width: 84px; height: 84px; border-radius: 50%; background: var(--qsoft); padding: 6px; margin-bottom: 4px; }
+.ps-human .ps-icon { position: absolute; left: 22px; bottom: 0; width: 150px; height: 164px; }
+.ps-agent .face .eyes { animation: none; }
