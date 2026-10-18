@@ -138,6 +138,7 @@
       const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
       if (mode === 'compare') {
         return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
+          <span class="cmp-ans">Right answer? <b>${yn(a.placement.q1.answer)}</b> · Must work together? <b>${yn(a.placement.q2.answer)}</b>${mismatchChip(a)}</span>
           <span class="role">${esc(Qd.compareRole || Qd.role)}</span></div>`;
       }
       return `<div class="qcell" data-q="${q}" data-focus-q="${q}" role="button" tabindex="0" aria-label="Zoom into ${esc(Qd.title)}: ${esc(nameOf(a))}">${basics}
@@ -452,8 +453,9 @@
     html: `${head('Back to the map', 'How the person’s *job* changes')}${qmapHTML('compare')}
       <div class="cmp-foot">
         <div class="cmp-qs">
-          <p><b>Question 1</b> A right answer, or no single right answer?</p>
-          <p><b>Question 2</b> Must people and AI work together, or can either complete the task independently?</p>
+          <p class="cmp-label">How the job changes</p>
+          <p><b>Across <span aria-hidden="true">→</span></b><span>Right answer → no single answer: from <em>verifying</em> the answer to <em>choosing</em> between good options.</span></p>
+          <p><b>Down <span aria-hidden="true">↓</span></b><span>Together → either alone: from <em>needed in every case</em> to <em>spot-checking</em> or <em>deciding independently</em>.</span></p>
         </div>
         ${s.compareExample ? `<div class="cmp-ex"><p class="lead-in">${esc(s.compareExample.lead)}</p><p>${esc(s.compareExample.text)}</p></div>` : ''}
       </div>`
