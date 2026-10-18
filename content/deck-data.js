@@ -265,7 +265,7 @@ window.DECK_DATA = {
       theme: "mbairline",
       motif: "plane",
       avatar: "suit",
-      catchphrase: "I am always in control!",
+      catchphrase: "I advise. You lead and decide!",
       banner: { src: "assets/brand/mbairline-banner.jpg", alt: "MBairline aircraft above the clouds at sunset, with the MBairline Customer Feedback wordmark", position: "center 40%" },
       name: "MBairline Priority Guest Relations Assistant",
       shortName: "MBairline assistant",
