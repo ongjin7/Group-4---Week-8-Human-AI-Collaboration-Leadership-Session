@@ -383,14 +383,14 @@ window.DECK_DATA = {
           say: "The filter saw yes and yes, so the agent drafted a reply. It sits in Drafts: the agent cannot press Send."
         },
         {
-          who: "Manager", short: "Manager decides", title: "The manager decides", human: true,
-          note: "The manager reads the report and the draft, checks consent and tone, and chooses the response.",
+          who: "Manager", short: "Manager decides", title: "The manager decides and can handle the case independently.", human: true,
+          note: "AI prepares the assessment and draft to reduce preparation effort; the manager can review the feedback, formulate a response, and act without the agent.",
           options: [
             "Edit the apology and send it by email",
             "Refer the crew complaint to Cabin Crew, and the food to Food & Beverage",
             "Not a phone call: Kerry said no to mobile contact"
           ],
-          say: "This is where the person decides. The agent prepared everything, but the manager chooses: send, edit, refer, or not. And no phone call, because Kerry said no."
+          say: "The manager decides, and could handle this case without the agent. AI only saves preparation effort. Send, edit, refer, or not, and no phone call, because Kerry said no. No single right answer, and either can do it alone: that is why it sits bottom-right."
         }
       ],
       check: {
