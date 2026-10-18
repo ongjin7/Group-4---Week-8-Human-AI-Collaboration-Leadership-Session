@@ -269,6 +269,7 @@ window.DECK_DATA = {
       banner: { src: "assets/brand/mbairline-banner.jpg", alt: "MBairline aircraft above the clouds at sunset, with the MBairline Customer Feedback wordmark", position: "center 40%" },
       name: "MBairline Priority Guest Relations Assistant",
       shortName: "MBairline assistant",
+      mapName: "Airline Priority Customer Feedback Assistant",
       presenter: "Jin",
       domain: "Airline customer service",
       oneLiner: "Assesses priority-passenger feedback to assist the manager in customer handling.",

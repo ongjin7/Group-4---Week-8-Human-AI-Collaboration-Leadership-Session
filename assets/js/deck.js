@@ -135,9 +135,9 @@
       if (!a) return `<div class="qcell" data-q="${q}"><span class="qt">${esc(Qd.title)}</span>${tbc('no agent placed here yet')}</div>`;
       const num = `<span class="num" aria-hidden="true">${pad2(ORDER.indexOf(q) + 1)}</span>`;
       const tag = `<span class="tag">${Qd.q1 === 'yes' ? 'Right answer' : 'No single answer'} · ${Qd.q2 === 'yes' ? 'Work together' : 'Either alone'}</span>`;
-      const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(nameOf(a))}</span><span class="dm">Presented by ${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
+      const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">Presented by ${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
       if (mode === 'compare') {
-        return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(nameOf(a))}</span>
+        return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
           <span class="role"><b>The person</b> ${esc(lc(Qd.role))}</span></div>`;
       }
       return `<div class="qcell" data-q="${q}" data-focus-q="${q}" role="button" tabindex="0" aria-label="Zoom into ${esc(Qd.title)}: ${esc(nameOf(a))}">${basics}
