@@ -371,10 +371,10 @@ figcaption { font-size: 20px; line-height: 1.35; color: var(--muted); }
 .ov-item .t { font-size: 17px; font-weight: 600; }
 .lightbox { display: none; place-items: center; padding: 24px 24px 80px; }
 .lightbox.open { display: grid; }
-.lb-inner { position: relative; max-width: 96vw; max-height: calc(100vh - 120px); overflow: auto; background: #fff; border-radius: 12px; }
-.lb-inner .lb-img-wrap { position: relative; display: inline-block; }
-.lb-inner img { display: block; max-width: 94vw; max-height: calc(100vh - 140px); cursor: zoom-in; }
-.lb-inner.zoomed img { max-width: none; max-height: none; width: 200%; cursor: zoom-out; }
+.lb-inner { position: relative; max-width: 96vw; max-height: calc(100vh - 110px); overflow: auto; background: #fff; border-radius: 12px; }
+.lb-inner .lb-img-wrap { position: relative; display: block; cursor: zoom-in; }
+.lb-inner.zoomed .lb-img-wrap { cursor: zoom-out; }
+.lb-inner img { display: block; width: 100%; height: auto; }
 .lb-bar { position: fixed; left: 0; right: 0; bottom: 16px; display: flex; justify-content: center; gap: 12px; align-items: center; color: var(--paper); font-size: 17px; }
 .lb-bar button { background: var(--paper); color: var(--ink); border: 0; border-radius: 999px; padding: 8px 18px; font-weight: 600; }
 .help { display: none; place-items: center; }

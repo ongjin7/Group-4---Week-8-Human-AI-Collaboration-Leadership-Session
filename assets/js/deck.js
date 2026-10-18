@@ -666,7 +666,11 @@
     if (el.matches('[data-unfocus]')) { unfocusMap(slide); return; }
     if (el.matches('[data-goto]')) { const k = indexOf(el.dataset.goto); if (k >= 0) go(k, 0); return; }
     if (el.matches('[data-showall]')) { go(state.i, 'end'); return; }
-    if (el.matches('[data-ev]')) { openLightbox(Number(el.dataset.ev)); return; }
+    if (el.matches('[data-ev]')) {
+      const im = el.querySelector('img');
+      openLightbox(Number(el.dataset.ev), im && im.naturalWidth ? im.getBoundingClientRect().width / im.naturalWidth : 0);
+      return;
+    }
     if (el.matches('[data-move]')) { stepMove(el); return; }
     if (el.matches('[data-focus-q]')) { if (!el.classList.contains('sel')) focusMap(slide, el.dataset.focusQ); }
   });
@@ -686,7 +690,7 @@
   }
   const anyOverlay = () => [lb, ov, help].some((o) => o.classList.contains('open'));
 
-  function openLightbox(id) {
+  function openLightbox(id, slideScale) {
     const item = EV[id];
     if (!item) return;
     const pins = pinHTML(item.pins);
@@ -694,10 +698,35 @@
     inner.classList.remove('zoomed');
     inner.innerHTML = `<div class="lb-img-wrap"><img src="${esc(item.src)}" alt="${esc(item.alt || item.caption || '')}">${pins}</div>`;
     lb.querySelector('.lb-cap').textContent = [item.caption, ...(item.pins || []).map((p) => `${p.n}: ${p.text || ''}`)].filter(Boolean).join('  ·  ');
+    lb.dataset.focus = item.focus || '50% 50%';
+    lb.dataset.slideScale = String(slideScale || 0);
     openOverlay(lb);
+    const img = inner.querySelector('img');
+    if (img.complete) sizeLightbox(); else img.addEventListener('load', sizeLightbox, { once: true });
   }
+  /* Fit the screenshot to the screen, scaling small screenshots UP (not just down).
+     Zoomed: twice that size, scrolled to the screenshot's focus point. */
+  function sizeLightbox() {
+    const inner = lb.querySelector('.lb-inner');
+    const wrap = inner.querySelector('.lb-img-wrap');
+    const img = inner.querySelector('img');
+    if (!img || !img.naturalWidth) return;
+    const widthFit = (window.innerWidth * 0.94) / img.naturalWidth;
+    const fit = Math.min(widthFit, (window.innerHeight - 130) / img.naturalHeight);
+    /* never smaller than the slide showed it: at least 1.5× the on-slide size, up to full width */
+    const base = Math.min(widthFit, Math.max(fit, (Number(lb.dataset.slideScale) || 0) * 1.5));
+    const zoomed = inner.classList.contains('zoomed');
+    const w = img.naturalWidth * base * (zoomed ? 2 : 1);
+    wrap.style.width = `${Math.round(w)}px`;
+    /* centre the view on the screenshot's focus point when it is larger than the screen */
+    const [fx, fy] = (lb.dataset.focus || '50% 50%').split(/\s+/).map((v) => parseFloat(v) / 100);
+    const h = w * img.naturalHeight / img.naturalWidth;
+    inner.scrollLeft = Math.max(0, fx * w - inner.clientWidth / 2);
+    inner.scrollTop = Math.max(0, fy * h - inner.clientHeight / 2);
+  }
+  window.addEventListener('resize', () => { if (lb.classList.contains('open')) sizeLightbox(); });
   lb.addEventListener('click', (e) => {
-    if (e.target.closest('img')) { lb.querySelector('.lb-inner').classList.toggle('zoomed'); return; }
+    if (e.target.closest('.lb-img-wrap')) { lb.querySelector('.lb-inner').classList.toggle('zoomed'); sizeLightbox(); return; }
     if (e.target.closest('[data-close]') || e.target === lb) closeOverlays();
   });
 
