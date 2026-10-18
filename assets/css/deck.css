@@ -531,3 +531,15 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .pin.no-ring .ring { display: none; }
 .pin.no-ring.p-right .tag { left: 8px; }
 .pin.no-ring.p-left .tag { right: 8px; }
+
+/* agent catchphrase: speech bubble that pops when the card is tapped */
+.tc-portrait { position: relative; }
+.tc-bubble {
+  position: absolute; top: 14px; right: 14px; max-width: 210px; padding: 10px 16px; border-radius: 18px 18px 4px 18px;
+  background: #fff; border: 2.5px solid var(--qdot); color: var(--ink); font: 700 19px/1.25 var(--sans);
+  box-shadow: 0 10px 22px -10px rgba(0,0,0,.35);
+  opacity: 0; transform: scale(.4) translate(20px, 30px); transform-origin: 85% 100%;
+  transition: opacity .2s var(--ease), transform .35s cubic-bezier(.3,1.6,.5,1);
+}
+.tcard.speak .tc-bubble { opacity: 1; transform: none; }
+@media print { .tc-bubble { display: none; } }

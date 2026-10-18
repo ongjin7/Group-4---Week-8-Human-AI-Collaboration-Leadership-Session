@@ -217,11 +217,17 @@
     plane: '<path d="M46 72 Q100 22 154 72 Z" style="fill:#142544"/><rect x="34" y="68" width="132" height="14" rx="7" style="fill:#142544"/><path d="M86 52 l14 -6 l14 6 l-14 4 z" style="fill:#C9A25A"/><circle cx="100" cy="51" r="4" style="fill:#C9A25A"/>',
     receipt: '<circle cx="78" cy="104" r="17" fill="none" stroke-width="4" style="stroke:var(--ink)"/><circle cx="122" cy="104" r="17" fill="none" stroke-width="4" style="stroke:var(--ink)"/><path d="M95 104 h10" stroke-width="4" style="stroke:var(--ink)"/>',
     chat: '<path d="M40 104 Q40 38 100 38 Q160 38 160 104" fill="none" stroke-width="7" stroke-linecap="round" style="stroke:var(--ink)"/><rect x="28" y="92" width="18" height="34" rx="8" style="fill:var(--ink)"/><rect x="154" y="92" width="18" height="34" rx="8" style="fill:var(--ink)"/><path d="M38 126 Q44 150 76 146" fill="none" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/><circle cx="80" cy="146" r="6" style="fill:var(--ink)"/>',
-    calendar: '<path d="M66 168 L92 192 M134 168 L108 192" stroke-width="5" style="stroke:var(--qc)"/><rect x="84" y="182" width="32" height="18" rx="4" style="fill:var(--card);stroke:var(--qc)" stroke-width="3"/>'
+    calendar: '<path d="M66 168 L92 192 M134 168 L108 192" stroke-width="5" style="stroke:var(--qc)"/><rect x="84" y="182" width="32" height="18" rx="4" style="fill:var(--card);stroke:var(--qc)" stroke-width="3"/>',
+    /* customer service manager: navy suit, white shirt, gold tie, pocket square and name badge */
+    suit: '<path d="M40 200 Q40 164 100 164 Q160 164 160 200 Z" style="fill:#142544"/>' +
+      '<path d="M84 164 L100 198 L116 164 Z" fill="#fff"/>' +
+      '<path d="M84 164 L95 192 L86 182 L78 168 Z M116 164 L105 192 L114 182 L122 168 Z" style="fill:#0B1A33"/>' +
+      '<path d="M96 168 h8 l-1 5 h-6 z M97 173 h6 l3 20 l-6 6 l-6 -6 z" style="fill:#C9A25A"/>' +
+      '<path d="M58 182 l10 -4 l2 6 z" style="fill:#C9A25A"/><rect x="126" y="180" width="18" height="8" rx="2" style="fill:#C9A25A"/>'
   };
   function face(a) {
-    const acc = ACCESSORY[a.motif] || '';
-    const antenna = a.motif === 'plane' ? '' : '<path d="M100 54 V32" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/><circle cx="100" cy="28" r="8" style="fill:var(--qdot)"/>';
+    const acc = ACCESSORY[a.avatar || a.motif] || '';
+    const antenna = (a.avatar || a.motif) === 'plane' ? '' : '<path d="M100 54 V32" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/><circle cx="100" cy="28" r="8" style="fill:var(--qdot)"/>';
     return `<svg class="face" viewBox="0 0 200 200" aria-hidden="true">
       <path d="M44 200 Q44 162 100 162 Q156 162 156 200 Z" style="fill:var(--qdot);opacity:.55"/>
       ${antenna}
@@ -261,7 +267,7 @@
           <div class="tcard" data-tap role="button" tabindex="0" aria-label="Tap the card to unlock its next ability">
             <div class="tc-top"><span>Agent card</span><span class="tc-no">No. ${pad2(s.quadrantNo)}</span></div>
             <div class="tc-class">${esc(q.title)}</div>
-            <div class="tc-portrait">${face(a)}</div>
+            <div class="tc-portrait">${face(a)}${a.catchphrase ? `<span class="tc-bubble" aria-hidden="true">${esc(a.catchphrase)}</span>` : ''}</div>
             <div class="tc-name">${esc(nameOf(a))}</div>
             <div class="tc-sub">${t(a.domain)} · ${t(a.presenter)}</div>
             <div class="tc-stats"><span>Right answer <b>${yn(a.placement.q1.answer)}</b></span><span>Together <b>${yn(a.placement.q2.answer)}</b></span></div>
@@ -526,6 +532,14 @@
     });
   }
 
+  /* The agent's catchphrase pops up in a speech bubble for a moment after each tap. */
+  function speak(card) {
+    if (!card.querySelector('.tc-bubble')) return;
+    card.classList.add('speak');
+    clearTimeout(card._speakTimer);
+    card._speakTimer = setTimeout(() => card.classList.remove('speak'), 2400);
+  }
+
   function go(i, step, opts) {
     i = Math.max(0, Math.min(SLIDES.length - 1, i));
     const s = SLIDES[i];
@@ -544,6 +558,7 @@
       card.classList.remove('tap');
       void card.offsetWidth; // restart the tap animation
       card.classList.add('tap');
+      speak(card);
     }
     layoutEvidence(s.el);
     updateChrome();
@@ -645,7 +660,7 @@
     if (el.matches('[data-tap]')) {
       const s = SLIDES[state.i];
       if (state.step < s.steps) go(state.i, state.step + 1);
-      else { const card = el; card.classList.remove('tap'); void card.offsetWidth; card.classList.add('tap'); }
+      else { const card = el; card.classList.remove('tap'); void card.offsetWidth; card.classList.add('tap'); speak(card); }
       return;
     }
     if (el.matches('[data-unfocus]')) { unfocusMap(slide); return; }
