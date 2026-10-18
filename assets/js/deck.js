@@ -355,7 +355,7 @@
       if (typeof v === 'string') { if (isTBC(v)) tbcs++; return; }
       if (Array.isArray(v)) { v.forEach((x) => walk(x)); return; }
       if (typeof v === 'object') Object.keys(v).forEach((key) => walk(v[key], key));
-    })({ agents: D.agents, members: D.members, faq: D.faq });
+    })({ agents: D.agents, members: D.members });
     return { tbcs, shots };
   }
 
@@ -411,12 +411,6 @@
         const item = a && a.config && a.config[row];
         return item ? ev(item) : '<div></div>';
       }).join('')).join('')}</div>`
-  });
-
-  R.faq = (s) => ({
-    html: `${head('Anticipated questions', s.from ? 'More questions we expect' : 'Questions we expect, and our answers')}
-      <div class="grid2">${D.faq.slice(s.from || 0, s.to || D.faq.length).map((f) => `
-        <div class="acard"><p class="q">${t(f.q)}</p><p class="a">${t(f.a)}</p></div>`).join('')}</div>`
   });
 
   R.unknown = (s) => ({ html: head('Unknown slide type', s.type || '?') });

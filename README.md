@@ -75,7 +75,7 @@ The main flow is 30 slides and totals exactly **20:00**:
 | Comparison | How the person’s job changes 0:50 · Moves 0:55 · Closing question 0:15 | 2:00 |
 
 The appendix (evidence status, MBairline testing lessons, placement checks, configuration
-evidence, anticipated questions) is untimed and for Q&A. The presenter view warns if the
+evidence) is untimed and for Q&A. The presenter view warns if the
 timings in `deck-data.js` stop adding up to 20:00.
 
 ## Edit the content

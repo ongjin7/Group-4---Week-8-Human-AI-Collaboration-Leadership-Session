@@ -387,27 +387,6 @@ window.DECK_DATA = {
     { id: "a-placement", type: "placement", title: "A3 · Placement checks",
       notes: "Our own challenge to each placement. The CRM placement is the one most likely to be questioned." },
     { id: "a-config", type: "config", title: "A4 · Configuration evidence",
-      notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
-    { id: "a-faq-1", type: "faq", title: "A5 · Anticipated questions", from: 0, to: 4 },
-    { id: "a-faq-2", type: "faq", title: "A5 · Anticipated questions (cont.)", from: 4, to: 8 }
-  ],
-
-  faq: [
-    { q: "Isn’t MBairline top-right, since the manager judges?",
-      a: "Judgment happens in both right-hand quadrants. The difference is Q2: the agent completes its report and draft without the manager, and the manager decides independently afterwards. Nothing in the process waits for the manager’s judgment to continue." },
-    { q: "Why is the CRM agent top-right and not bottom-right?",
-      a: "TBC: Point to the step where the process waits for the person’s choice and continues with it. If no such step exists, we should move it to bottom-right." },
-    { q: "If the expense approver only clicks ‘approve’, isn’t that AI alone, with checks?",
-      a: "TBC: Show a run where the approver added something the agent could not, such as an exception or an unwritten rule. If they never do, bottom-left is the better fit." },
-    { q: "How do you know the output screenshot came from that run?",
-      a: "Each run slide pairs the output with its Zap history record and shows the shared run ID or timestamp. A screenshot alone would not prove it." },
-    { q: "How much time does each agent save?",
-      a: "We have not measured time saved. We can show what each run produced; savings are an expected benefit, not a result." },
-    { q: "What happens when an agent is wrong?",
-      a: "Each run slide has an ‘If the check fails’ line. For MBairline, the consent error in A2 is a real example: it was caught on review and the input labels were changed." },
-    { q: "Would you trust the HR report without the spot check?",
-      a: "TBC: Answer with the spot-check frequency and any error it has caught so far." },
-    { q: "Which agent was hardest to place?",
-      a: "TBC: Agree as a group. Suggested: the CRM agent, because recommendation alone looks like bottom-right." }
+      notes: "All configuration screenshots in one place, for questions about how each Zap was built." }
   ]
 };
