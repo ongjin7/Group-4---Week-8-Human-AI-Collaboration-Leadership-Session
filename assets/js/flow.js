@@ -52,6 +52,24 @@
           handover = 'Hand back: “We will now look at how our answers to the map’s two questions placed each of our four agents, and what would move each one to another quadrant.”';
         }
         AGENT_SLIDES.forEach((t, k) => {
+          /* An agent with a `journey` tells its run as a sequence of stops, one slide each. */
+          if (t.key === 'run' && Array.isArray(a.journey) && a.journey.length) {
+            const total = split[k] || 0;
+            const n = a.journey.length;
+            const each = Math.floor(total / n);
+            a.journey.forEach((stop, j) => {
+              out.push({
+                id: `${a.id}-journey-${j + 1}`, type: 'agent-journey', stop: j,
+                seconds: each + (j === 0 ? total - each * n : 0),
+                agentId: a.id, segId: seg.id, segLabel: seg.label, quadrant: a.quadrant, quadrantNo,
+                presenter: plain(a.presenter),
+                title: `${q.position} · ${name} · journey ${j + 1}/${n}: ${stop.short || stop.title}`,
+                notes: stop.say || stop.note || t.notes,
+                cue: j === n - 1 ? 'Last stop: the person decides. Then → for the same run in Zap history.' : 'Press → for the next stop on the journey.'
+              });
+            });
+            return;
+          }
           out.push({
             id: `${a.id}-${t.key}`, type: t.type, seconds: split[k] || 0,
             agentId: a.id, segId: seg.id, segLabel: seg.label, quadrant: a.quadrant, quadrantNo,

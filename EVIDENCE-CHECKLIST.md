@@ -49,11 +49,15 @@ Zap history record by run ID or timestamp.
 Already in the deck, taken from Jin’s published PS5 agent card: problem, five-line card,
 seven-step workflow, check (who, what, when, if it fails), placement reasoning, move.
 
-- [ ] Screenshot: Zap editor (redacted)
+- [x] Screenshot: Zap editor (`zap-editor.jpg`)
 - [ ] Screenshot: Filter by Zapier conditions
 - [ ] Screenshot: Gmail action set to **Create Draft**, not Send Email
-- [ ] One run: form response (passenger name and email redacted), the manager report and Gmail draft, Zap history record
-- [ ] Shared run ID or timestamp. The agent card says “18 October, finished 5:00 PM”; confirm it is the same run in Zap history.
+- [x] One run, shown as a five-stop journey (test passenger Kerry Tan): form (`form-top.jpg`, `form-answers.jpg`,
+      email and phone redacted), manager’s inbox and report (`manager-inbox.jpg`, `manager-report.jpg`, sender address
+      redacted), reply draft (`reply-draft.jpg`)
+- [ ] **Zap history record of the Kerry Tan run**, with its run ID or time visible: the last piece that proves the
+      form, report and draft all come from the same run
+- [ ] Shared run ID or timestamp shown on the “Same run, in Zap history” slide
 - [ ] Testing lessons (appendix A2):
   - [ ] Consent reversal: annotated before/after screenshot (reported in Jin’s write-up)
   - [ ] Retest showing Email: Yes, Mobile: No: screenshot (reported in write-up)

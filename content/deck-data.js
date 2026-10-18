@@ -291,16 +291,70 @@ window.DECK_DATA = {
         { type: "human", label: "Manager decides", detail: "How to engage, and whether to send" }
       ],
       config: [
-        { src: null, caption: "Zap editor: full workflow", missing: "Redacted screenshot of the MBairline Zap editor" },
+        { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "Zap editor: the six steps", alt: "Zapier editor showing six steps: Google Forms, AI by Zapier, Gmail Send Email, Filter by Zapier, AI by Zapier, Gmail Create Draft" },
         { src: null, caption: "Filter conditions", missing: "Screenshot of the Filter by Zapier conditions" },
         { src: null, caption: "Gmail: Create Draft, not Send", missing: "Screenshot of the Gmail action event setting" }
       ],
       run: {
-        matchKey: { label: "Zap run ID / timestamp", value: "TBC: run ID or timestamp. Jin’s agent card shows “18 October, finished 5:00 PM”; confirm in Zap history" },
-        input: { src: null, caption: "Input: feedback form response", missing: "Form response for this run, passenger name and email redacted" },
-        output: { src: null, caption: "Output: manager report + saved draft", missing: "The report email and the Gmail draft from this run" },
-        record: { src: null, caption: "Zap history: same run", missing: "Zap history detail showing the same run ID/timestamp" }
+        matchKey: { label: "Zap run ID / timestamp", value: "TBC: the run ID or time of the Kerry Tan test run, as shown in Zap history" },
+        input: { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Input: Kerry Tan’s feedback form" },
+        output: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Output: the manager’s report" },
+        record: { src: null, caption: "Zap history: same run", missing: "Zap history run detail for the Kerry Tan test run, showing its run ID and time" }
       },
+      /* One run, start to finish. Each stop is its own slide; → moves along the timeline.
+         Shots: focus = the point to zoom into, zoom = how far, pins = numbered markers (x/y in % of the image). */
+      journey: [
+        {
+          who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback",
+          note: "A test passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
+          shots: [
+            { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 70%", zoom: 1.35,
+              pins: [{ x: 15, y: 77, n: 1, text: "1 star out of 5" }] },
+            { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Complaint and contact consent", alt: "Form answers: complaint about cabin crew and food; email contact Yes; mobile contact No", focus: "40% 74%", zoom: 1.6,
+              pins: [{ x: 22, y: 66.8, n: 2, text: "Email contact: Yes" }, { x: 20, y: 93, n: 3, text: "Mobile contact: No" }] }
+          ],
+          say: "Meet Kerry, our test passenger. One star, a complaint about the crew and the food. Watch the two consent answers: email yes, mobile no."
+        },
+        {
+          who: "Zapier", short: "Zap fires", title: "The Zap fires",
+          note: "The new form response triggers the Zap. AI assesses the feedback, Gmail emails a report, a Filter checks the conditions, AI drafts a reply, and Gmail saves it as a draft.",
+          shots: [
+            { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "The six steps in the Zap editor", alt: "Zapier editor showing six steps",
+              pins: [{ x: 5, y: 23, n: 1, text: "AI assesses the feedback" }, { x: 5, y: 58.5, n: 2, text: "Filter: follow-up AND email = Yes" }, { x: 5, y: 74, n: 3, text: "AI drafts the reply" }, { x: 5, y: 89.5, n: 4, text: "Create Draft, never Send" }] }
+          ],
+          say: "No one presses a button. The form response starts the Zap: six steps, two of them AI."
+        },
+        {
+          who: "Manager’s inbox", short: "Report arrives", title: "A report lands in the inbox",
+          note: "The manager receives an assessment with suggested next steps. The consent lines match Kerry’s form: email yes, mobile no.",
+          layout: "stack",
+          shots: [
+            { src: "assets/evidence/mbairline/manager-inbox.jpg", caption: "The manager’s inbox", alt: "Gmail inbox showing the email MBairline | Priority Guest Feedback Report — Kerry Tan", focus: "75% 92%", zoom: 1.7 },
+            { src: "assets/evidence/mbairline/manager-report.jpg", caption: "The report, written by AI", alt: "Report email: personalised action Yes, urgent Yes, email contact Yes, mobile contact No, and two recommended next steps", focus: "28% 49%", zoom: 2,
+              pins: [{ x: 6.2, y: 41.3, n: 1, text: "Personalised action: Yes" }, { x: 6.2, y: 47, n: 2, text: "Email Yes, mobile No: matches the form" }, { x: 6.2, y: 58.2, n: 3, text: "Suggested next steps" }] }
+          ],
+          say: "The manager gets this report. Point at the consent lines: email yes, mobile no, exactly what Kerry said. That is the consent bug we fixed in testing."
+        },
+        {
+          who: "Drafts", short: "Reply drafted", title: "A reply waits in Drafts",
+          note: "Personalised action is Yes and email is allowed, so the Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft. Nothing is sent.",
+          shots: [
+            { src: "assets/evidence/mbairline/reply-draft.jpg", caption: "The personalised reply, saved as a draft", alt: "Gmail draft reply to Kerry Tan apologising and promising review by the Cabin Crew and Food and Beverage teams", focus: "50% 55%", zoom: 1.15,
+              pins: [{ x: 22, y: 95, n: 1, text: "Not sent: waits for the manager" }] }
+          ],
+          say: "The filter saw yes and yes, so the agent drafted a reply. It sits in Drafts: the agent cannot press Send."
+        },
+        {
+          who: "Manager", short: "Manager decides", title: "The manager decides", human: true,
+          note: "The manager reads the report and the draft, checks consent and tone, and chooses the response.",
+          options: [
+            "Edit the apology and send it by email",
+            "Refer the crew complaint to Cabin Crew, and the food to Food & Beverage",
+            "Not a phone call: Kerry said no to mobile contact"
+          ],
+          say: "This is where the person decides. The agent prepared everything, but the manager chooses: send, edit, refer, or not. And no phone call, because Kerry said no."
+        }
+      ],
       check: {
         who: "The customer service manager (played by Jin in testing).",
         what: "Original feedback, contact consent, factual accuracy, tone, urgency, and whether the recommendations follow airline policy.",
@@ -362,7 +416,7 @@ window.DECK_DATA = {
     { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
     { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
     { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
-    { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     {
       id: "close", label: "Comparison", seconds: 120,
       slides: [

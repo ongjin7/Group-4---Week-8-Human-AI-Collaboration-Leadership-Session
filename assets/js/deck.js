@@ -85,7 +85,7 @@
 
   /* ----------------------------------------------------------- evidence */
   const EV = [];
-  function ev(item, label, num) {
+  function ev(item, label, num, opts) {
     item = item || { src: null, caption: '', missing: 'Not supplied' };
     const lab = label ? `<div class="ev-label">${num ? `<span class="num">${num}</span>` : ''}${esc(label)}</div>` : '';
     const cap = item.caption && !label ? `<figcaption>${t(item.caption)}</figcaption>` : '';
@@ -94,7 +94,7 @@
     }
     const id = EV.push(item) - 1;
     const pins = (item.pins || []).map((p) => `<span class="pin" style="left:${p.x}%;top:${p.y}%">${esc(p.n)}</span>`).join('');
-    const notes = (item.pins || []).length ? `<ul class="pin-notes">${item.pins.map((p) => `<li><b>${esc(p.n)}</b> ${esc(p.text || '')}</li>`).join('')}</ul>` : '';
+    const notes = (item.pins || []).length && !(opts && opts.noNotes) ? `<ul class="pin-notes">${item.pins.map((p) => `<li><b>${esc(p.n)}</b> ${esc(p.text || '')}</li>`).join('')}</ul>` : '';
     return `<figure class="ev">${lab}<button class="ev-frame" data-ev="${id}" aria-label="Enlarge: ${esc(item.alt || item.caption || 'evidence')}">
       <div class="ev-inner" data-focus="${esc(item.focus || '50% 0%')}" data-zoom="${Number(item.zoom) || 1}" style="position:absolute;left:0;top:0;width:100%;transform-origin:0 0">
         <img src="${esc(item.src)}" alt="${esc(item.alt || item.caption || '')}" style="display:block;width:100%;height:auto">${pins}</div>
@@ -302,6 +302,37 @@
       cls: 'agent', q: a.quadrant, theme: a.theme,
       html: `${agentHead(a, 'One *real* run')}
         <div class="pair">${ev(a.run.input, a.run.input.caption || 'What came in', 1)}<span class="arrow" aria-hidden="true">→</span>${ev(a.run.output, a.run.output.caption || 'What the agent produced', 2)}</div>`
+    };
+  };
+
+  /* 4b · the run as a journey: one stop per slide under a shared timeline */
+  R['agent-journey'] = (s) => {
+    const a = AG[s.agentId];
+    const stops = a.journey;
+    const st = stops[s.stop];
+    const timeline = `<ol class="jline" aria-label="Journey: stop ${s.stop + 1} of ${stops.length}">${stops.map((x, j) => `
+      <li class="${j < s.stop ? 'done' : ''}${j === s.stop ? ' cur' : ''}${x.human ? ' human' : ''}"><span class="dot">${j < s.stop ? '✓' : j + 1}</span><span class="jt"><span class="jw">${esc(x.who)}</span>${esc(x.short || x.title)}</span></li>`).join('')}</ol>`;
+    const pins = (st.shots || []).flatMap((sh) => sh.pins || []);
+    const info = `<div class="jinfo">
+        <span class="jno">${pad2(s.stop + 1)}</span>
+        <span class="k">${esc(st.who)}</span>
+        <h3>${esc(st.title)}</h3>
+        <p class="body">${t(st.note)}</p>
+        ${pins.length ? `<ul class="jpins">${pins.map((p) => `<li><span class="pin-dot">${esc(p.n)}</span>${esc(p.text || '')}</li>`).join('')}</ul>` : ''}
+      </div>`;
+    let stage;
+    if (st.human) {
+      stage = `<div class="jhuman"><span class="k">The person decides</span>
+          <p class="jh-title">${t(a.check.who)}</p>
+          <ul>${(st.options || []).map((o) => `<li>${t(o)}</li>`).join('')}</ul>
+          <p class="jh-foot">The agent prepared everything. Nothing reaches Kerry until the manager chooses.</p></div>`;
+    } else {
+      stage = `<div class="jshots${st.layout === 'stack' ? ' stack' : ''}">${st.shots.map((sh) => ev(sh, sh.caption, null, { noNotes: true })).join('')}</div>`;
+    }
+    return {
+      cls: 'agent journey', q: a.quadrant, theme: a.theme,
+      html: `${agentHead(a, 'One run, start to *finish*')}${timeline}
+        <div class="jbody">${info}${stage}</div>`
     };
   };
 
