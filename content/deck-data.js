@@ -273,7 +273,7 @@ window.DECK_DATA = {
       domain: "Airline customer service",
       oneLiner: "Assesses Priority passenger feedback and prepares a report and reply draft for the customer service manager.",
       problem: {
-        statement: "Priority passengers expect timely, personalised attention. Airlines need to understand passenger’s feedback quickly and appropriately respond.",
+        statement: "Priority passengers expect timely, personalised attention. Airlines need to understand passengers’ feedback quickly and respond appropriately.",
         affected: "Dedicated customer service teams supporting priority passengers, and passengers whose concerns require personalised attention.",
         difficulty: "Each response must be read, judged for urgency, checked for consent and answered personally.",
         benefit: "The agent summarises feedback, recommends next steps, and prepares a management report and, where appropriate and permitted, a personalised email draft. This reduces preparation effort while managers retain full control over decisions and sensitive customer interactions.",
