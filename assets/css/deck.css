@@ -643,3 +643,7 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .ps-human dl { gap: 18px 22px; }
 .ps-human dd { font-size: 26px; }
 .ps-human .ps-icon { width: 190px; height: 208px; left: 26px; }
+/* opener polish: left column sits a little lower; more air between the card's paragraphs */
+.s-intro.has-banner .left { margin-top: 40px; }
+.s-intro.has-banner .card > div + div { margin-top: 30px; }
+.s-intro.has-banner .card hr + div { margin-top: 26px; }
