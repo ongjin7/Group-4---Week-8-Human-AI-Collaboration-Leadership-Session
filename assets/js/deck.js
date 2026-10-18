@@ -77,11 +77,10 @@
   /* Header for the agent's inner slides: quadrant, agent, presenter, then a big title. */
   function agentHead(a, title) {
     const q = QS[a.quadrant];
-    const brand = a.theme === 'mbairline' ? '<div class="brandmark" role="img" aria-label="MBairline"></div>' : '';
     return `<header class="head"><div class="titles">
         <div class="who-line"><span class="qchip" data-q="${a.quadrant}">${esc(q.title)}</span>&ensp;·&ensp;<b>${esc(nameOf(a))}</b>&ensp;·&ensp;${t(a.presenter)}</div>
         <h2>${md(title)}</h2></div>
-        <div class="head-right">${brand}${mini(a.quadrant)}</div></header>`;
+        <div class="head-right">${mini(a.quadrant)}</div></header>`;
   }
 
   /* ----------------------------------------------------------- evidence */
@@ -188,7 +187,7 @@
     const a = AG[s.agentId];
     const q = QS[a.quadrant];
     const banner = a.banner && a.banner.src
-      ? `<div class="banner" role="img" aria-label="${esc(a.banner.alt || '')}" style="background-image:url('${esc(a.banner.src)}')${a.banner.position ? `;background-position:${esc(a.banner.position)}` : ''}"></div>`
+      ? `<div class="banner" role="img" aria-label="${esc(a.banner.alt || '')}" style="background-image:linear-gradient(180deg, rgba(251,250,246,0) 0%, rgba(251,250,246,0) 40%, rgba(251,250,246,.55) 70%, #FBFAF6 100%), url('${esc(a.banner.src)}');background-position:center, ${esc(a.banner.position || 'center')}"></div>`
       : '';
     return {
       cls: 's-intro' + (banner ? ' has-banner' : ''), q: a.quadrant, theme: a.theme,
