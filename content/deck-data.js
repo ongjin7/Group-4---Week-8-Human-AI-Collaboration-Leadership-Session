@@ -25,8 +25,8 @@
  */
 window.DECK_DATA = {
   meta: {
-    title: "How does the *task* decide the person’s role?",
-    subtitle: "Four Problem Set 5 agents, one per quadrant of the map",
+    title: "Four Agents,\nFour *Roles* for People",
+    subtitle: "Group 4’s take on exploring the Human–AI Collaboration Map",
     course: "Week 8 · Human–AI Collaboration · Problem-solving session",
     date: "Wednesday 21 October 2026",
     group: "Group 4",

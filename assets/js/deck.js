@@ -26,7 +26,7 @@
   const isTBC = F.isTBC;
   const tbc = (m) => `<span class="tbc"><b>TBC</b>${esc(m)}</span>`;
   /* *word* in a heading becomes the italic accent, as on the group site */
-  const md = (s) => esc(s).replace(/\*(.+?)\*/g, '<em>$1</em>');
+  const md = (s) => esc(s).replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
   const plainText = (s) => String(s).replace(/\*/g, '');
   const pad2 = (n) => String(n).padStart(2, '0');
 
