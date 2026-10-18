@@ -564,6 +564,24 @@
     };
   };
 
+  /* A section break between the main deck and the appendix */
+  R.divider = () => {
+    const items = SLIDES.filter((x) => x.appendix && x.type !== 'divider');
+    return {
+      cls: 's-divider',
+      html: `<p class="dv-end">End of presentation</p>
+        <div class="dv-main">
+          <h1>Appendix</h1>
+          <p class="dv-sub">Supporting evidence, for questions</p>
+          <ol class="dv-list">${items.map((x) => {
+            const [num, ...rest] = String(x.title).split(' · ');
+            return `<li><span>${esc(num)}</span>${esc(rest.join(' · ') || x.title)}</li>`;
+          }).join('')}</ol>
+        </div>
+        <span></span>`
+    };
+  };
+
   /* Every step of one run, with the time it ran: appendix proof */
   R['run-trace'] = (s) => {
     const a = AG[s.agentId || s.agent];
@@ -703,7 +721,7 @@
 
   function updateChrome() {
     const s = SLIDES[state.i];
-    count.textContent = s.appendix ? `A${SLIDES.filter((x) => x.appendix).indexOf(s) + 1}` : `${state.i + 1} / ${mainCount}`;
+    count.textContent = s.type === 'divider' ? 'End' : s.appendix ? `A${SLIDES.filter((x) => x.appendix && x.type !== 'divider').indexOf(s) + 1}` : `${state.i + 1} / ${mainCount}`;
     ticks.forEach((b) => { const k = Number(b.dataset.k); b.classList.toggle('done', k < state.i); b.classList.toggle('cur', k === state.i); });
     segBtns.forEach((b, n) => b.classList.toggle('cur', segGroups[n].idx.includes(state.i)));
     document.title = `${s.title || s.id} · ${D.meta.group} Week 8`;

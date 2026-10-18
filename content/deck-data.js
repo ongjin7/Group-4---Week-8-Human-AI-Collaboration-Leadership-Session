@@ -473,6 +473,8 @@ window.DECK_DATA = {
   ],
 
   appendix: [
+    { id: "appendix", type: "divider", title: "Appendix",
+      notes: "End of the presentation. Everything after this is supporting material for questions only." },
     { id: "a-evidence", type: "evidence-status", title: "A1 · Evidence status",
       notes: "Generated from the data file: every TBC and missing screenshot. Use it in rehearsal; hide or fill before Wednesday." },
     { id: "a-config", type: "config", title: "A2 · Configuration evidence",
