@@ -361,10 +361,10 @@
       </div>`;
     let stage;
     if (st.human) {
-      stage = `<div class="jhuman"><span class="k">The person decides</span>
-          <p class="jh-title">${t(a.check.who)}</p>
+      stage = `<div class="jhuman"><span class="k">${esc(st.panelLabel || 'The person decides')}</span>
+          <p class="jh-title">${st.panelTitle ? esc(st.panelTitle) : t(a.check.who)}</p>
           <ul>${(st.options || []).map((o) => `<li>${t(o)}</li>`).join('')}</ul>
-          <p class="jh-foot">The agent prepared everything. Nothing reaches Kerry until the manager chooses.</p></div>`;
+          ${st.panelFoot ? `<p class="jh-foot">${t(st.panelFoot)}</p>` : ''}</div>`;
     } else {
       stage = `<div class="jshots${st.layout === 'stack' ? ' stack' : ''}">${st.shots.map((sh) => ev(sh, sh.caption, null, { noNotes: true })).join('')}</div>`;
     }

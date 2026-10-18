@@ -516,7 +516,6 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .jhuman ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 14px; }
 .jhuman li { display: flex; gap: 14px; font-size: 27px; line-height: 1.35; }
 .jhuman li::before { content: "→"; color: #E9CF8E; flex: none; }
-.jhuman li:last-child::before { content: "✕"; color: var(--br-dot); }
 .jhuman .jh-foot { margin-top: auto; font-size: 22px; color: #CFC8BB; }
 
 /* ------------------------------------------ evidence markers (see-through) */
@@ -607,3 +606,7 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .bp-owner p { font-size: 22px; line-height: 1.45; color: #E9E4D9; }
 .bp-caption { margin-top: 14px; font: italic 400 24px/1.4 var(--serif); color: var(--accent); position: relative; z-index: 1; }
 .slide.build-panel .build-foot { margin-top: auto; }
+.jhuman { justify-content: center; gap: 22px; }
+.jhuman .jh-title { font-size: 40px; }
+.jhuman ul { gap: 20px; }
+.jhuman li { font-size: 28px; }

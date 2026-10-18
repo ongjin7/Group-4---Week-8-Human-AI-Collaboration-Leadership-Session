@@ -385,12 +385,14 @@ window.DECK_DATA = {
         {
           who: "Manager", short: "Manager decides", title: "The manager decides and can handle the case independently.", human: true,
           note: "AI prepares the assessment and draft to reduce preparation effort; the manager can review the feedback, formulate a response, and act without the agent.",
+          panelLabel: "The person is in control",
+          panelTitle: "The Customer Service Manager",
           options: [
-            "Edit the apology and send it by email",
-            "Refer the crew complaint to Cabin Crew, and the food to Food & Beverage",
-            "Not a phone call: Kerry said no to mobile contact"
+            "Can choose his next course of action based on information provided by the agent",
+            "Can decide, using his own experience, what to do next",
+            "Could also have done this entire process alone, with or without the agent"
           ],
-          say: "The manager decides, and could handle this case without the agent. AI only saves preparation effort. Send, edit, refer, or not, and no phone call, because Kerry said no. No single right answer, and either can do it alone: that is why it sits bottom-right."
+          say: "The person is in control. The manager chooses the next course of action from what the agent provides, decides using their own experience, and could have done the whole process alone. AI only saves preparation effort. No single right answer, and either can do it alone: that is why it sits bottom-right."
         }
       ],
       check: {
