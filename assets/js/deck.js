@@ -137,7 +137,7 @@
       const tag = `<span class="tag">${Qd.q1 === 'yes' ? 'Right answer' : 'No single answer'} · ${Qd.q2 === 'yes' ? 'Work together' : 'Either alone'}</span>`;
       const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
       if (mode === 'compare') {
-        return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
+        return `<div class="qcell" data-q="${q}"><span class="cface" aria-hidden="true">${face(a)}</span><span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
           <span class="cmp-ans">Right answer? <b>${yn(a.placement.q1.answer)}</b> · Must work together? <b>${yn(a.placement.q2.answer)}</b>${mismatchChip(a)}</span>
           <span class="role">${esc(Qd.compareRole || Qd.role)}</span></div>`;
       }
@@ -450,7 +450,7 @@
 
   R.compare = (s) => ({
     cls: 'compare',
-    html: `${head('Comparing the four agents', 'How our answers *placed* each agent')}${qmapHTML('compare')}
+    html: `${head('Conclusion and reflections', 'How our answers *placed* each agent')}${qmapHTML('compare')}
       <div class="cmp-foot">
         <div class="cmp-qs">
           <p class="cmp-label">How the job changes</p>
@@ -467,7 +467,7 @@
     q2: { name: 'Question 2', yes: 'must work together', no: 'either can do it alone' }
   };
   R.moves = () => ({
-    html: `${head('Hypothetical redesigns, not current capabilities', 'What would *move* each agent?')}
+    html: `${head('Conclusion and reflections', 'What would *move* each agent?')}
       <div class="moves">${ORDER.map((q) => {
         const a = byQ(q);
         if (!a) return '';

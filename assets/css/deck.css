@@ -748,3 +748,15 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .cmp-qs p b { font-size: 24px; }
 .cmp-qs { grid-template-columns: 140px 1fr 1fr; gap: 12px; }
 .cmp-qs .cmp-label { background: none; border: 0; box-shadow: none; padding: 0 14px 0 0; display: block; font-size: 15px; line-height: 1.5; max-width: none; }
+/* comparison cells: the agent's card face, top-right, in place of 01–04 */
+.cface { position: absolute; top: 12px; right: 16px; width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,.7); padding: 5px; box-shadow: 0 6px 16px -10px rgba(0,0,0,.3); }
+.cface svg { width: 100%; height: 100%; }
+.compare .qcell .qt, .compare .qcell .an { padding-right: 90px; }
+.cface { width: 62px; height: 62px; top: 12px; right: 14px; padding: 4px; }
+.compare .qcell .qt, .compare .qcell .an { padding-right: 70px; }
+.compare .qcell { gap: 0; padding: 12px 20px 10px; }
+.compare .qcell .cmp-ans { margin-top: 2px; }
+.compare .qcell .role { margin-top: auto; padding-top: 6px; }
+.compare .qcell .an { padding-right: 0; }
+.compare .qcell .qt { padding-right: 70px; }
+.compare .qcell .role { padding-top: 0; }
