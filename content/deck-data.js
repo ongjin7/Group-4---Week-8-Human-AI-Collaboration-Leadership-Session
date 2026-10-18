@@ -338,14 +338,14 @@ window.DECK_DATA = {
       journey: [
         {
           who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback", time: "22:40:32",
-          note: "A test passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
+          note: "A first-class passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
           shots: [
             { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 0%", zoom: 1.25,
               pins: [{ x: 23, y: 76.7, n: 1, side: "left", text: "1 star out of 5" }] },
             { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Complaint and contact consent", alt: "Form answers: complaint about cabin crew and food; email contact Yes; mobile contact No", focus: "40% 74%", zoom: 1.6,
               pins: [{ x: 10, y: 66.8, n: 2, text: "Email contact: Yes" }, { x: 10, y: 93.1, n: 3, text: "Mobile contact: No" }] }
           ],
-          say: "Meet Kerry, our test passenger. One star, a complaint about the crew and the food. Watch the two consent answers: email yes, mobile no."
+          say: "Meet Kerry Tan, a first-class passenger. One star, a complaint about the crew and the food. Watch the two consent answers: email yes, mobile no."
         },
         {
           who: "Zapier", short: "Zap fires", title: "The Zap fires", time: "22:40:53",
