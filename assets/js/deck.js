@@ -578,7 +578,7 @@
             return `<li><span>${esc(num)}</span>${esc(rest.join(' · ') || x.title)}</li>`;
           }).join('')}</ol>
         </div>
-        <span></span>`
+        <div class="dv-mascot" aria-hidden="true"><div class="dv-sign">More details<br>if needed</div><div class="dv-pole"></div><div class="dv-face" data-q="br">${face(byQ('br') || D.agents[0])}</div></div>`
     };
   };
 

@@ -798,3 +798,23 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .s-divider .dv-list li { display: flex; gap: 18px; align-items: baseline; font-size: 26px; color: #E9E4D9; border-top: 1px solid #3A3630; padding-top: 12px; }
 .s-divider .dv-list span { font: 600 16px/1 var(--sans); letter-spacing: .12em; color: #A39D92; min-width: 32px; }
 .s-divider .glyph { align-self: flex-end; opacity: .9; }
+
+/* appendix divider, lighter: warm paper, same type; an agent holds a sign */
+.slide.s-divider { background: linear-gradient(160deg, #F4F1EA 0%, #EFE9DD 100%); color: var(--ink); position: relative; }
+.s-divider .dv-end { color: var(--muted); }
+.s-divider .dv-end::after { background: var(--line); }
+.s-divider h1 { color: var(--ink); }
+.s-divider .dv-sub { color: var(--accent); }
+.s-divider .dv-list li { color: var(--ink-2); border-top-color: var(--line); }
+.s-divider .dv-list span { color: var(--muted); }
+.s-divider .dv-main { margin-bottom: 110px; }
+.dv-mascot { position: absolute; right: 110px; bottom: 56px; display: flex; flex-direction: column; align-items: center; }
+.dv-sign { background: var(--card); border: 2.5px solid var(--br-dot); border-radius: 14px; padding: 12px 22px; font: 700 22px/1.2 var(--sans); color: var(--br); text-align: center; box-shadow: 0 12px 24px -12px rgba(0,0,0,.3); transform: rotate(-4deg); }
+.dv-pole { width: 5px; height: 26px; background: #8A847A; border-radius: 3px; margin-top: -2px; }
+.dv-face { width: 150px; height: 150px; border-radius: 50%; background: var(--br-soft); padding: 12px; margin-top: -6px; box-shadow: 0 0 0 5px #fff; }
+.dv-face svg { width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference) { .slide.active .dv-sign { animation: dv-wave 2.4s ease-in-out infinite; transform-origin: 50% 100%; } }
+@keyframes dv-wave { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } }
+.slide.s-divider { justify-content: flex-start; }
+.s-divider .dv-main { margin: auto 0; padding-bottom: 40px; grid-template-columns: auto minmax(0, 640px); }
+.dv-mascot { right: 120px; bottom: 70px; }
