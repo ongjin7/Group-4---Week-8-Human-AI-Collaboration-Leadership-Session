@@ -274,9 +274,16 @@ window.DECK_DATA = {
       oneLiner: "Assesses Priority passenger feedback and prepares a report and reply draft for the customer service manager.",
       problem: {
         statement: "Priority passengers’ feedback needs a fast, personal follow-up that respects their contact consent.",
-        affected: "The customer service manager, and Priority passengers waiting for a response.",
+        affected: "Dedicated customer service teams supporting priority passengers, and passengers whose concerns require personalised attention.",
         difficulty: "Each response must be read, judged for urgency, checked for consent and answered personally.",
-        benefit: "Every response arrives with an assessment, suggested next steps and a reply draft to review. Time saved has not been measured."
+        benefit: "The agent summarises feedback, recommends next steps, and prepares a management report and, where appropriate and permitted, a personalised email draft. This reduces preparation effort while managers retain full control over decisions and sensitive customer interactions.",
+        /* optional: where else the same pattern fits, and where it does not */
+        alsoFor: [
+          ["Private banking", "Personalised client follow-up"],
+          ["Facilities management", "Defect review and prioritisation"],
+          ["Luxury hotels", "Guest feedback and service recovery"]
+        ],
+        scope: "This approach serves selected customers or cases requiring individual attention. Reviewing every assessment and draft may be impractical for high-volume general enquiries, which would require different triage and escalation arrangements."
       },
       card: {
         job: "Analyse passenger feedback for the customer service manager, recommend follow-up actions and a guiding report, and prepare personalised customer email drafts.",
@@ -409,7 +416,7 @@ window.DECK_DATA = {
         { title: "Review stays necessary", detail: "Every customer reply is reviewed by the manager before it is sent; the agent can only save drafts.", status: "Design choice: enforced by Create Draft", evidence: null }
       ],
       notes: {
-        intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. The manager is who it helps. The benefit is EXPECTED; we did not measure time saved.",
+        intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. It helps dedicated priority-service teams and the passengers who need personal attention. It cuts preparation effort while the manager keeps full control (expected, not measured). The same pattern fits private banking, facilities defects and luxury hotels; it is not meant for high-volume general enquiries, which need different triage.",
         card: "Meet the MBairline assistant. Tap the card five times: its mission, what wakes it up (a new feedback form), its gear, its forbidden move (it can never send a reply: the Gmail step is Create Draft, not Send Email), and where it calls a human (the manager).",
         build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",

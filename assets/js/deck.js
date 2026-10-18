@@ -200,6 +200,8 @@
           <h1>${esc(q.title)}</h1>
           ${chips(a)}
           <p class="who-line"><b>${esc(a.name)}</b><br>${t(a.domain)} · presented by ${t(a.presenter)}</p>
+          ${(a.problem.alsoFor || []).length ? `<div class="alsofor"><span class="k">Also works for</span><ul>${a.problem.alsoFor.map(([biz, use]) => `<li><b>${esc(biz)}</b><span>${esc(use)}</span></li>`).join('')}</ul></div>` : ''}
+          ${a.problem.scope ? `<div class="scope"><span class="k">Scope</span><p>${t(a.problem.scope)}</p></div>` : ''}
         </div>
         <div class="card">
           <span class="k">The business problem</span>
