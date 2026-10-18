@@ -587,3 +587,9 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .alsofor ul { gap: 12px; margin-top: 12px; }
 .scope-foot { grid-column: 1 / -1; align-self: end; margin: 0; max-width: 1240px; font-size: 15px; line-height: 1.45; color: #8A847A; }
 .scope-foot b { color: var(--muted); font-weight: 600; }
+
+/* journey: more breathing room between the timeline and each stop */
+.slide.journey .jline { margin-bottom: 0; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.slide.journey .jbody { margin-top: 30px; }
+.slide.journey .jinfo { gap: 14px; }
+.slide.journey .jno { font-size: 68px; }
