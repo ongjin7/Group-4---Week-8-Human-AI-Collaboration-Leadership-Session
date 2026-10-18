@@ -45,26 +45,34 @@ After editing `content/deck-data.js`, hard-refresh the browser (Ctrl+Shift+R).
 
 Interactions are optional: every slide reads correctly without clicking anything.
 
-- **Map**: click a quadrant to focus its agent; “Back to full map” or Esc returns.
-- **How it runs**: → reveals trigger → processing → action → the person, one step at a time;
-  “Show all steps” reveals everything. The person’s step is gold; AI generation is dashed;
-  fixed rules are solid navy.
+- **Map**: click a quadrant to zoom into it (agent, job, the person’s role, our two answers);
+  “Back to the map” or Esc returns.
+- **How it runs**: → reveals the steps one at a time; “Show all steps” reveals everything.
+  The person’s step is gold; AI generation is dashed; fixed rules are solid navy.
+  “See it in Zapier” opens the Zap editor screenshot full screen once one is added.
 - **Evidence**: click any screenshot to enlarge it; click again to zoom.
 - **What would move each agent?**: click a card to step through change → which answer
-  changes → resulting quadrant.
+  flips → resulting quadrant.
 
-### Timing
+### Structure and timing
 
-The main flow is 18 slides and totals exactly **20:00**:
+One idea per slide, nothing smaller than 22px. Each agent gets the same six slides,
+so the class always knows what comes next:
+
+1. **The problem**: a bold slide in the quadrant’s colour with both map answers and the business problem
+2. **The agent card**: the five lines, large
+3. **How it runs**: the workflow, revealed step by step
+4. **One real run**: input and output screenshots, side by side
+5. **Same run in Zap history**: one full-width screenshot plus the matching run ID
+6. **The person**: who checks, what, when, and why this quadrant
+
+The main flow is 30 slides and totals exactly **20:00**:
 
 | Segment | Slides | Budget |
 | --- | --- | --- |
-| Opening | Title 0:25 · Two questions 0:45 · Map 0:50 | 2:00 |
-| Top-left: A person leads, AI inside | Problem 1:15 · Build 1:15 · Run 1:30 | 4:00 |
-| Top-right: Agents run it, a person judges | same split | 4:00 |
-| Bottom-left: AI alone, with checks | same split | 4:00 |
-| Bottom-right: A person decides, AI alongside | same split | 4:00 |
-| Comparison | Both questions 0:55 · Moves 0:50 · Closing question 0:15 | 2:00 |
+| Opening | Title 0:20 · Two questions 0:40 · Map 0:60 | 2:00 |
+| Each quadrant (×4) | Problem 0:30 · Card 0:35 · How it runs 0:45 · Run 0:40 · Zap history 0:30 · Person 0:60 | 4:00 |
+| Comparison | How the person’s job changes 0:50 · Moves 0:55 · Closing question 0:15 | 2:00 |
 
 The appendix (evidence status, MBairline testing lessons, placement checks, configuration
 evidence, anticipated questions) is untimed and for Q&A. The presenter view warns if the
@@ -83,7 +91,8 @@ Everything is in `content/deck-data.js`, one block per agent, in this shape:
 - `check`: who, what, when, if it fails (plus `options` for top-right; `prepares`/`decides` for bottom-right)
 - `placement`: the answer to each map question, and why
 - `move`: a workflow change, which question it changes, and where the agent lands
-- `notes`: presenter notes for each of the agent’s three slides
+- `notes`: optional presenter notes per slide, keyed `intro`, `card`, `build`, `run`, `record`, `person`
+  (any you leave out fall back to sensible defaults)
 
 **Placeholders.** Any text starting with `TBC:` shows as an amber “TBC” chip, and any
 screenshot with `src: null` shows as a striped “Missing evidence” frame. Both are counted

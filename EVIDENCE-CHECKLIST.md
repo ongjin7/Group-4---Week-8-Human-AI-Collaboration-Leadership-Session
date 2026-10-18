@@ -1,7 +1,7 @@
 # Evidence checklist
 
 Status on 18 October 2026. Appendix slide **A1** in the deck shows the same thing, counted
-live from `content/deck-data.js`. Today it counts 83 `TBC` fields and 22 missing screenshots.
+live from `content/deck-data.js`.
 
 Tick an item only when the real material is in the deck. A workflow diagram is not evidence
 of a run, and an output screenshot proves nothing about a run until it is matched to the
@@ -64,7 +64,7 @@ seven-step workflow, check (who, what, when, if it fails), placement reasoning, 
 ## 5 · Claims to keep honest
 
 - No agent has measured time or cost savings. Benefits are shown as “expected, not measured”.
-- “Moves” on slide 17 are proposals for discussion, not changes made to any Zap.
+- The “What would move each agent?” slide shows proposals for discussion, not changes made to any Zap.
 - The Q1 and Q2 answers for the expense, CRM and HR agents are currently their assigned quadrants. Each needs its builder’s reasoning (`placement.why`) before it can be defended.
 
 ## 6 · Before Wednesday

@@ -114,7 +114,7 @@ window.DECK_DATA = {
         concern: "A person approving the agent’s check does not by itself show the work must be done together. Show what the person adds that the agent cannot, such as unwritten rules or exception decisions. If the agent can apply every rule and the person only samples results, it fits “AI alone, with checks”."
       },
       move: {
-        change: "Write every claims rule into the agent (limits, receipts, categories) and have finance sample paid claims weekly.",
+        change: "Every claims rule is written into the agent; finance samples paid claims weekly.",
         question: "q2",
         from: "yes",
         to: "no",
@@ -122,9 +122,7 @@ window.DECK_DATA = {
         caveat: "Deleting the sign-off alone would not move it. The move only holds if the agent genuinely holds all the rules."
       },
       notes: {
-        problem: "TBC presenter. Say the business problem in plain words BEFORE showing anything technical. Name who is affected and what is hard today. Benefit: say ‘expected’ unless you measured it.",
-        build: "Walk the steps with → . Point at the AI step versus the fixed rule. End on the sign-off step: this is the top-left signature, the person signs off what the agent has checked.",
-        run: "Show the input, the output, then the Zap history record. Read the matching run ID or timestamp aloud. Then: who signs off, what they check, when, and what happens if they reject. Close with both map questions."
+        person: "The top-left signature: the person SIGNS OFF what the agent has checked. Show the exact step. Name who, what they check, when, and what happens if they reject. Then: right answer? Yes. Must work together? Yes, and say what the person knows that the agent cannot."
       }
     },
 
@@ -179,7 +177,7 @@ window.DECK_DATA = {
         concern: "Placement to confirm. If the agent only generates recommendations and the person then decides alone, the work is “Either can do it alone”, which is bottom-right, like MBairline. Top-right holds only if the agent runs a multi-step process and pauses at a checkpoint where the person’s judgment is needed before it continues."
       },
       move: {
-        change: "The agent only lists recommendations and stops. The account manager decides and acts alone.",
+        change: "The agent only lists recommendations; the account manager decides and acts alone.",
         question: "q2",
         from: "yes",
         to: "no",
@@ -187,9 +185,8 @@ window.DECK_DATA = {
         caveat: "This is also the test of today’s placement: if the real Zap already works this way, it belongs in bottom-right now."
       },
       notes: {
-        problem: "TBC presenter. Business problem first, in plain words. Then the card. Stress the checkpoint line: the person judges INSIDE the process.",
-        build: "Walk the steps with → . Show the process the agent runs, then the judgment checkpoint, then what happens after the choice. Point out which steps are AI generation and which are fixed rules.",
-        run: "Input → output → Zap history; read the matching run ID aloud. Name the ACTUAL options the person chose between in this run and which one they picked. Then both map questions. Be ready for: ‘why not bottom-right?’"
+        build: "Press → for each step. Show the process the agent runs, then the judgment checkpoint, then what the process does AFTER the person chooses. That ‘after’ is what makes it top-right.",
+        person: "Name the ACTUAL options from this run and which one the person picked. Who judges, when, and what happens if no option fits. Then: right answer? No. Together? Yes, because the process waits for the person. Be ready for: ‘why not bottom-right?’"
       }
     },
 
@@ -251,9 +248,8 @@ window.DECK_DATA = {
         caveat: "This changes the task itself. Who approves, and when, would then need to be decided again."
       },
       notes: {
-        problem: "TBC presenter. Business problem first. The card’s checkpoint line is a SPOT CHECK: name who, what and how often.",
-        build: "Walk the steps with → . This agent is mostly fixed rules: say so. Highlight that the person sits outside the run.",
-        run: "Input → output → Zap history; read the matching run ID aloud. Then the spot check: who makes it, what they compare, how often, what happens when it is wrong."
+        build: "Press → for each step. This agent is mostly fixed rules: say so. The person sits outside the run.",
+        person: "The spot check: who makes it, what they compare the report against, HOW OFTEN, and what happens when a figure is wrong. Then: right answer? Yes. Together? No: the agent runs alone."
       }
     },
 
@@ -314,7 +310,7 @@ window.DECK_DATA = {
         concern: "Human accountability is not what places it here. What matters is that the agent’s outputs are complete without the person, and the person decides independently."
       },
       move: {
-        change: "The agent runs the investigation and follow-up across departments, with the manager judging at set checkpoints.",
+        change: "The agent runs the follow-up across departments; the manager judges at set checkpoints.",
         question: "q2",
         from: "no",
         to: "yes",
@@ -329,9 +325,12 @@ window.DECK_DATA = {
         { title: "Review stays necessary", detail: "Every customer reply is reviewed by the manager before it is sent; the agent can only save drafts.", status: "Design choice: enforced by Create Draft", evidence: null }
       ],
       notes: {
-        problem: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. Name the manager as the person affected. Benefit is EXPECTED; we did not measure time saved. Read the ‘never’ line and its setting: Create Draft, not Send Email.",
-        build: "Walk the seven steps with → . Two AI steps (assess, draft), one fixed rule (the filter needs both follow-up AND email permission), two Gmail actions. The gold step is the person: the manager decides, nothing goes out on its own.",
-        run: "Input → output → Zap history; read the matching run ID / timestamp aloud. Who: the manager. What: feedback, consent, accuracy, tone, urgency, policy. When: on every report, before sending. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. Mention the consent error (appendix) if asked."
+        intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. The manager is who it helps. The benefit is EXPECTED; we did not measure time saved.",
+        card: "Read the five lines. Line 4 is the guardrail: it can never send a reply, because the Gmail step is Create Draft, not Send Email.",
+        build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
+        run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
+        record: "Same run in Zap history. Read the run ID / timestamp aloud and point back to it on the output.",
+        person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: the consent mix-up in appendix A2."
       }
     }
   ],
@@ -344,28 +343,28 @@ window.DECK_DATA = {
     {
       id: "opening", label: "Opening", seconds: 120,
       slides: [
-        { id: "title", type: "title", seconds: 25, title: "Title",
+        { id: "title", type: "title", seconds: 20, title: "Title",
           notes: "Welcome. One sentence: today we show four real agents and ask one question: how does the task decide what the person does?",
           cue: "“Our four agents sit together on this map, one per quadrant, and each works on a business problem in a different domain.”" },
-        { id: "questions", type: "axes", seconds: 45, title: "The map’s two questions",
+        { id: "questions", type: "axes", seconds: 40, title: "The map’s two questions",
           notes: "Explain the two questions BEFORE any technical detail. Q1: is there a right answer? Q2: must people and AI do the work together? Name the two traps: a person checking output does not mean they must work together; and accountability alone does not separate the two right-hand quadrants.",
           cue: "Ask the room: ‘Which question do you think is harder to answer?’ Don’t wait long." },
-        { id: "map", type: "map", seconds: 50, title: "Four agents, one map",
-          notes: "All four agents on one map. One sentence each: domain and job. Click a quadrant only if you have time; the map reads without clicking. Then hand over to the top-left presenter.",
+        { id: "map", type: "map", seconds: 60, title: "Four agents, one map",
+          notes: "All four agents on one map. One sentence each: domain and job. Click a quadrant to zoom into it (Esc or “Back to the map” returns); the map also reads without clicking. Then hand over to the top-left presenter.",
           cue: "Hand over: “Let’s start top-left, where a person leads with AI inside.”" }
       ]
     },
-    { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [75, 75, 90] },
-    { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [75, 75, 90] },
-    { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [75, 75, 90] },
-    { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [75, 75, 90] },
+    { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
     {
       id: "close", label: "Comparison", seconds: 120,
       slides: [
-        { id: "compare", type: "compare", seconds: 55, title: "Both questions, four agents",
+        { id: "compare", type: "compare", seconds: 50, title: "Both questions, four agents",
           notes: "Back to the full map. Read across the table: how our answers to the two questions placed each agent, and how the person’s job changes from signing off, to judging, to spot-checking, to deciding.",
           cue: "“We will now look at how our answers to the map’s two questions placed each of our four agents, and what would move each one to another quadrant.”" },
-        { id: "moves", type: "moves", seconds: 50, title: "What would move each agent?",
+        { id: "moves", type: "moves", seconds: 55, title: "What would move each agent?",
           notes: "One concrete workflow change per agent. For each: which answer changes, and where it lands. Stress: removing an approval does not by itself move an agent; the work itself has to change.",
           cue: "Click a card to step through it only if time allows; all four read without clicking." },
         { id: "closing", type: "closing", seconds: 15, title: "Your turn",
