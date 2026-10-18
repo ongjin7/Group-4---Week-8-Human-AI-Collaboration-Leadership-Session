@@ -675,3 +675,50 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .qmap.focused .qcell.sel .num { display: none; }
 @media (prefers-reduced-motion: no-preference) { .qmap.focused .qcell.sel .zface { animation: zpop .35s cubic-bezier(.3,1.6,.5,1); } }
 @keyframes zpop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------------------------------------- comparison, round 2 */
+.compare .qcell .role { font-size: 22px; line-height: 1.38; }
+.cmp-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 18px; }
+.cmp-qs { display: grid; gap: 8px; align-content: center; }
+.cmp-qs p { font-size: 21px; line-height: 1.35; color: var(--ink-2); }
+.cmp-qs b { display: inline-block; min-width: 132px; color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 23px; }
+.cmp-ex { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--bl-dot); border-radius: 14px; padding: 14px 20px; box-shadow: var(--shadow); }
+.cmp-ex .lead-in { font: 600 21px/1.3 var(--sans); color: var(--ink); margin-bottom: 4px; }
+.cmp-ex p { font-size: 20px; line-height: 1.4; color: var(--ink-2); }
+
+/* ---------------------------------------- moves, round 2: no clicks needed */
+.moves .move { cursor: default; grid-template-columns: 1fr; gap: 12px; padding: 22px 26px 20px; }
+.moves .move:hover { box-shadow: var(--shadow); }
+.mv-head { display: flex; justify-content: space-between; align-items: center; }
+.mv-name { font: 600 26px/1.2 var(--sans); color: var(--ink); }
+.mv-hyp { font: 700 13px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1.5px dashed #CFC8BB; border-radius: 999px; padding: 6px 12px; }
+.mv-change { font-size: 21px; line-height: 1.4; color: var(--ink-2); }
+.mv-flip { font-size: 21px; line-height: 1.35; color: var(--ink-2); }
+.mv-flip b:first-child { color: var(--accent); font-family: var(--serif); font-style: italic; font-weight: 500; margin-right: 6px; }
+.mv-arrow { color: var(--qdot); font-weight: 700; margin: 0 4px; }
+.mv-to { color: var(--ink); }
+.mv-dest { margin-top: auto; display: grid; grid-template-columns: 64px 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; background: var(--qsoft); border-radius: 12px; padding: 10px 14px; }
+.mv-dest .mini { grid-row: 1 / span 2; width: 64px; height: 64px; gap: 4px; }
+.mv-dest .mini span.to { background: var(--qto); border: 0; }
+.mv-route { font: 600 14px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--qc); }
+.mv-title { font: 600 23px/1.2 var(--sans); color: var(--qc); }
+
+/* ---------------------------------------- closing, round 2 */
+.s-closing .close-take { font: italic 400 34px/1.35 var(--serif); color: var(--accent); max-width: 1250px; }
+.s-closing h1 { font-size: 78px; }
+.moves { gap: 16px; }
+.moves .move { gap: 8px; padding: 18px 24px 16px; }
+.mv-name { font-size: 24px; }
+.mv-change, .mv-flip { font-size: 19.5px; line-height: 1.38; }
+.mv-dest { padding: 8px 12px; }
+.mv-dest .mini { width: 54px; height: 54px; }
+.mv-dest { grid-template-columns: 54px 1fr; }
+.mv-title { font-size: 21px; }
+.compare .qcell { padding: 16px 24px; gap: 4px; }
+.compare .qcell .role { font-size: 20px; }
+.compare .qcell .an { margin-top: 6px; }
+.cmp-foot { margin-top: 14px; }
+.cmp-qs p { display: grid; grid-template-columns: 132px 1fr; column-gap: 10px; align-items: baseline; }
+.cmp-qs b { min-width: 0; }
+.mv-dest .mini span.on { background: transparent; box-shadow: inset 0 0 0 2.5px var(--qdot); opacity: .75; }
+.compare .qcell .role { margin-top: 10px; }

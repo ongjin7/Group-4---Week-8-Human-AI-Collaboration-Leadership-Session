@@ -31,7 +31,8 @@ window.DECK_DATA = {
     date: "Wednesday 21 October 2026",
     group: "Group 4",
     sessionSeconds: 1200,
-    closingQuestion: "Which of our four agents would you place in a *different* quadrant, and why?"
+    closingQuestion: "Which of our four agents would you place *differently*, and why?",
+    closingTakeaway: "No function belongs to just one quadrant. Place each task using the two questions, then explain the person’s role."
   },
 
   members: [
@@ -58,10 +59,10 @@ window.DECK_DATA = {
   },
 
   quadrants: {
-    tl: { title: "A person leads, AI inside", q1: "yes", q2: "yes", role: "Signs off what the agent has checked", position: "Top-left" },
-    tr: { title: "Agents run it, a person judges", q1: "no", q2: "yes", role: "Judges inside the process, choosing between options", position: "Top-right" },
-    bl: { title: "AI alone, with checks", q1: "yes", q2: "no", role: "Spot-checks a sample on a set schedule", position: "Bottom-left" },
-    br: { title: "A person decides, AI alongside", q1: "no", q2: "no", role: "Decides independently, using what the agent prepared", position: "Bottom-right" }
+    tl: { title: "A person leads, AI inside", q1: "yes", q2: "yes", role: "Signs off what the agent has checked", position: "Top-left", compareRole: "The person signs off what the agent has checked." },
+    tr: { title: "Agents run it, a person judges", q1: "no", q2: "yes", role: "Judges inside the process, choosing between options", position: "Top-right", compareRole: "The person judges options at required checkpoints within the process." },
+    bl: { title: "AI alone, with checks", q1: "yes", q2: "no", role: "Spot-checks a sample on a set schedule", position: "Bottom-left", compareRole: "The person spot-checks accuracy on a defined schedule." },
+    br: { title: "A person decides, AI alongside", q1: "no", q2: "no", role: "Decides independently, using what the agent prepared", position: "Bottom-right", compareRole: "The manager owns the case and can decide independently, using AI assessments and drafts as support." }
   },
 
   /* Order here = order of the four segments. */
@@ -117,12 +118,12 @@ window.DECK_DATA = {
         concern: "A person approving the agent’s check does not by itself show the work must be done together. Show what the person adds that the agent cannot, such as unwritten rules or exception decisions. If the agent can apply every rule and the person only samples results, it fits “AI alone, with checks”."
       },
       move: {
-        change: "Every claims rule is written into the agent; finance samples paid claims weekly.",
+        change: "For routine claims with complete evidence and fully specified rules, the agent processes claims independently; finance performs weekly spot checks.",
         question: "q2",
         from: "yes",
         to: "no",
         result: "bl",
-        caveat: "Deleting the sign-off alone would not move it. The move only holds if the agent genuinely holds all the rules."
+        caveat: "TBC: no expense-claims run evidence yet; confirm the current agent needs the person’s sign-off."
       },
       notes: {
         person: "The top-left signature: the person SIGNS OFF what the agent has checked. Show the exact step. Name who, what they check, when, and what happens if they reject. Then: right answer? Yes. Must work together? Yes, and say what the person knows that the agent cannot."
@@ -181,12 +182,12 @@ window.DECK_DATA = {
         concern: "Placement to confirm. If the agent only generates recommendations and the person then decides alone, the work is “Either can do it alone”, which is bottom-right, like MBairline. Top-right holds only if the agent runs a multi-step process and pauses at a checkpoint where the person’s judgment is needed before it continues."
       },
       move: {
-        change: "The agent only lists recommendations; the account manager decides and acts alone.",
+        change: "The agent provides optional recommendations; the manager can assess the case and act independently.",
         question: "q2",
         from: "yes",
         to: "no",
         result: "br",
-        caveat: "This is also the test of today’s placement: if the real Zap already works this way, it belongs in bottom-right now."
+        caveat: "Check: the group site describes the CRM agent as recommending options for a person to choose. If that is how it already works, it is bottom-right today."
       },
       notes: {
         build: "Press → for each step. Show the process the agent runs, then the judgment checkpoint, then what the process does AFTER the person chooses. That ‘after’ is what makes it top-right.",
@@ -245,12 +246,12 @@ window.DECK_DATA = {
         concern: "Confirm the run shows real processing, not only forwarding a sheet, and that a named person actually performs the spot check."
       },
       move: {
-        change: "Instead of reporting balances, the agent recommends whose leave to approve in peak weeks.",
+        change: "The task moves from reporting balances to recommending how to balance competing leave requests. The manager can evaluate requests independently.",
         question: "q1",
         from: "yes",
         to: "no",
         result: "br",
-        caveat: "This changes the task itself. Who approves, and when, would then need to be decided again."
+        caveat: "TBC: no HR leave-report run evidence yet."
       },
       notes: {
         build: "Press → for each step. This agent is mostly fixed rules: say so. The person sits outside the run.",
@@ -410,12 +411,12 @@ window.DECK_DATA = {
         concern: "Human accountability is not what places it here. What matters is that the agent’s outputs are complete without the person, and the person decides independently."
       },
       move: {
-        change: "The agent runs the follow-up across departments; the manager judges at set checkpoints.",
+        change: "The agent coordinates departmental follow-up, while required manager judgments determine how that process proceeds.",
         question: "q2",
         from: "no",
         to: "yes",
         result: "tr",
-        caveat: "Adding approvals alone would not move it: the agent must take over a process the person then judges inside."
+        caveat: "Today’s run shows the manager working independently; this coordination is not built."
       },
       lessons: [
         { title: "Consent reversed", detail: "One report swapped email and mobile consent and recommended a call the passenger had declined.", status: "Reported in Jin’s PS5 write-up", evidence: { src: null, caption: "Annotated: consent fields in the input vs the report", missing: "The form response and the faulty report, side by side, redacted", pins: [] } },
@@ -458,14 +459,15 @@ window.DECK_DATA = {
     {
       id: "close", label: "Comparison", seconds: 120,
       slides: [
-        { id: "compare", type: "compare", seconds: 50, title: "Both questions, four agents",
-          notes: "Back to the full map. Read across the table: how our answers to the two questions placed each agent, and how the person’s job changes from signing off, to judging, to spot-checking, to deciding.",
+        { id: "compare", type: "compare", seconds: 45, title: "How the person’s job changes",
+          compareExample: { lead: "One business function can contain tasks in different quadrants.", text: "HR: reporting leave balances has a verifiable answer; balancing competing leave requests requires judgment." },
+          notes: "Back to the full map. Two questions placed each agent: is there a right answer, and must people and AI work together. Read the person’s job across the four quadrants: signs off, judges at checkpoints, spot-checks, decides independently. Then the HR example: one function, two quadrants. If asked: task complexity, clarity of rules, available evidence and the consequences of error shape how work is designed and checked. They inform the two questions; they are not extra axes. High importance does not automatically mean people and AI must work together. And missing data does not automatically mean there is no single right answer: separate an answer that cannot yet be verified from a decision with several reasonable outcomes.",
           cue: "“We will now look at how our answers to the map’s two questions placed each of our four agents, and what would move each one to another quadrant.”" },
-        { id: "moves", type: "moves", seconds: 55, title: "What would move each agent?",
-          notes: "One concrete workflow change per agent. For each: which answer changes, and where it lands. Stress: removing an approval does not by itself move an agent; the work itself has to change.",
-          cue: "Click a card to step through it only if time allows; all four read without clicking." },
+        { id: "moves", type: "moves", seconds: 60, title: "What would move each agent?",
+          notes: "Hypothetical redesigns, not things our agents do today. For each card: the change, which question flips, and where it lands. One answer changes, the other stays. Only Question 1 moves the HR agent; the other three change Question 2. Removing an approval does not by itself move an agent: the work has to change.",
+          cue: "Say “hypothetical” once, then read the four destinations." },
         { id: "closing", type: "closing", seconds: 15, title: "Your turn",
-          notes: "Read the question and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
+          notes: "Read the takeaway, then the question, and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
           cue: "Read the question exactly, then pause." }
       ]
     }

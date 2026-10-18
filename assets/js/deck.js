@@ -138,7 +138,7 @@
       const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
       if (mode === 'compare') {
         return `<div class="qcell" data-q="${q}">${num}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
-          <span class="role"><b>The person</b> ${esc(lc(Qd.role))}</span></div>`;
+          <span class="role">${esc(Qd.compareRole || Qd.role)}</span></div>`;
       }
       return `<div class="qcell" data-q="${q}" data-focus-q="${q}" role="button" tabindex="0" aria-label="Zoom into ${esc(Qd.title)}: ${esc(nameOf(a))}">${basics}
         <span class="hint no-print">Click to zoom in</span><span class="zface" aria-hidden="true">${face(a)}</span>
@@ -447,38 +447,52 @@
     };
   };
 
-  R.compare = () => ({
+  R.compare = (s) => ({
     cls: 'compare',
     html: `${head('Back to the map', 'How the person’s *job* changes')}${qmapHTML('compare')}
-      <div class="takeaway">
-        <p><b>Q1, right answer?</b> Yes: the person verifies. No: the person judges.</p>
-        <p><b>Q2, together?</b> Yes: the person is inside the work. No: they check or decide from outside.</p>
+      <div class="cmp-foot">
+        <div class="cmp-qs">
+          <p><b>Question 1</b> A right answer, or no single right answer?</p>
+          <p><b>Question 2</b> Must people and AI work together, or can either complete the task independently?</p>
+        </div>
+        ${s.compareExample ? `<div class="cmp-ex"><p class="lead-in">${esc(s.compareExample.lead)}</p><p>${esc(s.compareExample.text)}</p></div>` : ''}
       </div>`
   });
 
+  /* Hypothetical redesigns: the change, the one question that flips (the other is kept), and the destination. */
+  const QLABEL = {
+    q1: { name: 'Question 1', yes: 'a right answer', no: 'no single right answer' },
+    q2: { name: 'Question 2', yes: 'must work together', no: 'either can do it alone' }
+  };
   R.moves = () => ({
-    html: `${head('What would move each agent?', 'Change the work, and the *quadrant* follows')}
+    html: `${head('Hypothetical redesigns, not current capabilities', 'What would *move* each agent?')}
       <div class="moves">${ORDER.map((q) => {
         const a = byQ(q);
         if (!a) return '';
         const m = a.move;
+        const other = m.question === 'q1' ? 'q2' : 'q1';
         const expected = m.question === 'q1' ? quadrantFor(m.to, QS[q].q2) : quadrantFor(QS[q].q1, m.to);
-        return `<div class="move" data-q="${q}" data-move role="button" tabindex="0" aria-label="Step through the move for ${esc(nameOf(a))}">
-          <div class="an"><span>${esc(nameOf(a))}</span><span class="small no-print">click to step through</span></div>
-          <div>
-            <p class="st" data-st="0"><b>If:</b> ${t(m.change)}</p>
-            <p class="st" data-st="1"><b>${m.question === 'q1' ? 'Q1' : 'Q2'} flips:</b> <s>${esc(ans(m.question, m.from))}</s> → ${esc(ans(m.question, m.to))}</p>
-            <p class="st dest" data-st="2">→ <span style="color:var(--${m.result})">${esc(QS[m.result].title)}</span>${expected !== m.result ? ' ' + tbc('check: points to ' + QS[expected].title) : ''}</p>
+        const L = QLABEL[m.question];
+        return `<div class="move" data-q="${q}">
+          <div class="mv-head"><span class="mv-name">${esc(nameOf(a))}</span><span class="mv-hyp">Hypothetical</span></div>
+          <p class="mv-change">${t(m.change)}</p>
+          <p class="mv-flip"><b>${L.name}</b> ${esc(L[m.from])} <span class="mv-arrow" aria-hidden="true">→</span> <b class="mv-to">${esc(L[m.to])}</b></p>
+          <div class="mv-dest" data-q="${m.result}">
+            ${mini(q, m.result)}
+            <span class="mv-route">${esc(QS[q].position)} <span aria-hidden="true">→</span> ${esc(QS[m.result].position)}</span>
+            <b class="mv-title">${esc(QS[m.result].title)}</b>
+            ${expected !== m.result ? tbc('check: this change points to ' + QS[expected].title) : ''}
           </div>
-          <div class="result">${mini(q, m.result)}<span class="small" style="font-size:17px;text-align:center">${esc(QS[q].position)} →<br>${esc(QS[m.result].position)}</span></div>
+          <span class="mv-keep" title="${esc(QLABEL[other].name)} unchanged"></span>
         </div>`;
       }).join('')}</div>`
   });
 
   R.closing = () => ({
     cls: 's-closing',
-    html: `<p class="eyebrow">Questions</p><h1>${md(D.meta.closingQuestion)}</h1>
-      <p class="lead">We will answer with evidence from our runs and their Zap history records.</p>
+    html: `<p class="eyebrow">Takeaway</p>
+      ${D.meta.closingTakeaway ? `<p class="close-take">${md(D.meta.closingTakeaway)}</p>` : ''}
+      <h1>${md(D.meta.closingQuestion)}</h1>
       ${glyph(130)}`
   });
 
