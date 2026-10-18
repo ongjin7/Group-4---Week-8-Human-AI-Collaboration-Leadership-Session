@@ -25,7 +25,7 @@
  */
 window.DECK_DATA = {
   meta: {
-    title: "Four Agents,\nFour *Roles* for People",
+    title: "Four *Agents*,\nFour *Roles* for People",
     subtitle: "Group 4’s take on exploring the Human–AI Collaboration Map",
     course: "Week 8 · Human–AI Collaboration · Problem-solving session",
     date: "Wednesday 21 October 2026",
