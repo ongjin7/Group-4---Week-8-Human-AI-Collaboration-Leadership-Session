@@ -445,11 +445,8 @@ window.DECK_DATA = {
         { id: "title", type: "title", seconds: 20, title: "Title",
           notes: "Welcome. One sentence: today we show four real agents and ask one question: how does the task decide what the person does?",
           cue: "“Our four agents sit together on this map, one per quadrant, and each works on a business problem in a different domain.”" },
-        { id: "questions", type: "axes", seconds: 40, title: "The map’s two questions",
-          notes: "Explain the two questions BEFORE any technical detail. Q1: is there a right answer? Q2: must people and AI do the work together? Name the two traps: a person checking output does not mean they must work together; and accountability alone does not separate the two right-hand quadrants.",
-          cue: "Ask the room: ‘Which question do you think is harder to answer?’ Don’t wait long." },
-        { id: "map", type: "map", seconds: 60, title: "Four agents, one map",
-          notes: "All four agents on one map. One sentence each: domain and job. Click a quadrant to zoom into it (Esc or “Back to the map” returns); the map also reads without clicking. Then hand over to the top-left presenter.",
+        { id: "map", type: "map", seconds: 100, title: "Four agents, one map",
+          notes: "First name the two axes: they are the map’s two questions. Across: is there a right answer? Down: must people and AI do the work together? Then all four agents, one sentence each: domain and job. Click a quadrant to zoom into it (Esc or “Back to the map” returns); the map also reads without clicking. Then hand over to the top-left presenter.",
           cue: "Hand over: “Let’s start top-left, where a person leads with AI inside.”" }
       ]
     },

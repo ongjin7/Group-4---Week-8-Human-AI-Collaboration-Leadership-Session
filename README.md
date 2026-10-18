@@ -66,11 +66,11 @@ so the class always knows what comes next:
 5. **Same run in Zap history**: one full-width screenshot plus the matching run ID
 6. **The person**: who checks, what, when, and why this quadrant
 
-The main flow is 30 slides and totals exactly **20:00**:
+The main flow totals exactly **20:00**:
 
 | Segment | Slides | Budget |
 | --- | --- | --- |
-| Opening | Title 0:20 · Two questions 0:40 · Map 0:60 | 2:00 |
+| Opening | Title 0:20 · Map with the two questions as axes 1:40 | 2:00 |
 | Each quadrant (×4) | Problem 0:30 · Card 0:35 · How it runs 0:45 · Run 0:40 · Zap history 0:30 · Person 0:60 | 4:00 |
 | Comparison | How the person’s job changes 0:50 · Moves 0:55 · Closing question 0:15 | 2:00 |
 
