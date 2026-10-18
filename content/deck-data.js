@@ -331,7 +331,7 @@ window.DECK_DATA = {
       ],
       notes: {
         intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. The manager is who it helps. The benefit is EXPECTED; we did not measure time saved.",
-        card: "Read the five lines. Line 4 is the guardrail: it can never send a reply, because the Gmail step is Create Draft, not Send Email.",
+        card: "Meet the MBairline assistant. Tap the card five times: its mission, what wakes it up (a new feedback form), its gear, its forbidden move (it can never send a reply: the Gmail step is Create Draft, not Send Email), and where it calls a human (the manager).",
         build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
         record: "Same run in Zap history. Read the run ID / timestamp aloud and point back to it on the output.",

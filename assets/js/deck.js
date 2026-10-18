@@ -209,19 +209,66 @@
   };
 
   /* 2 · the five-line card, big */
+  /* A friendly face for each agent; the accessory follows its business scene. */
+  const ACCESSORY = {
+    plane: '<path d="M46 72 Q100 22 154 72 Z" style="fill:#142544"/><rect x="34" y="68" width="132" height="14" rx="7" style="fill:#142544"/><path d="M86 52 l14 -6 l14 6 l-14 4 z" style="fill:#C9A25A"/><circle cx="100" cy="51" r="4" style="fill:#C9A25A"/>',
+    receipt: '<circle cx="78" cy="104" r="17" fill="none" stroke-width="4" style="stroke:var(--ink)"/><circle cx="122" cy="104" r="17" fill="none" stroke-width="4" style="stroke:var(--ink)"/><path d="M95 104 h10" stroke-width="4" style="stroke:var(--ink)"/>',
+    chat: '<path d="M40 104 Q40 38 100 38 Q160 38 160 104" fill="none" stroke-width="7" stroke-linecap="round" style="stroke:var(--ink)"/><rect x="28" y="92" width="18" height="34" rx="8" style="fill:var(--ink)"/><rect x="154" y="92" width="18" height="34" rx="8" style="fill:var(--ink)"/><path d="M38 126 Q44 150 76 146" fill="none" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/><circle cx="80" cy="146" r="6" style="fill:var(--ink)"/>',
+    calendar: '<path d="M66 168 L92 192 M134 168 L108 192" stroke-width="5" style="stroke:var(--qc)"/><rect x="84" y="182" width="32" height="18" rx="4" style="fill:var(--card);stroke:var(--qc)" stroke-width="3"/>'
+  };
+  function face(a) {
+    const acc = ACCESSORY[a.motif] || '';
+    const antenna = a.motif === 'plane' ? '' : '<path d="M100 54 V32" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/><circle cx="100" cy="28" r="8" style="fill:var(--qdot)"/>';
+    return `<svg class="face" viewBox="0 0 200 200" aria-hidden="true">
+      <path d="M44 200 Q44 162 100 162 Q156 162 156 200 Z" style="fill:var(--qdot);opacity:.55"/>
+      ${antenna}
+      <rect x="42" y="52" width="116" height="112" rx="42" style="fill:#fff;stroke:var(--ink)" stroke-width="5"/>
+      <g class="eyes"><ellipse cx="78" cy="104" rx="8" ry="11" style="fill:var(--ink)"/><ellipse cx="122" cy="104" rx="8" ry="11" style="fill:var(--ink)"/>
+        <circle cx="81" cy="99" r="3" fill="#fff"/><circle cx="125" cy="99" r="3" fill="#fff"/></g>
+      <circle cx="62" cy="128" r="9" style="fill:var(--qdot);opacity:.4"/><circle cx="138" cy="128" r="9" style="fill:var(--qdot);opacity:.4"/>
+      <path d="M84 130 Q100 146 116 130" fill="none" stroke-width="5" stroke-linecap="round" style="stroke:var(--ink)"/>
+      ${acc}
+    </svg>`;
+  }
+  const ICON = {
+    mission: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+    trigger: '<path d="M13 2 L4 14 h7 l-1 8 9-12 h-7 z"/>',
+    gear: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    human: '<circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'
+  };
+  const icon = (n) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+
+  /* 2 · the agent card as a collectible card: each tap unlocks one of its five lines */
   R['agent-card'] = (s) => {
     const a = AG[s.agentId];
     const c = a.card;
+    const q = QS[a.quadrant];
+    const abilities = [
+      ['mission', 'Mission', t(c.job), ''],
+      ['trigger', 'Activates when', t(c.trigger), ''],
+      ['gear', 'Gear', t(c.tools), ''],
+      ['lock', 'Forbidden move', `${t(c.never.rule)}<span class="set">Locked by: ${t(c.never.setting)}</span>`, 'never'],
+      ['human', 'Calls a human', t(c.checkpoint), 'human']
+    ];
     return {
-      cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${agentHead(a, 'The agent *card*')}
-        <ol class="five" aria-label="Five-line agent card">
-          <li><span class="n">1</span><span class="k">Job</span><span class="v">${t(c.job)}</span></li>
-          <li><span class="n">2</span><span class="k">Trigger</span><span class="v">${t(c.trigger)}</span></li>
-          <li><span class="n">3</span><span class="k">Tools</span><span class="v">${t(c.tools)}</span></li>
-          <li class="never"><span class="n">4</span><span class="k">Must never</span><span class="v">${t(c.never.rule)}<span class="set">Enforced by: ${t(c.never.setting)}</span></span></li>
-          <li class="checkpoint"><span class="n">5</span><span class="k">Human checkpoint</span><span class="v">${t(c.checkpoint)}</span></li>
-        </ol>`
+      cls: 'agent', q: a.quadrant, theme: a.theme, steps: abilities.length,
+      html: `${agentHead(a, 'Meet the *agent*')}
+        <div class="cardstage">
+          <div class="tcard" data-tap role="button" tabindex="0" aria-label="Tap the card to unlock its next ability">
+            <div class="tc-top"><span>Agent card</span><span class="tc-no">No. ${pad2(s.quadrantNo)}</span></div>
+            <div class="tc-class">${esc(q.title)}</div>
+            <div class="tc-portrait">${face(a)}</div>
+            <div class="tc-name">${esc(nameOf(a))}</div>
+            <div class="tc-sub">${t(a.domain)} · ${t(a.presenter)}</div>
+            <div class="tc-stats"><span>Right answer <b>${yn(a.placement.q1.answer)}</b></span><span>Together <b>${yn(a.placement.q2.answer)}</b></span></div>
+            <div class="tc-foot"><span class="tc-chip" aria-hidden="true"></span>
+              <span class="tc-waves" aria-hidden="true"><i></i><i></i><i></i></span><span class="tc-tap no-print">Tap to activate</span></div>
+          </div>
+          <ol class="abil" aria-label="The five lines of the agent card">${abilities.map(([ic, k, v, cls], i) => `
+            <li class="${cls}" data-frag="${i + 1}"><span class="ico">${icon(ic)}</span><div><span class="k">${i + 1} · ${esc(k)}</span><p class="v">${v}</p></div></li>`).join('')}
+          </ol>
+        </div>`
     };
   };
 
@@ -455,8 +502,15 @@
       x.el.classList.toggle('active', k === i);
       x.el.setAttribute('aria-hidden', k === i ? 'false' : 'true');
     });
+    const tapped = s.type === 'agent-card' && i === state.i && step > state.step;
     state.i = i; state.step = step;
     applyFrags(s, step);
+    if (tapped) {
+      const card = s.el.querySelector('.tcard');
+      card.classList.remove('tap');
+      void card.offsetWidth; // restart the tap animation
+      card.classList.add('tap');
+    }
     layoutEvidence(s.el);
     updateChrome();
     if (!(opts && opts.noHash)) history.replaceState(null, '', location.pathname + location.search + '#' + s.id);
@@ -551,9 +605,15 @@
   }
 
   document.addEventListener('click', (e) => {
-    const el = e.target.closest('button, [data-move], [data-focus-q]');
+    const el = e.target.closest('button, [data-move], [data-focus-q], [data-tap]');
     if (!el || el.closest('.chrome')) return;
     const slide = el.closest('.slide');
+    if (el.matches('[data-tap]')) {
+      const s = SLIDES[state.i];
+      if (state.step < s.steps) go(state.i, state.step + 1);
+      else { const card = el; card.classList.remove('tap'); void card.offsetWidth; card.classList.add('tap'); }
+      return;
+    }
     if (el.matches('[data-unfocus]')) { unfocusMap(slide); return; }
     if (el.matches('[data-goto]')) { const k = indexOf(el.dataset.goto); if (k >= 0) go(k, 0); return; }
     if (el.matches('[data-showall]')) { go(state.i, 'end'); return; }
