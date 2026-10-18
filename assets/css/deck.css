@@ -663,3 +663,8 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .qmap .xh { padding-bottom: 8px; }
 .qmap .av { font-size: 22px; }
 .compare .qmap { grid-template-columns: 140px 1fr 1fr; grid-template-rows: 40px 1fr 1fr; }
+/* map cells: the agent stands apart from the quadrant title; presenter tucked bottom-right */
+.qmap .qcell .an { margin-top: 18px; }
+.qmap .qcell .job { margin-top: 6px; }
+.qmap .qcell .dm { position: absolute; right: 24px; bottom: 16px; font-size: 16px; color: var(--muted); opacity: .8; }
+.qmap.focused .qcell.sel .dm { position: static; font-size: 22px; opacity: 1; }
