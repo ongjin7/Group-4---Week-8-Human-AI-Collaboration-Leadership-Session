@@ -430,8 +430,8 @@ window.DECK_DATA = {
         card: "Meet the MBairline assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
         build: "Press → for each of the six automated steps: this is AI assistance, preparing information and drafts for the manager. Two AI steps (it suggests an assessment, and prepares an optional reply draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. Last press: the manager panel. The manager owns the case, uses or rejects the suggestions, and could handle it without AI. Read the caption: no single right answer, and the manager can do it alone.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
-        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A5.",
-        person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: the consent mix-up in appendix A2."
+        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A3.",
+        person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: one report once swapped email and mobile consent; it was caught on review and the input labels were fixed."
       }
     }
   ],
@@ -475,13 +475,9 @@ window.DECK_DATA = {
   appendix: [
     { id: "a-evidence", type: "evidence-status", title: "A1 · Evidence status",
       notes: "Generated from the data file: every TBC and missing screenshot. Use it in rehearsal; hide or fill before Wednesday." },
-    { id: "a-lessons", type: "lessons", agent: "mbairline", title: "A2 · MBairline testing lessons",
-      notes: "Only claim what the records show. Items marked TBC need evidence before they are presented as facts." },
-    { id: "a-placement", type: "placement", title: "A3 · Placement checks",
-      notes: "Our own challenge to each placement. The CRM placement is the one most likely to be questioned." },
-    { id: "a-config", type: "config", title: "A4 · Configuration evidence",
+    { id: "a-config", type: "config", title: "A2 · Configuration evidence",
       notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
-    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A5 · MBairline run trace",
+    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A3 · MBairline run trace",
       notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." }
   ]
 };

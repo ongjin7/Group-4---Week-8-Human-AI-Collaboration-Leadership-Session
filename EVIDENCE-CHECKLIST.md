@@ -58,8 +58,8 @@ seven-step workflow, check (who, what, when, if it fails), placement reasoning, 
 - [x] **Zap history record** (`zap-run-history.jpg`): one successful run on 18 Oct 2026 at 10:40 pm, every step green
 - [x] Run time shown on the “Same run, in Zap history” slide
 - [x] Tied to that exact run: step 1 data names Kerry Tan (22:40:53) and step 3 sends the report with the same
-      subject as the inbox email (22:41:02); full trace with times in appendix A5 (form to draft: 26 seconds)
-- [ ] Testing lessons (appendix A2):
+      subject as the inbox email (22:41:02); full trace with times in appendix A3 (form to draft: 26 seconds)
+- [ ] Testing lessons (no longer a slide; keep for Q&A):
   - [ ] Consent reversal: annotated before/after screenshot (reported in Jin’s write-up)
   - [x] Correct consent handling: the Kerry Tan run shows email Yes / mobile No in both the form data and the report
   - [ ] HTML Yes/No exact-match filter failure: the live filter now uses “contains Yes” (run trace step 4), but the original **failure itself is not on record**, so present it as a lesson, not a shown result
