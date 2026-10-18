@@ -296,29 +296,41 @@ window.DECK_DATA = {
       ],
       config: [
         { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "Zap editor: the six steps", alt: "Zapier editor showing six steps: Google Forms, AI by Zapier, Gmail Send Email, Filter by Zapier, AI by Zapier, Gmail Create Draft" },
-        { src: null, caption: "Filter conditions", missing: "Screenshot of the Filter by Zapier conditions" },
-        { src: null, caption: "Gmail: Create Draft, not Send", missing: "Screenshot of the Gmail action event setting" }
+        { src: "assets/evidence/mbairline/run-4-filter.jpg", caption: "Filter: continue only if both answers are Yes", alt: "Filter by Zapier run details: only continue if personalised action contains Yes AND email permission contains Yes; the run passed", focus: "40% 45%", zoom: 1.3 },
+        { src: "assets/evidence/mbairline/step-6-create-draft.jpg", caption: "Gmail step 6: Create Draft, not Send", alt: "Zap step 6: Gmail, Create Draft, sent 1 new draft to Gmail" }
       ],
       run: {
-        matchKey: { label: "Zap run", value: "18 Oct 2026, 10:40 pm: the only run in the last 30 days, every step successful" },
+        matchKey: { label: "Run", value: "18 Oct, 10:40 pm · input names Kerry Tan · report subject matches the inbox · 26 s, form to draft" },
         input: { src: "assets/evidence/mbairline/form-answers.jpg", caption: "Input: Kerry Tan’s feedback form" },
         output: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Output: the manager’s report" },
         record: { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "Zap history: the run and each step’s result" },
-        /* The same screenshot, shown as two zoomed views: the run entry, and each step's outcome. */
+        /* Three linked views: the run, the input it carried (Kerry Tan), and the report subject that matches the inbox. */
         recordShots: [
-          { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "The run: successful, 18 Oct, 10:40 pm",
+          { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "1 · The run: successful, 10:40 pm",
             alt: "Zap runs panel: 1 run in the last 30 days, Successful, Oct 18, 2026 10:40 pm", focus: "20% 45%", zoom: 2.2,
             pins: [{ x: 37.5, y: 44.8, n: 1, ring: false, text: "Successful run, 18 Oct 2026, 10:40 pm" }] },
-          { src: "assets/evidence/mbairline/zap-run-history.jpg", caption: "Each step of that run: done",
-            alt: "Each Zap step marked done: found 1 form response, AI results, email sent, passed the filter, AI draft, draft sent to Gmail", focus: "80% 67%", zoom: 2.2,
-            pins: [{ x: 95, y: 51, n: 2, ring: false, text: "Report email sent" }, { x: 95, y: 67, n: 3, ring: false, text: "Passed the filter" }, { x: 95, y: 83, n: 4, ring: false, text: "AI drafted the reply" }] }
+          { src: "assets/evidence/mbairline/run-1-form-data.jpg", caption: "2 · Its input: Kerry Tan’s form",
+            alt: "Run details for step 1 at 22:40:53: First Name Kerry, Last Name Tan, email contact Yes, mobile contact No", focus: "30% 72%", zoom: 1.7,
+            pins: [{ x: 16.4, y: 74.9, n: 2, text: "Kerry Tan, the same passenger" }] },
+          { src: "assets/evidence/mbairline/run-3-report-email.png", caption: "3 · Its report: the inbox subject",
+            alt: "Run details for step 3 at 22:41:02: subject MBairline | Priority Guest Feedback Report — Kerry Tan", focus: "35% 40%", zoom: 1.8,
+            pins: [{ x: 56, y: 41.5, n: 3, ring: false, text: "Same subject as the email in the inbox" }] }
         ]
       },
+      /* Every step of the Kerry Tan run, with the time it ran (Singapore time). Appendix proof. */
+      trace: [
+        { time: "22:40:53", step: "1 · Form response found", src: "assets/evidence/mbairline/run-1-form-data.jpg", focus: "35% 60%", zoom: 1.5, note: "Kerry Tan, 1 star, email Yes, mobile No" },
+        { time: "22:41:01", step: "2 · AI assessment", src: "assets/evidence/mbairline/run-2-ai-assessment.jpg", focus: "40% 50%", zoom: 1.5, note: "Personalised action Yes, urgent Yes, email Yes, mobile No" },
+        { time: "22:41:02", step: "3 · Report emailed", src: "assets/evidence/mbairline/run-3-report-email.png", focus: "40% 42%", zoom: 1.5, note: "Subject: MBairline | Priority Guest Feedback Report — Kerry Tan" },
+        { time: "22:41:04", step: "4 · Filter passed", src: "assets/evidence/mbairline/run-4-filter.jpg", focus: "40% 42%", zoom: 1.3, note: "Both answers contain Yes, so the run continues" },
+        { time: "22:41:18", step: "5 · AI drafts the reply", src: "assets/evidence/mbairline/run-5-ai-reply.jpg", focus: "40% 45%", zoom: 1.4, note: "“Dear Kerry, thank you for taking the time…”" },
+        { time: "22:41:19", step: "6 · Draft saved", src: "assets/evidence/mbairline/run-6-draft-saved.jpg", focus: "25% 45%", zoom: 1.8, note: "Gmail label: DRAFT. Not sent." }
+      ],
       /* One run, start to finish. Each stop is its own slide; → moves along the timeline.
          Shots: focus = the point to zoom into, zoom = how far, pins = numbered markers (x/y in % of the image). */
       journey: [
         {
-          who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback",
+          who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback", time: "22:40:32",
           note: "A test passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
           shots: [
             { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 0%", zoom: 1.25,
@@ -329,7 +341,7 @@ window.DECK_DATA = {
           say: "Meet Kerry, our test passenger. One star, a complaint about the crew and the food. Watch the two consent answers: email yes, mobile no."
         },
         {
-          who: "Zapier", short: "Zap fires", title: "The Zap fires",
+          who: "Zapier", short: "Zap fires", title: "The Zap fires", time: "22:40:53",
           note: "The new form response triggers the Zap. AI assesses the feedback, Gmail emails a report, a Filter checks the conditions, AI drafts a reply, and Gmail saves it as a draft.",
           shots: [
             { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "The six steps in the Zap editor", alt: "Zapier editor showing six steps",
@@ -338,7 +350,7 @@ window.DECK_DATA = {
           say: "No one presses a button. The form response starts the Zap: six steps, two of them AI."
         },
         {
-          who: "Manager’s inbox", short: "Report arrives", title: "A report lands in the inbox",
+          who: "Manager’s inbox", short: "Report arrives", title: "A report lands in the inbox", time: "22:41:02",
           note: "The manager receives an assessment with suggested next steps. The consent lines match Kerry’s form: email yes, mobile no.",
           layout: "stack",
           shots: [
@@ -349,8 +361,8 @@ window.DECK_DATA = {
           say: "The manager gets this report. Point at the consent lines: email yes, mobile no, exactly what Kerry said. That is the consent bug we fixed in testing."
         },
         {
-          who: "Drafts", short: "Reply drafted", title: "A reply waits in Drafts",
-          note: "Personalised action is Yes and email is allowed, so the Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft. Nothing is sent.",
+          who: "Drafts", short: "Reply drafted", title: "A reply waits in Drafts", time: "22:41:19",
+          note: "Personalised action is Yes and email is allowed, so the Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft: 26 seconds after the Zap picked up the form. Nothing is sent.",
           shots: [
             { src: "assets/evidence/mbairline/reply-draft.jpg", caption: "The personalised reply, saved as a draft", alt: "Gmail draft reply to Kerry Tan apologising and promising review by the Cabin Crew and Food and Beverage teams", focus: "50% 55%", zoom: 1.15,
               pins: [{ x: 8.6, y: 95, n: 1, text: "Not sent: waits for the manager" }] }
@@ -391,8 +403,8 @@ window.DECK_DATA = {
       },
       lessons: [
         { title: "Consent reversed", detail: "One report swapped email and mobile consent and recommended a call the passenger had declined.", status: "Reported in Jin’s PS5 write-up", evidence: { src: null, caption: "Annotated: consent fields in the input vs the report", missing: "The form response and the faulty report, side by side, redacted", pins: [] } },
-        { title: "Inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Reported in write-up; screenshot TBC", evidence: null },
-        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "TBC: needs evidence before presenting", evidence: null },
+        { title: "Inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Seen in the Kerry Tan run: the form said email Yes, mobile No, and so did the report (appendix A5)", evidence: null },
+        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "The live filter now checks “contains Yes” on the HTML value (A5, step 4). The original failure itself is not on record.", evidence: null },
         { title: "Satisfied customer flagged", detail: "One satisfied-customer case was wrongly flagged for personalised action.", status: "TBC: needs evidence before presenting", evidence: null },
         { title: "Review stays necessary", detail: "Every customer reply is reviewed by the manager before it is sent; the agent can only save drafts.", status: "Design choice: enforced by Create Draft", evidence: null }
       ],
@@ -401,7 +413,7 @@ window.DECK_DATA = {
         card: "Meet the MBairline assistant. Tap the card five times: its mission, what wakes it up (a new feedback form), its gear, its forbidden move (it can never send a reply: the Gmail step is Create Draft, not Send Email), and where it calls a human (the manager).",
         build: "Press → for each of the seven steps. Two AI steps (assess, draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. The gold step is the manager: nothing goes out on its own.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
-        record: "The proof: Zap history shows one successful run on 18 October at 10:40 pm. Every step is green: it found Kerry’s form, sent the report, passed the filter, drafted the reply and saved it as a draft. That is the run we just followed.",
+        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A5.",
         person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: the consent mix-up in appendix A2."
       }
     }
@@ -454,6 +466,8 @@ window.DECK_DATA = {
     { id: "a-placement", type: "placement", title: "A3 · Placement checks",
       notes: "Our own challenge to each placement. The CRM placement is the one most likely to be questioned." },
     { id: "a-config", type: "config", title: "A4 · Configuration evidence",
-      notes: "All configuration screenshots in one place, for questions about how each Zap was built." }
+      notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
+    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A5 · MBairline run trace",
+      notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." }
   ]
 };

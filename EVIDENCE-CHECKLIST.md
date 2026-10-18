@@ -50,19 +50,19 @@ Already in the deck, taken from Jin’s published PS5 agent card: problem, five-
 seven-step workflow, check (who, what, when, if it fails), placement reasoning, move.
 
 - [x] Screenshot: Zap editor (`zap-editor.jpg`)
-- [ ] Screenshot: Filter by Zapier conditions
-- [ ] Screenshot: Gmail action set to **Create Draft**, not Send Email
+- [x] Screenshot: Filter by Zapier conditions (`run-4-filter.jpg`: “contains Yes” AND “contains Yes”, passed)
+- [x] Screenshot: Gmail step is **Create Draft**, not Send Email (`step-6-create-draft.jpg`, and label DRAFT in `run-6-draft-saved.jpg`)
 - [x] One run, shown as a five-stop journey (test passenger Kerry Tan): form (`form-top.jpg`, `form-answers.jpg`,
       email and phone redacted), manager’s inbox and report (`manager-inbox.jpg`, `manager-report.jpg`, sender address
       redacted), reply draft (`reply-draft.jpg`)
 - [x] **Zap history record** (`zap-run-history.jpg`): one successful run on 18 Oct 2026 at 10:40 pm, every step green
 - [x] Run time shown on the “Same run, in Zap history” slide
-- [ ] Optional, to tie the screenshots to that exact run: the run’s step details showing Kerry Tan’s data
-      (can go in the appendix as extra proof)
+- [x] Tied to that exact run: step 1 data names Kerry Tan (22:40:53) and step 3 sends the report with the same
+      subject as the inbox email (22:41:02); full trace with times in appendix A5 (form to draft: 26 seconds)
 - [ ] Testing lessons (appendix A2):
   - [ ] Consent reversal: annotated before/after screenshot (reported in Jin’s write-up)
-  - [ ] Retest showing Email: Yes, Mobile: No: screenshot (reported in write-up)
-  - [ ] HTML Yes/No exact-match filter failure: **no record supplied yet**, so do not present it as fact
+  - [x] Correct consent handling: the Kerry Tan run shows email Yes / mobile No in both the form data and the report
+  - [ ] HTML Yes/No exact-match filter failure: the live filter now uses “contains Yes” (run trace step 4), but the original **failure itself is not on record**, so present it as a lesson, not a shown result
   - [ ] Satisfied customer wrongly flagged: **no record supplied yet**, so do not present it as fact
 - [ ] Optional: confirm the MBairline brand colours (the deck uses navy `#0D2340` and gold `#C9A54A`)
 

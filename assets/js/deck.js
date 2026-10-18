@@ -324,7 +324,7 @@
     const pins = (st.shots || []).flatMap((sh) => sh.pins || []);
     const info = `<div class="jinfo">
         <span class="jno">${pad2(s.stop + 1)}</span>
-        <span class="k">${esc(st.who)}</span>
+        <span class="k">${esc(st.who)}${st.time ? `<span class="jtime">${esc(st.time)}</span>` : ''}</span>
         <h3>${esc(st.title)}</h3>
         <p class="body">${t(st.note)}</p>
         ${pins.length ? `<ul class="jpins">${pins.map((p) => `<li><span class="pin-dot">${esc(p.n)}</span>${esc(p.text || '')}</li>`).join('')}</ul>` : ''}
@@ -473,6 +473,22 @@
       <div class="lesson-layout"><div class="lessons">${lessons.map((l, i) => `
         <div class="lesson"><span class="n">${i + 1}</span><div><p class="t">${t(l.title)}</p><p class="d">${t(l.detail)}</p><p class="s">Status: ${t(l.status)}</p></div></div>`).join('')}</div>
         <div style="display:flex;flex-direction:column;min-height:0">${ev(shot)}</div></div>`
+    };
+  };
+
+  /* Every step of one run, with the time it ran: appendix proof */
+  R['run-trace'] = (s) => {
+    const a = AG[s.agentId || s.agent];
+    if (!a || !a.trace) return R.unknown(s);
+    return {
+      cls: 'agent', q: a.quadrant, theme: a.theme,
+      html: `${head(`${nameOf(a)} · run trace`, 'Every step of the Kerry Tan run')}
+        <div class="trace">${a.trace.map((x) => `
+          <div class="trace-step">
+            <div class="trace-head"><span class="jtime">${esc(x.time)}</span><b>${esc(x.step)}</b></div>
+            ${ev({ src: x.src, caption: x.step, alt: `${x.step}: ${x.note}`, focus: x.focus, zoom: x.zoom })}
+            <p class="trace-note">${esc(x.note)}</p>
+          </div>`).join('')}</div>`
     };
   };
 
