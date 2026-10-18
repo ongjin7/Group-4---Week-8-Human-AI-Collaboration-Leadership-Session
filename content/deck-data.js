@@ -459,7 +459,7 @@ window.DECK_DATA = {
     {
       id: "close", label: "Comparison", seconds: 120,
       slides: [
-        { id: "compare", type: "compare", seconds: 45, title: "How the person’s job changes",
+        { id: "compare", type: "compare", seconds: 45, title: "How our answers placed each agent",
           notes: "Back to the full map. Point at the answers in each cell: our two answers placed each agent (expense: yes, yes; CRM: no, yes; HR: yes, no; MBairline: no, no). Then how the job changes: across, losing the right answer turns verifying into choosing between options (signs off → judges); down, no longer having to work together turns being needed in every case into spot-checking or deciding independently. If asked: task complexity, clarity of rules, available evidence and the consequences of error shape how work is designed and checked. They inform the two questions; they are not extra axes. High importance does not automatically mean people and AI must work together. And missing data does not automatically mean there is no single right answer: separate an answer that cannot yet be verified from a decision with several reasonable outcomes.",
           cue: "“We will now look at how our answers to the map’s two questions placed each of our four agents, and what would move each one to another quadrant.”" },
         { id: "moves", type: "moves", seconds: 60, title: "What would move each agent?",

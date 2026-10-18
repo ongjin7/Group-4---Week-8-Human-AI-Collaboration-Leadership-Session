@@ -450,7 +450,7 @@
 
   R.compare = (s) => ({
     cls: 'compare',
-    html: `${head('Back to the map', 'How the person’s *job* changes')}${qmapHTML('compare')}
+    html: `${head('Comparing the four agents', 'How our answers *placed* each agent')}${qmapHTML('compare')}
       <div class="cmp-foot">
         <div class="cmp-qs">
           <p class="cmp-label">How the job changes</p>
