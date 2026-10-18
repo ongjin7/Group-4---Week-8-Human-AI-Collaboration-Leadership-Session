@@ -818,3 +818,12 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .slide.s-divider { justify-content: flex-start; }
 .s-divider .dv-main { margin: auto 0; padding-bottom: 40px; grid-template-columns: auto minmax(0, 640px); }
 .dv-mascot { right: 120px; bottom: 70px; }
+
+/* MBairline banner, option 1: a soft rosy duotone so the photo sits in the deck's pastel palette */
+.s-intro .banner { filter: sepia(.35) saturate(.55) brightness(1.08) contrast(.9); opacity: .85; }
+.s-intro .banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #F8E0E0 0%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: .9; }
+.s-intro .banner::after { content: ""; position: absolute; inset: 0; background: #F8E0E0; mix-blend-mode: color; opacity: .28; }
+.s-intro .banner { position: relative; }
+.s-intro .banner { filter: sepia(.15) saturate(.9) brightness(1.12) contrast(.82); opacity: .9; }
+.s-intro .banner::before { background: linear-gradient(180deg, #F3C6C6 0%, #F8E0D6 60%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: 1; }
+.s-intro .banner::after { background: linear-gradient(90deg, #E9B7B7, #F2D3B8); mix-blend-mode: color; opacity: .42; }
