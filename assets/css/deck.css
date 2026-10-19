@@ -872,3 +872,5 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 /* Highlighter: ==text== in deck-data.js */
 mark.hl { background: linear-gradient(transparent 18%, var(--qsoft, #F8E0E0) 18%, var(--qsoft, #F8E0E0) 92%, transparent 92%); color: var(--ink); font-weight: 600; padding: 0 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .theme-mbairline mark.hl { background: linear-gradient(transparent 14%, #F3C6C6 14%, #F3C6C6 94%, transparent 94%); }
+/* bold only, no highlighter band */
+mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--ink); font-weight: 600; }
