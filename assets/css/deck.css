@@ -866,3 +866,5 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .theme-mbairline .banner { opacity: 1; filter: none; }
 .theme-mbairline .banner::before, .theme-mbairline .banner::after { display: none; }
 .s-intro.has-banner .banner { background-position: center, center top !important; }
+.s-divider .dv-list span { min-width: 110px; }
+.s-divider .dv-order { margin: 22px 0 0; font-size: 20px; color: var(--muted); }

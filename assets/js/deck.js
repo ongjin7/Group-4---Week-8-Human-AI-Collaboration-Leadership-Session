@@ -567,7 +567,20 @@
   };
 
   /* A section break between the main deck and the appendix */
-  R.divider = () => {
+  R.divider = (s) => {
+    if (Array.isArray(s.items)) {
+      return {
+        cls: 's-divider',
+        html: `<p class="dv-end">End of presentation</p>
+        <div class="dv-main">
+          <h1>Appendix</h1>
+          <p class="dv-sub">Supporting evidence, for questions</p>
+          <ol class="dv-list">${s.items.map(([k, v]) => `<li><span>${esc(k)}</span>${esc(v)}</li>`).join('')}</ol>
+          ${s.order ? `<p class="dv-order">${esc(s.order)}</p>` : ''}
+        </div>
+        <div class="dv-mascot" aria-hidden="true"><div class="dv-sign">More details<br>if needed</div><div class="dv-pole"></div><div class="dv-face" data-q="br">${face(byQ('br') || D.agents[0])}</div></div>`
+      };
+    }
     const items = SLIDES.filter((x) => x.appendix && x.type !== 'divider');
     return {
       cls: 's-divider',

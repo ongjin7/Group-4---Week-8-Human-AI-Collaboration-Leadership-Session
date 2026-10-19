@@ -685,8 +685,8 @@ window.DECK_DATA = {
       },
       lessons: [
         { title: "Consent reversed", detail: "One report swapped email and mobile consent and recommended a call the passenger had declined.", status: "Failure reported in Jin’s PS5 write-up; no screenshot of the faulty report", evidence: null },
-        { title: "Fix: inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Seen in the Kerry Tan run: the form said email Yes, mobile No, and so did the report (appendix A2, steps 1–2)", evidence: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Retest: the report’s consent lines match the form", alt: "Report email for Kerry Tan: personalised action Yes, urgent Yes, email contact Yes, mobile contact No", focus: "28% 49%", zoom: 1.6, pins: [{ x: 24.3, y: 47, n: 1, text: "Email Yes, mobile No: matches the form" }] } },
-        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "The live filter now checks “contains Yes” on the HTML value (appendix A2, step 4: the Kerry Tan run passed it). The original failure itself is not on record.", evidence: null },
+        { title: "Fix: inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Seen in the Kerry Tan run: the form said email Yes, mobile No, and so did the report (appendix A8, steps 1–2)", evidence: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Retest: the report’s consent lines match the form", alt: "Report email for Kerry Tan: personalised action Yes, urgent Yes, email contact Yes, mobile contact No", focus: "28% 49%", zoom: 1.6, pins: [{ x: 24.3, y: 47, n: 1, text: "Email Yes, mobile No: matches the form" }] } },
+        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "The live filter now checks “contains Yes” on the HTML value (appendix A8, step 4: the Kerry Tan run passed it). The original failure itself is not on record.", evidence: null },
         { title: "Satisfied customer flagged", detail: "One satisfied-customer case was wrongly flagged for personalised action.", status: "Reported in Jin’s PS5 write-up; no screenshot", evidence: null },
         { title: "Review stays necessary", detail: "Every customer reply is reviewed by the manager before it is sent; the agent can only save drafts.", status: "Design choice: enforced by Create Draft", evidence: null }
       ],
@@ -695,7 +695,7 @@ window.DECK_DATA = {
         card: "Meet the MBairline assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
         build: "Press → for each of the six automated steps: this is AI assistance, preparing information and drafts for the manager. Two AI steps (it suggests an assessment, and prepares an optional reply draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. Last press: the manager panel. The manager owns the case, uses or rejects the suggestions, and could handle it without AI. Read the caption: no single right answer, and the manager can do it alone.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
-        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A2.",
+        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A8.",
         person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: one report once swapped email and mobile consent; it was caught on review and the input labels were fixed."
       }
     }
@@ -739,24 +739,30 @@ window.DECK_DATA = {
 
   appendix: [
     { id: "appendix", type: "divider", title: "Appendix",
+      items: [
+        ["A1", "Configuration evidence"],
+        ["Per agent", "Run trace: every step of one real run"],
+        ["Per agent", "Failure, fix and retest: one example"]
+      ],
+      order: "In presentation order: Expense claims · Banking CRM · Manpower report · MBairline",
       notes: "End of the presentation. Everything after this is supporting material for questions only." },
     { id: "a-config", type: "config", title: "A1 · Configuration evidence",
       notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
-    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A2 · MBairline run trace",
-      notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." },
-    { id: "a-lessons-mb", type: "lessons", agent: "mbairline", title: "A3 · MBairline testing", subtitle: "Failure, fix and retest",
-      notes: "If asked what went wrong: one report swapped email and mobile consent and recommended a call the passenger had declined. Fix: each consent answer is labelled explicitly; the Kerry Tan run shows the report matching the form. The HTML Yes/No filter now checks “contains Yes”. Say clearly which items are on record and which are only in the write-up." },
+    { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A2 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
+      notes: "Proof for the top-left run: Jack submits at 12:42:57, the Zap picks up the row at 12:45:01 and Gmail sends the pre-check at 12:45:02, under one run ID (01ba7a48…). Click any screenshot to enlarge it." },
+    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A3 · Expense claims testing", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." },
     { id: "a-trace-crm", type: "run-trace", agent: "crm", title: "A4 · Banking CRM run trace", subtitle: "Every step of the BANK_013 run on record",
       notes: "Proof for the top-right run: Zap history at 23:05, the BANK_013 input at 23:05:10, the parsed draft at 23:05:21 and the approval request at 23:05:22. No run ID is shown, so the steps are matched by time and customer ID." },
     { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A5 · Banking CRM testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." },
-    { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A6 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
-      notes: "Proof for the top-left run: Jack submits at 12:42:57, the Zap picks up the row at 12:45:01 and Gmail sends the pre-check at 12:45:02, under one run ID (01ba7a48…). Click any screenshot to enlarge it." },
-    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A7 · Expense claims testing", subtitle: "Failure, fix and retest",
-      notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." },
-    { id: "a-trace-leave", type: "run-trace", agent: "leave", title: "A8 · Manpower report run trace", subtitle: "Every step of the 19 Oct run on record",
+    { id: "a-trace-leave", type: "run-trace", agent: "leave", title: "A6 · Manpower report run trace", subtitle: "Every step of the 19 Oct run on record",
       notes: "Proof for the bottom-left run: the row is picked up at 14:45:57 and Gmail sends at 2:45:57 pm under run ID 01baa5ba…. The email has row 3’s exact numbers, but Gmail shows 2:40 PM, five minutes earlier, so it may be from a test of the same row." },
-    { id: "a-lessons-leave", type: "lessons", agent: "leave", title: "A9 · Manpower report testing", subtitle: "Failure, fix and retest",
-      notes: "If asked what went wrong: on a 12% absence day the report looked like any other, so Adithi added a status flag that puts ⚠ ABOVE 10% at the start of the subject. The run 2 and run 3 screenshots are not provided yet; this is from Adithi’s write-up." }
+    { id: "a-lessons-leave", type: "lessons", agent: "leave", title: "A7 · Manpower report testing", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: on a 12% absence day the report looked like any other, so Adithi added a status flag that puts ⚠ ABOVE 10% at the start of the subject. The run 2 and run 3 screenshots are not provided yet; this is from Adithi’s write-up." },
+    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A8 · MBairline run trace",
+      notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." },
+    { id: "a-lessons-mb", type: "lessons", agent: "mbairline", title: "A9 · MBairline testing", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: one report swapped email and mobile consent and recommended a call the passenger had declined. Fix: each consent answer is labelled explicitly; the Kerry Tan run shows the report matching the form. The HTML Yes/No filter now checks “contains Yes”. Say clearly which items are on record and which are only in the write-up." }
   ]
 };
