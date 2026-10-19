@@ -288,7 +288,7 @@
   R['agent-build'] = (s) => {
     const a = AG[s.agentId];
     const n = a.workflow.length;
-    const cols = n <= 5 ? n : 4;
+    const cols = n <= 5 ? n : n === 6 ? 3 : 4;
     const shot = (a.config || []).find((c) => c.src);
     const evId = shot ? EV.push(shot) - 1 : -1;
     const foot = `<div class="build-foot no-print">
@@ -412,7 +412,7 @@
   /* 6 · the person in the loop, and why this quadrant */
   const PERSON = {
     tl: { title: 'The person *signs off*', rows: (c) => [['Who signs off', c.who, true], ['What they check', c.what], ['When', c.when], ['If they reject it', c.ifFails]] },
-    tr: { title: 'The person *judges*', rows: (c) => [['Who judges', c.who], ['Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['When', c.when], ['If no option fits', c.ifFails]] },
+    tr: { title: 'The person *judges*', rows: (c) => [['Who judges', c.who], [c.decisionLabel || 'Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['What they weigh', c.what], ['When', c.when]] },
     bl: { title: 'The *spot check*', rows: (c) => [['Who checks', c.who], ['How often', c.when, true], ['What they inspect', c.what], ['If it is wrong', c.ifFails]] },
     br: { title: 'The person *leads* and decides', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
   };
@@ -554,13 +554,15 @@
     const a = AG[s.agentId || s.agent];
     if (!a) return R.unknown(s);
     const lessons = a.lessons || [];
-    const shot = (lessons.find((l) => l.evidence) || {}).evidence;
+    const shots = lessons.filter((l) => l.evidence).map((l) => l.evidence);
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${head(`${nameOf(a)} · testing`, 'What testing taught us, and what we can prove')}
+      html: `${head(`${nameOf(a)} · testing`, s.subtitle || 'What testing taught us, and what we can prove')}
       <div class="lesson-layout"><div class="lessons">${lessons.map((l, i) => `
         <div class="lesson"><span class="n">${i + 1}</span><div><p class="t">${t(l.title)}</p><p class="d">${t(l.detail)}</p><p class="s">Status: ${t(l.status)}</p></div></div>`).join('')}</div>
-        <div style="display:flex;flex-direction:column;min-height:0">${ev(shot)}</div></div>`
+        ${shots.length > 1
+          ? `<div class="jshots stack">${shots.map((sh) => ev(sh, sh.caption)).join('')}</div>`
+          : `<div style="display:flex;flex-direction:column;min-height:0">${ev(shots[0])}</div>`}</div>`
     };
   };
 
@@ -588,8 +590,8 @@
     if (!a || !a.trace) return R.unknown(s);
     return {
       cls: 'agent', q: a.quadrant, theme: a.theme,
-      html: `${head(`${nameOf(a)} · run trace`, 'Every step of the Kerry Tan run')}
-        <div class="trace">${a.trace.map((x) => `
+      html: `${head(`${nameOf(a)} · run trace`, s.subtitle || 'Every step of the Kerry Tan run')}
+        <div class="trace"${a.trace.length <= 4 ? ' style="grid-template-columns:repeat(2, 1fr)"' : ''}>${a.trace.map((x) => `
           <div class="trace-step">
             <div class="trace-head"><span class="jtime">${esc(x.time)}</span><b>${esc(x.step)}</b></div>
             ${ev({ src: x.src, caption: x.step, alt: `${x.step}: ${x.note}`, focus: x.focus, zoom: x.zoom })}

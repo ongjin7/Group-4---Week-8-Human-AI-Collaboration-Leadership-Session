@@ -65,7 +65,7 @@
                 presenter: plain(a.presenter),
                 title: `${q.position} · ${name} · journey ${j + 1}/${n}: ${stop.short || stop.title}`,
                 notes: stop.say || stop.note || t.notes,
-                cue: j === n - 1 ? 'Last stop: the person decides. Then → for the same run in Zap history.' : 'Press → for the next stop on the journey.'
+                cue: j === n - 1 ? `Last stop${stop.human ? ': the person decides' : ''}. Then → for the same run in Zap history.` : 'Press → for the next stop on the journey.'
               });
             });
             return;

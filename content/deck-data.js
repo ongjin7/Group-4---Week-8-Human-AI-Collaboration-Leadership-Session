@@ -38,7 +38,7 @@ window.DECK_DATA = {
   members: [
     { name: "Jin", agent: "mbairline" },
     { name: "Revan", agent: "TBC" },
-    { name: "Minh", agent: "TBC" },
+    { name: "Minh", agent: "crm" },
     { name: "Adithi", agent: "TBC" }
   ],
 
@@ -134,64 +134,160 @@ window.DECK_DATA = {
     {
       id: "crm",
       quadrant: "tr",
-      name: "CRM scenario agent",
-      presenter: "TBC: Revan, Minh or Adithi",
-      domain: "Customer relationship management",
       motif: "chat",
-      oneLiner: "Recommends how to act in different customer scenarios, for a person to judge and choose.",
+      catchphrase: "I run it. You judge it!",
+      name: "Banking CRM Onboarding Agent",
+      shortName: "Banking CRM agent",
+      mapName: "Banking CRM Onboarding Agent",
+      presenter: "Minh",
+      domain: "Digital banking CRM",
+      oneLiner: "Runs first-deposit outreach; the CRM Manager approves each message before it is sent.",
       problem: {
-        statement: "TBC: The business problem in one plain sentence",
-        affected: "TBC: Who is affected (account manager, customer?)",
-        difficulty: "TBC: What makes choosing the right action hard today",
-        benefit: "TBC: Expected benefit, described, not quantified unless measured"
+        statement: "Some new digital-bank customers register but never finish onboarding or make their first deposit. Each may need different guidance, depending on what they have done so far.",
+        affected: "New customers who need relevant help to get started, and the CRM Manager who must review every outgoing message.",
+        difficulty: "Each case means reading the customer’s behaviour, picking a fitting campaign and writing a careful message with no invented offers.",
+        benefit: "Faster preparation of relevant onboarding outreach, with the CRM Manager judging every message before it is sent. More first deposits is the intended outcome, not a measured result.",
+        scope: "A prototype on synthetic customers: no real bank data, no measured first-deposit uplift, and eligibility is not yet checked against real transaction records."
       },
       card: {
-        job: "TBC: The agent’s job in one line",
-        trigger: "TBC: App + event that starts the Zap",
-        tools: "TBC: Apps and actions, in order",
-        never: { rule: "TBC: What the agent must never do", setting: "TBC: The Zap setting that enforces it" },
-        checkpoint: "TBC: Where inside the process the person judges, and what the process does next"
+        job: "Turn new-customer onboarding signals into personalised first-deposit emails for the CRM Manager to judge.",
+        trigger: "A new row in Google Sheets with a synthetic case_id and user_status.",
+        tools: "Google Sheets → Gemini → Code by Zapier → Filter by Zapier → Human in the Loop → Gmail",
+        never: { rule: "Send an email without the manager’s approval, or target a customer who has already deposited.", setting: "Human in the Loop approval before Gmail, and a Filter that stops NO_CAMPAIGN cases." },
+        checkpoint: "Step 5, just before Gmail: the CRM Manager reviews the options, the recommendation and the draft, then approves (email sent) or rejects (run stops)."
       },
+      /* The six real Zap steps. The person sits INSIDE the process: Gmail runs only after they approve. */
       workflow: [
-        { type: "trigger", label: "Scenario arrives", detail: "TBC: trigger app + event" },
-        { type: "ai", label: "AI analyses it", detail: "TBC: what it reads and classifies" },
-        { type: "ai", label: "AI drafts options", detail: "TBC: the options it produces" },
-        { type: "human", label: "Person judges", detail: "TBC: who chooses, and how the choice is recorded" },
-        { type: "action", label: "Process continues", detail: "TBC: what the agent does with the chosen option" }
+        { type: "trigger", label: "New customer case", detail: "Google Sheets: new row with case_id and user_status (synthetic)" },
+        { type: "ai", label: "AI assesses and drafts", detail: "Gemini: likely barrier, three campaign options, a recommendation and an email draft" },
+        { type: "action", label: "Output parsed", detail: "Code by Zapier: turns Gemini’s reply into fields" },
+        { type: "rule", label: "Eligibility filter", detail: "Continue only if campaign status = SEND_FOR_APPROVAL" },
+        { type: "human", label: "CRM Manager judges", detail: "Human in the Loop: Approve or Reject. The Zap waits here." },
+        { type: "action", label: "Email sent", detail: "Gmail: sends the approved email (test inbox), only after Approve" }
       ],
       config: [
-        { src: null, caption: "Zap editor: full workflow", missing: "Redacted screenshot of the Zap editor" },
-        { src: null, caption: "Judgment checkpoint", missing: "Screenshot of the step that waits for the person’s choice" }
+        { src: "assets/evidence/crm/zap-six-steps.webp", caption: "The six Zap steps, in an approved run", alt: "Zapier run showing six steps: Google Sheets, Gemini, Code by Zapier, Filter passed, Human in the Loop approved, Gmail sent 1 message" },
+        { src: "assets/evidence/crm/approval-review-bank013.webp", caption: "Human in the Loop: the review screen", alt: "Request Approval step for BANK_013: approval request message, content to be reviewed, and Reject Campaign / Approve Campaign buttons" },
+        { src: "assets/evidence/crm/earlier-filter-stops.webp", caption: "Filter stops a NO_CAMPAIGN case (earlier-version test)", alt: "Earlier Zap version: Filter by Zapier stopped the run because campaign status was NO_CAMPAIGN; approval and Gmail did not run" }
       ],
       run: {
-        matchKey: { label: "Zap run ID / timestamp", value: "TBC: the run ID or exact timestamp shared by both screenshots" },
-        input: { src: null, caption: "Input: the customer scenario", missing: "Anonymised scenario used in this run" },
-        output: { src: null, caption: "Output: options offered", missing: "The options the agent produced" },
-        record: { src: null, caption: "Zap history: same run", missing: "Zap history detail showing the same run ID/timestamp" }
+        matchKey: { label: "Run", value: "18 Oct, 11:05 pm · Successful · BANK_013 input 23:05:10 → draft 23:05:21 → approval request 23:05:22 (no run ID shown, so matched by time)" },
+        input: { src: "assets/evidence/crm/run-1-input-bank013.webp", caption: "Input: BANK_013’s onboarding status" },
+        output: { src: "assets/evidence/crm/run-2-output-bank013.webp", caption: "Output: the draft, sent for approval" },
+        record: { src: "assets/evidence/crm/run-history-bank013.webp", caption: "Zap history: the run" },
+        /* Three linked views: the run, its input (BANK_013), and the approval request for the same customer one second after the draft. */
+        recordShots: [
+          { src: "assets/evidence/crm/run-history-bank013.webp", caption: "1 · The run: successful, 11:05 pm",
+            alt: "Zap runs panel: Successful, Oct 18, 2026 23:05",
+            pins: [{ x: 90, y: 80, n: 1, ring: false, text: "Successful run, 18 Oct 2026, 23:05" }] },
+          { src: "assets/evidence/crm/run-1-input-bank013.webp", caption: "2 · Its input: BANK_013, 23:05:10",
+            alt: "Run details for step 1 at 23:05:10: Row 22, case_id BANK_013, user_status KYC verified, signed up 3 days ago, viewed deposit instructions twice, no first deposit", focus: "40% 70%", zoom: 1.4,
+            pins: [{ x: 70, y: 78.2, n: 2, ring: false, text: "case_id BANK_013" }] },
+          { src: "assets/evidence/crm/approval-review-bank013.webp", caption: "3 · Its approval request, 23:05:22",
+            alt: "Request Approval step: notification sent at Oct 18, 2026 23:05:22; content to be reviewed for Customer ID BANK_013",
+            pins: [{ x: 50, y: 20.2, n: 3, ring: false, text: "Sent 23:05:22, one second after the draft" }, { x: 93, y: 30.1, n: 4, ring: false, text: "Same customer: BANK_013" }] }
+        ]
       },
+      /* The BANK_013 run, step by step (Singapore time). Appendix proof. */
+      trace: [
+        { time: "23:05", step: "Zap history: Successful", src: "assets/evidence/crm/run-history-bank013.webp", focus: "50% 75%", zoom: 1.4, note: "One successful run, 18 Oct 2026" },
+        { time: "23:05:10", step: "1 · New row: BANK_013", src: "assets/evidence/crm/run-1-input-bank013.webp", focus: "40% 70%", zoom: 1.3, note: "KYC verified; viewed deposit instructions twice; no first deposit" },
+        { time: "23:05:21", step: "2–3 · AI draft, parsed", src: "assets/evidence/crm/run-2-output-bank013.webp", focus: "40% 50%", zoom: 1.1, note: "Subject: Getting started: How to fund your new account · SEND_FOR_APPROVAL" },
+        { time: "23:05:22", step: "5 · Approval requested", src: "assets/evidence/crm/approval-review-bank013.webp", focus: "40% 30%", zoom: 1.3, note: "Customer ID BANK_013, with Approve or Reject" }
+      ],
+      /* One run, start to finish. The person is stop 4, inside the process: Gmail (stop 5) only runs after they approve. */
+      journey: [
+        {
+          who: "Customer data", short: "Case arrives", title: "A new customer case arrives", time: "23:05:10",
+          note: "A synthetic customer, BANK_013, is KYC verified and signed up 3 days ago. They have viewed the deposit instructions twice but not made a first deposit.",
+          shots: [
+            { src: "assets/evidence/crm/run-1-input-bank013.webp", caption: "Step 1: the new Google Sheets row", alt: "Run details for step 1 at 23:05:10: case_id BANK_013, user_status KYC verified, signed up 3 days ago, viewed deposit instructions twice, no first deposit", focus: "50% 70%", zoom: 1,
+              pins: [{ x: 97, y: 78.2, n: 1, ring: false, text: "Customer BANK_013 (synthetic)" }, { x: 97, y: 87.5, n: 2, ring: false, text: "Viewed the instructions twice, no deposit yet" }] }
+          ],
+          say: "Minh. Meet BANK_013, a synthetic new customer: verified, looked at the deposit instructions twice, still no first deposit. A new row in Google Sheets starts the Zap."
+        },
+        {
+          who: "Gemini", short: "AI drafts", title: "AI reads the case and drafts an email", time: "23:05:21",
+          note: "Gemini suggests the likely barrier, proposes campaigns, recommends one and drafts the email. SEND_FOR_APPROVAL lets the run past the Filter.",
+          shots: [
+            { src: "assets/evidence/crm/run-2-output-bank013.webp", caption: "BANK_013: the draft, waiting for review", alt: "Run output at 23:05:21: Manager Review Check Pending; Email Subject Getting started: How to fund your new account; email body; Campaign Status SEND_FOR_APPROVAL",
+              pins: [{ x: 93, y: 45.7, n: 1, ring: false, text: "A how-to-fund email" }, { x: 64, y: 95.8, n: 2, ring: false, text: "SEND_FOR_APPROVAL: passes the Filter" }] },
+            { src: "assets/evidence/crm/gemini-options-bank007.webp", caption: "A different run (BANK_007): three options, one recommended", alt: "Gemini output for a different customer, BANK_007: potential barrier, Campaign A technical support outreach, Campaign B guided onboarding tutorial, Campaign C status check, and a recommendation", focus: "50% 70%", zoom: 1.2,
+              pins: [{ x: 86, y: 73, n: 3, ring: false, text: "Campaigns A, B and C" }] }
+          ],
+          say: "Gemini reads the case, suggests the barrier, proposes campaigns and recommends one. On the right is what those options look like, from a different customer. For BANK_013 it drafts a how-to-fund email and marks it SEND_FOR_APPROVAL."
+        },
+        {
+          who: "Zapier", short: "Approval asked", title: "The Zap stops and asks the manager", time: "23:05:22",
+          note: "The run pauses at Human in the Loop. Zapier emails the reviewer, and the review screen shows BANK_013’s behaviour, the likely barrier, the campaign options and the draft.",
+          shots: [
+            { src: "assets/evidence/crm/approval-notification.webp", caption: "Zapier asks for a review", alt: "Zapier email: A Zap requires your review to proceed. Approval request message asks to review the AI-generated onboarding campaign recommendation and approve or decline", focus: "50% 70%", zoom: 1.1,
+              pins: [{ x: 40, y: 95.4, n: 1, ring: false, text: "Review step" }] },
+            { src: "assets/evidence/crm/approval-review-bank013.webp", caption: "The review screen for BANK_013", alt: "Request Approval step: notification sent at 23:05:22; content to be reviewed for Customer ID BANK_013, stage, observed behaviour, potential barrier, Campaign Option A; Reject Campaign and Approve Campaign buttons",
+              pins: [{ x: 92, y: 30.1, n: 2, ring: false, text: "BANK_013, sent 23:05:22" }, { x: 49, y: 96.2, n: 3, ring: false, text: "Reject or Approve" }] }
+          ],
+          say: "Now the Zap stops. It cannot send anything yet. Zapier emails the reviewer, and the review screen shows the customer, the barrier, the options and the draft, with two buttons: Reject or Approve."
+        },
+        {
+          who: "CRM Manager", short: "Manager judges", title: "The CRM Manager judges, and the process waits", human: true,
+          note: "The manager reviews the three options and the recommended draft, then approves or rejects that draft. They do not pick A, B or C directly.",
+          panelLabel: "The person judges inside the process",
+          panelTitle: "The CRM Manager",
+          options: [
+            "Checks customer fit, wording, unsupported offers or security claims, and business risk",
+            "Approve: the Zap continues and Gmail sends the email",
+            "Reject: the run stops and nothing is sent"
+          ],
+          say: "This is the top-right moment. The process waits for a person’s judgment. Approve and the agent carries on and sends; reject and it stops. To be precise: the manager approves or rejects the recommended draft, they don’t click to pick option B or C."
+        },
+        {
+          who: "Customer’s inbox", short: "Email sent", title: "After approval, the email goes out",
+          note: "The BANK_013 run ended Successful. The sent email has the same subject and wording as the draft at stop 2. A customer whose deposit failed got a different email: there is no single right answer.",
+          shots: [
+            { src: "assets/evidence/crm/email-education.webp", caption: "The how-to-fund email (test inbox)", alt: "Email from Bank: Getting started: How to fund your new account, pointing the customer to the step-by-step deposit guide", focus: "50% 40%", zoom: 1,
+              pins: [{ x: 30, y: 14, n: 1, ring: false, text: "Same subject as the BANK_013 draft" }] },
+            { src: "assets/evidence/crm/email-tech-support.webp", caption: "Another case (failed deposit): a different email", alt: "Email from Bank: Assistance with your recent deposit attempt, offering troubleshooting after a technical error", focus: "50% 40%", zoom: 1,
+              pins: [{ x: 30, y: 13, n: 2, ring: false, text: "Failed deposit → support outreach" }] }
+          ],
+          say: "Only after approval does Gmail send. Same subject and wording as the draft. And a customer whose deposit failed gets a support email instead: different customers, different right moves."
+        }
+      ],
       check: {
-        who: "TBC: Role of the person who judges",
-        what: "TBC: What they weigh up when choosing",
-        when: "TBC: The step at which the process waits for them",
-        ifFails: "TBC: What happens if no option is good enough",
-        options: ["TBC: Option A from the run", "TBC: Option B", "TBC: Option C"]
+        who: "The CRM Manager (in the prototype, the Zap owner acts as approver).",
+        what: "The three campaign options, the recommendation and its reasoning, and the drafted email: customer fit, wording, unsupported offers or security claims, and business risk.",
+        when: "Step 5: after the Filter, before Gmail sends.",
+        ifFails: "Reject: the run stops and nothing is sent. Revising or rerouting the case is not built yet.",
+        decisionLabel: "Reviews A/B/C, then approves or rejects the draft",
+        options: ["Approve → Gmail sends", "Reject → the run stops"]
       },
       placement: {
-        q1: { answer: "no", why: "Many good versions: AI drafts, the person picks (group site)." },
-        q2: { answer: "yes", why: "TBC: Show that the process cannot finish without the person’s judgment inside it." },
-        concern: "Placement to confirm. If the agent only generates recommendations and the person then decides alone, the work is “Either can do it alone”, which is bottom-right, like MBairline. Top-right holds only if the agent runs a multi-step process and pauses at a checkpoint where the person’s judgment is needed before it continues."
+        q1: { answer: "no", why: "An education email, a reminder or technical-support outreach can each be right; it depends on the customer’s behaviour." },
+        q2: { answer: "yes", why: "In this workflow the agent runs every step, but the Zap stops at Request Approval: Gmail sends only after the CRM Manager approves." },
+        concern: "If Gemini only proposed options and the manager ran every step alone, it would move bottom-right. It sits top-right because the agent runs the process and must stop for the manager’s judgment before it continues. The gate is a design choice, not proof that a person could not write the campaign alone."
       },
       move: {
-        change: "The agent provides optional recommendations; the manager can assess the case and act independently.",
+        change: "The agent only suggests campaigns; the CRM Manager writes and sends the outreach themselves, with or without the suggestions.",
         question: "q2",
         from: "yes",
         to: "no",
         result: "br",
-        caveat: "Check: the group site describes the CRM agent as recommending options for a person to choose. If that is how it already works, it is bottom-right today."
+        caveat: "Hypothetical. Today the Zap waits for the manager’s Approve or Reject before Gmail sends."
       },
+      /* Failure → fix → retest. Appendix only. */
+      lessons: [
+        { title: "NO_CAMPAIGN still went to approval", detail: "BANK_012 had already deposited. Gemini correctly returned NO_CAMPAIGN, but the earlier Zap still asked for approval: a workflow-control fault, not an AI error.", status: "Before-fix screenshot", evidence: { src: "assets/evidence/crm/before-fix-wrong-approval.webp", caption: "Before the fix: BANK_012 still sent for approval", alt: "Earlier Zap: Gemini prompt for BANK_012 who already deposited; the Human in the Loop step is pending review" } },
+        { title: "Fix: a Filter before approval", detail: "The Zap now continues only when campaign status = SEND_FOR_APPROVAL.", status: "Earlier-version test shows the Filter stopping a NO_CAMPAIGN run (appendix A2)", evidence: null },
+        { title: "Retested", detail: "BANK_012_RETEST stopped before approval; BANK_013 went through approval and sending.", status: "Reported by Minh; the BANK_013 run is in Zap history at 23:05", evidence: null },
+        { title: "Reject stops the run", detail: "When the manager rejects, nothing downstream runs and no email is sent.", status: "Earlier-version test", evidence: null },
+        { title: "An unsupported security claim", detail: "An early draft offered bank-security assurances it could not back up. The prompt was tightened and human review kept.", status: "Reported by Minh; no screenshot", evidence: null }
+      ],
       notes: {
-        build: "Press → for each step. Show the process the agent runs, then the judgment checkpoint, then what the process does AFTER the person chooses. That ‘after’ is what makes it top-right.",
-        person: "Name the ACTUAL options from this run and which one the person picked. Who judges, when, and what happens if no option fits. Then: right answer? No. Together? Yes, because the process waits for the person. Be ready for: ‘why not bottom-right?’"
+        intro: "Minh. Open with the customer: some new digital-bank customers sign up but never make a first deposit, and each needs different help. It helps those customers and the CRM Manager who reviews every message. Faster, relevant outreach with the manager judging each one (expected, not measured). Say clearly: synthetic customers, a prototype, no measured uplift.",
+        card: "Tap the card five times: the job, the trigger (a new Google Sheets row), the tools (six steps), what it must never do (send without approval, or target a customer who already deposited), and where a person checks (the CRM Manager, step 5, just before Gmail).",
+        build: "Press → for each of the six real Zap steps. Sheets row, Gemini assesses and drafts, Code parses it, a Filter lets only SEND_FOR_APPROVAL through, then the CRM Manager judges, and only then Gmail sends. Stress the last step: the process carries on AFTER the person decides. That is what makes it top-right.",
+        run: "One real run, BANK_013, 18 October at 11:05 pm.",
+        record: "The proof, in three links. One: Zap history shows a successful run at 23:05. Two: its input is BANK_013 at 23:05:10. Three: the approval request for the same customer went out at 23:05:22, one second after the draft. No run ID is shown, so we match by time. Appendix A4 has every step; A5 has the failure, fix and retest.",
+        person: "Who: the CRM Manager. What they decide: they review the three options and the recommendation, then approve or reject the recommended draft; they do not pick B or C directly. When: step 5, before Gmail. If it fails: reject, and the run stops. Placement: no single right answer, and in this workflow the process cannot finish without the person, so top-right. If asked ‘why not bottom-right?’: if Gemini only suggested and the manager did everything alone, it would be. Here the agent runs the process and waits for the judgment."
       }
     },
 
@@ -453,7 +549,7 @@ window.DECK_DATA = {
       ]
     },
     { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
-    { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
     { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     {
@@ -480,6 +576,10 @@ window.DECK_DATA = {
     { id: "a-config", type: "config", title: "A2 · Configuration evidence",
       notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
     { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A3 · MBairline run trace",
-      notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." }
+      notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." },
+    { id: "a-trace-crm", type: "run-trace", agent: "crm", title: "A4 · Banking CRM run trace", subtitle: "Every step of the BANK_013 run on record",
+      notes: "Proof for the top-right run: Zap history at 23:05, the BANK_013 input at 23:05:10, the parsed draft at 23:05:21 and the approval request at 23:05:22. No run ID is shown, so the steps are matched by time and customer ID." },
+    { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A5 · Banking CRM: failure → fix → retest", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." }
   ]
 };
