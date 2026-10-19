@@ -414,7 +414,7 @@
     tl: { title: 'The person *signs off*', rows: (c) => [['Who signs off', c.who, true], ['What they check', c.what], ['When', c.when], ['If they reject it', c.ifFails]] },
     tr: { title: 'The person *judges*', rows: (c) => [['Who judges', c.who], [c.decisionLabel || 'Chooses between', null, true, (c.options || []).length ? `<span class="options">${c.options.map((o) => `<span>${t(o)}</span>`).join('')}</span>` : tbc('the actual options')], ['What they weigh', c.what], ['When', c.when]] },
     bl: { title: 'The *spot check*', rows: (c) => [['Who checks', c.who], ['How often', c.when, true], ['What they inspect', c.what], ['If it is wrong', c.ifFails]] },
-    br: { title: 'The person *leads* and decides', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
+    br: { title: 'The person *leads and decides*', rows: (c) => [['The agent prepares', c.prepares], ['The manager decides', c.decides, true], ['What they check', c.what], ['When', c.when]] }
   };
   R['agent-person'] = (s) => {
     const a = AG[s.agentId];
