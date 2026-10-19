@@ -553,7 +553,7 @@ window.DECK_DATA = {
         scope: "This approach serves selected customers or cases requiring individual attention. Reviewing every assessment and draft may be impractical for high-volume general enquiries, which would require different triage and escalation arrangements."
       },
       card: {
-        job: "Analyse passenger feedback for the customer service manager, recommend follow-up actions and a guiding report, and prepare personalised customer email drafts.",
+        job: "Analyse passenger feedback to recommend follow-up actions and prepare a personalised customer response email draft.",
         trigger: "A new or updated response to the MB Airline Feedback Form (Google Forms).",
         tools: "Google Forms → AI by Zapier → Gmail report → Filter by Zapier → AI by Zapier → Gmail Create Draft",
         never: { rule: "Automatically send a customer reply.", setting: "The customer-facing Gmail step is Create Draft, not Send Email." },
