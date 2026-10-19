@@ -472,22 +472,15 @@ window.DECK_DATA = {
           say: "The counting is fixed rules. 92 present, 3 on approved leave, 5 unplanned, 8 percent. There is one right answer, and you can check it against the punch and leave records."
         },
         {
-          who: "Zapier", short: "Zap fires", title: "The Zap emails the report to HR", time: "2:45:57 pm",
-          note: "One trigger, one action: New Spreadsheet Row, then Gmail Send Email. The “To” field is fixed to one HR address.",
+          who: "Zapier → HR’s inbox", short: "Report emailed", title: "The Zap emails the report to HR", time: "2:45:57 pm",
+          note: "Two steps: New Spreadsheet Row, then Gmail Send Email, fixed to one HR address. The counts arrive with the percentage in the subject.",
           shots: [
-            { src: "assets/evidence/leave/zap-run.png", caption: "The run in Zapier", alt: "Zapier: run ID 01baa5ba-616d-a355-1414-4652a7f798c4, successful at 02:45:57 pm; Google Sheets New Spreadsheet Row, then Gmail Send Email: sent 1 new message", focus: "52% 50%", zoom: 1.7,
-              pins: [{ x: 65, y: 36.7, n: 1, ring: false, text: "Run ID 01baa5ba…, successful" }, { x: 62, y: 52.8, n: 2, ring: false, text: "New Spreadsheet Row" }, { x: 62, y: 75.5, n: 3, ring: false, text: "Gmail: sent 1 message" }] }
+            { src: "assets/evidence/leave/zap-run.png", caption: "The run: Sheets → Gmail", alt: "Zapier: run ID 01baa5ba-616d-a355-1414-4652a7f798c4, successful at 02:45:57 pm; Google Sheets New Spreadsheet Row, then Gmail Send Email: sent 1 new message", focus: "52% 55%", zoom: 2.2,
+              pins: [{ x: 59, y: 36.7, n: 1, ring: false, text: "Run ID 01baa5ba…, successful" }, { x: 61, y: 75.5, n: 2, ring: false, text: "Gmail: sent 1 message" }] },
+            { src: "assets/evidence/leave/email-report.png", caption: "The report in HR’s inbox", alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%", focus: "28% 60%", zoom: 2.2,
+              pins: [{ x: 40, y: 34, n: 3, ring: false, text: "8.0% absent, in the subject" }, { x: 26, y: 74, n: 4, ring: false, text: "92 · 3 · 5 · 8.0%" }] }
           ],
-          say: "Two steps, no person in between. The row arrives, Gmail sends the report, and it only ever goes to HR."
-        },
-        {
-          who: "HR’s inbox", short: "Report arrives", title: "The manpower report lands in HR’s inbox",
-          note: "Headcount, present, on approved leave, unplanned absence and absenteeism, with the percentage in the subject line.",
-          shots: [
-            { src: "assets/evidence/leave/email-report.png", caption: "The daily report (sender redacted)", alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%", focus: "30% 60%", zoom: 1.7,
-              pins: [{ x: 58.5, y: 25.8, n: 1, ring: false, text: "8.0% absent, in the subject" }, { x: 26, y: 74, n: 2, ring: false, text: "92 · 3 · 5 · 8.0%" }] }
-          ],
-          say: "This is what HR reads before the day starts. No one compiled it. The headline number is right in the subject."
+          say: "Two steps, no person in between. The row arrives, Gmail sends the report to HR, and that is what HR reads before the day starts. The headline number is right in the subject."
         },
         {
           who: "HR executive", short: "Friday check", title: "A person spot-checks, outside the run", human: true,
