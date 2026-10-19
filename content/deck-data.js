@@ -534,6 +534,7 @@ window.DECK_DATA = {
       banner: { src: "assets/brand/mbairline-banner.svg", alt: "Illustration: an MBairline aircraft, a one-star feedback form with email Yes and mobile No, an AI report, a reply saved as a draft, and the manager making their own call", position: "center top" },
       name: "MBairline Priority Guest Relations Assistant",
       shortName: "MBairline feedback assistant",
+      qaName: "Airline Feedback Assistant",
       mapName: "Airline Priority Customer Feedback Assistant",
       cardName: "Airline Priority Customer Feedback Assistant",
       presenter: "Jin",

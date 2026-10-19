@@ -502,7 +502,7 @@
         return `<div class="lu-agent" data-q="${q}" style="--d:${k * 0.14}s">
           <span class="lu-bubble" aria-hidden="true">${k % 2 ? 'Move me?' : 'Me?'}</span>
           <div class="lu-face">${face(a)}</div>
-          <span class="lu-name">${esc(nameOf(a))}</span>
+          <span class="lu-name">${esc(a.qaName || nameOf(a))}</span>
           <span class="lu-q">${esc(QS[q].title)}</span>
         </div>`;
       }).join('')}</div>`
