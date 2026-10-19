@@ -624,10 +624,10 @@ window.DECK_DATA = {
         },
         {
           who: "Zapier", short: "Zap fires", title: "The Zap fires", time: "22:40:53",
-          note: "The new form response triggers the Zap. AI assesses the feedback, Gmail emails a report, a Filter checks the conditions, AI drafts a reply, and Gmail saves it as a draft.",
+          note: "The new feedback triggers the Zap. AI assesses the feedback, Gmail emails a report, a Filter checks the conditions, AI drafts a reply, and Gmail saves it as a draft.",
           shots: [
             { src: "assets/evidence/mbairline/zap-editor.jpg", caption: "The six steps in the Zap editor", alt: "Zapier editor showing six steps",
-              pins: [{ x: 97, y: 23.3, n: 1, ring: false, text: "AI assesses the feedback" }, { x: 97, y: 58.2, n: 2, ring: false, text: "Filter: follow-up AND email = Yes" }, { x: 97, y: 73.8, n: 3, ring: false, text: "AI drafts the reply" }, { x: 97, y: 89.5, n: 4, ring: false, text: "Create Draft, never Send" }] }
+              pins: [{ x: 97, y: 23.3, n: 1, ring: false, text: "AI assesses the feedback" }, { x: 97, y: 40.7, n: 2, ring: false, text: "Gmail emails report" }, { x: 97, y: 58.2, n: 3, ring: false, text: "Filter: follow-up AND email = Yes" }, { x: 97, y: 81.6, n: 4, ring: false, text: "AI drafts customer reply, never sends" }] }
           ],
           say: "No one presses a button. The form response starts the Zap: six steps, two of them AI."
         },
