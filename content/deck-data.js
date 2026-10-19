@@ -199,6 +199,15 @@ window.DECK_DATA = {
         result: "bl",
         caveat: "Hypothetical. Today every claim waits for the line manager’s sign-off."
       },
+      /* Jack's run, step by step (Singapore time). Appendix proof. */
+      trace: [
+        { time: "12:42:57", step: "Claim submitted", src: "assets/evidence/expense/zap-run-jack.png", focus: "84% 45%", zoom: 2.6, note: "Row timestamp; name Jack; client entertainment; S$214" },
+        { time: "12:45:01", step: "1 · New row picked up", src: "assets/evidence/expense/zap-run-jack.png", focus: "75% 22%", zoom: 2.4, note: "Google Sheets step ran at 12:45:01" },
+        { time: "12:45:01", step: "The sheet’s rule results", src: "assets/evidence/expense/zap-run-jack.png", focus: "84% 77%", zoom: 2.6, note: "Limit 150 · OVER by S$64.00 · on time (12 days) · receipt OK" },
+        { time: "12:45:02", step: "2 · Gmail: email sent", src: "assets/evidence/expense/zap-run-jack.png", focus: "52% 55%", zoom: 1.8, note: "Run ID 01ba7a48… · Successful · sent 1 new message" },
+        { time: "12:45", step: "Zap history: Successful", src: "assets/evidence/expense/zap-history.png", focus: "50% 40%", zoom: 1.6, note: "The latest run, 19 Oct 2026" },
+        { time: "Inbox", step: "The pre-check email", src: "assets/evidence/expense/email-jack-over.png", focus: "50% 15%", zoom: 1.5, note: "Submitted by Jack, 12:42:57 · FAIL: OVER by S$64.00" }
+      ],
       /* Failure → fix → retest. Appendix only. */
       lessons: [
         { title: "A future-dated claim passed", detail: "A medical claim dated 11 days ahead got Days to Claim −11. Since −11 is under 30, On time said OK and the claim passed. The rule only checked for late claims.", status: "Predicted before the run; captured in “Tricky case test 2”", evidence: { src: "assets/evidence/expense/tricky-email-before.png", caption: "Before: a future date passes", alt: "Pre-check email for Tricky case test 2: medical claim dated 10/30/2026, submitted within 30 days (−11 days) OK, result PASS", pins: [{ x: 86, y: 63.8, n: 1, ring: false, text: "−11 days: OK" }] } },
@@ -673,7 +682,9 @@ window.DECK_DATA = {
       notes: "Proof for the top-right run: Zap history at 23:05, the BANK_013 input at 23:05:10, the parsed draft at 23:05:21 and the approval request at 23:05:22. No run ID is shown, so the steps are matched by time and customer ID." },
     { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A6 · Banking CRM testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." },
-    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A7 · Expense claims testing", subtitle: "Failure, fix and retest",
+    { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A7 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
+      notes: "Proof for the top-left run: Jack submits at 12:42:57, the Zap picks up the row at 12:45:01 and Gmail sends the pre-check at 12:45:02, under one run ID (01ba7a48…). Click any screenshot to enlarge it." },
+    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A8 · Expense claims testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." }
   ]
 };
