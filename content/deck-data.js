@@ -454,22 +454,13 @@ window.DECK_DATA = {
       /* One run, start to finish: the 19 Oct report. */
       journey: [
         {
-          who: "The sheet", short: "Day’s row", title: "A new day’s row lands in the sheet", time: "14:45:57",
-          note: "A new date row for 19 October lands in the Daily Report tab. The sheet already knows the headcount: 100.",
+          who: "The sheet", short: "Day’s row, counted", title: "The day’s row arrives, already counted", time: "14:45:57",
+          note: "Formulas match punch data against approved leave. Every number can be checked against the records.",
           shots: [
-            { src: "assets/evidence/leave/zap-run.png", caption: "The 19 Oct row, as the Zap read it", alt: "Step 1 data out: row 3, date 2026-10-19, headcount 100", focus: "85% 45%", zoom: 2.2,
-              pins: [{ x: 95, y: 31.5, n: 1, ring: false, text: "Step ran 14:45:57" }, { x: 92, y: 56.7, n: 2, ring: false, text: "Date: 19 Oct" }, { x: 92, y: 61.2, n: 3, ring: false, text: "Headcount: 100" }] }
+            { src: "assets/evidence/leave/zap-run.png", caption: "The 19 Oct row, as the Zap read it", alt: "Step 1 data out: row 3, date 2026-10-19, headcount 100, present 92, on leave 3, unplanned absence 5, absenteeism 8.0%", focus: "85% 64%", zoom: 2,
+              pins: [{ x: 92, y: 56.7, n: 1, ring: false, text: "19 Oct, headcount 100" }, { x: 92, y: 70.3, n: 2, ring: false, text: "92 present, 3 on leave, 5 unplanned" }, { x: 92, y: 79.5, n: 3, ring: false, text: "8.0% absent" }] }
           ],
-          say: "Adithi. Every morning someone in HR builds this report by hand. Here, a new row for the day lands in the sheet, and the Zap picks it up."
-        },
-        {
-          who: "The sheet’s rules", short: "Counts", title: "Formulas count who is in, on leave or absent",
-          note: "Formulas match punch data against approved leave: 92 present, 3 on approved leave, 5 unplanned absences, 8.0% absenteeism. Every number can be checked against the records.",
-          shots: [
-            { src: "assets/evidence/leave/zap-run.png", caption: "The counts on the 19 Oct row", alt: "Step 1 data out: present 92, on leave 3, unplanned absence 5, absenteeism 8.0%", focus: "85% 70%", zoom: 2.2,
-              pins: [{ x: 92, y: 65.8, n: 1, ring: false, text: "92 present" }, { x: 92, y: 70.3, n: 2, ring: false, text: "3 on leave" }, { x: 92, y: 74.9, n: 3, ring: false, text: "5 unplanned" }, { x: 92, y: 79.5, n: 4, ring: false, text: "8.0% absent" }] }
-          ],
-          say: "The counting is fixed rules. 92 present, 3 on approved leave, 5 unplanned, 8 percent. There is one right answer, and you can check it against the punch and leave records."
+          say: "Adithi. Every morning someone in HR builds this report by hand. Here, the day’s row lands in the sheet already counted: 92 present, 3 on approved leave, 5 unplanned, 8 percent. Fixed rules, one right answer, checkable against the punch and leave records."
         },
         {
           who: "Zapier → HR’s inbox", short: "Report emailed", title: "The Zap emails the report to HR", time: "2:45:57 pm",
