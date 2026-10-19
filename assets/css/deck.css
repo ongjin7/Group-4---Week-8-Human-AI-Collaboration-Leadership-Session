@@ -854,3 +854,4 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 
 /* Banking CRM banner: an illustration, shown at full strength */
 .theme-crm .banner { opacity: 1; filter: none; }
+.theme-expense .banner { opacity: 1; filter: none; }

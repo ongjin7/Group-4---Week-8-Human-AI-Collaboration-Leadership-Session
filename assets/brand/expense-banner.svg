@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" width="1600" height="260">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3F7FE"/>
+      <stop offset="1" stop-color="#DCE7FA"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#5B83D1" opacity=".2"/>
+    </pattern>
+    <g id="env">
+      <rect x="0" y="0" width="58" height="40" rx="7" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+      <path d="M3 5 L29 25 L55 5" fill="none" stroke="#1D1B18" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g id="tick">
+      <circle r="9" fill="#6AAA5C"/>
+      <path d="M-4 0 l3 3 l5 -6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="260" fill="url(#sky)"/>
+  <rect width="1600" height="260" fill="url(#dots)"/>
+  <circle cx="60" cy="30" r="96" fill="#BFD2F4" opacity=".35"/>
+  <circle cx="720" cy="235" r="120" fill="#C9D9F6" opacity=".3"/>
+  <circle cx="1300" cy="0" r="120" fill="#E3ECFB" opacity=".9"/>
+  <circle cx="1565" cy="210" r="80" fill="#BFD2F4" opacity=".3"/>
+
+  <g transform="translate(0 14)">
+  <!-- the path a claim takes -->
+  <path d="M410 96 C 520 20, 610 160, 760 96 S 960 40, 1100 92" fill="none" stroke="#5B83D1" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".75"/>
+
+  <!-- what consultants pay for: a flight and a client coffee -->
+  <g transform="translate(92 30) rotate(-14)">
+    <rect x="0" y="0" width="92" height="46" rx="8" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <path d="M62 0 v46" stroke="#1D1B18" stroke-width="2.5" stroke-dasharray="4 4"/>
+    <path d="M14 26 l22 -8 l6 3 l-10 6 l10 4 l-4 3 l-12 -4 l-8 3 z" fill="#2C4F8F"/>
+    <text x="77" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#2C4F8F">SIN</text>
+  </g>
+  <g transform="translate(126 108)">
+    <path d="M0 0 h40 l-5 40 a6 6 0 0 1 -6 5 h-18 a6 6 0 0 1 -6 -5 z" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <path d="M40 10 q14 0 12 12 q-2 10 -14 9" fill="none" stroke="#1D1B18" stroke-width="3"/>
+    <path d="M12 -8 q4 -6 0 -12 M24 -8 q4 -6 0 -12" fill="none" stroke="#5B83D1" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- the receipt -->
+  <g transform="translate(232 18) rotate(-6)">
+    <path d="M0 0 h120 v176 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 l-12 -8 l-12 8 z" fill="#fff" stroke="#1D1B18" stroke-width="3" stroke-linejoin="round"/>
+    <text x="60" y="26" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#2C4F8F">RECEIPT</text>
+    <path d="M16 40 h88" stroke="#C9D6EE" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="16" y="62" font-family="Arial, sans-serif" font-size="11.5" fill="#1D1B18">Dinner</text>
+    <text x="104" y="62" text-anchor="end" font-family="Arial, sans-serif" font-size="11.5" fill="#1D1B18">S$214</text>
+    <path d="M16 80 h60 M16 98 h44" stroke="#C9D6EE" stroke-width="5" stroke-linecap="round"/>
+    <path d="M16 114 h88" stroke="#1D1B18" stroke-width="2"/>
+    <text x="16" y="134" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1D1B18">Total</text>
+    <text x="104" y="134" text-anchor="end" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#2C4F8F">S$214</text>
+  </g>
+
+  <!-- 1 · the rules check it -->
+  <g transform="translate(470 0)">
+    <rect x="0" y="6" width="132" height="26" rx="13" fill="#fff" stroke="#C9D6EE" stroke-width="2"/>
+    <text x="66" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#2C4F8F">1 · Rules check</text>
+  </g>
+  <g transform="translate(470 46)">
+    <rect x="0" y="0" width="134" height="92" rx="12" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <use href="#tick" x="20" y="22"/>
+    <text x="36" y="26" font-family="Arial, sans-serif" font-size="12" fill="#1D1B18">Limit</text>
+    <use href="#tick" x="20" y="46"/>
+    <text x="36" y="50" font-family="Arial, sans-serif" font-size="12" fill="#1D1B18">30 days</text>
+    <use href="#tick" x="20" y="70"/>
+    <text x="36" y="74" font-family="Arial, sans-serif" font-size="12" fill="#1D1B18">Receipt</text>
+    <rect x="96" y="56" width="30" height="26" rx="6" fill="#2C4F8F"/>
+    <text x="111" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#fff">PASS</text>
+  </g>
+
+  <!-- 2 · pre-check emailed -->
+  <g transform="translate(690 64) rotate(-8)"><use href="#env"/></g>
+  <path d="M664 74 h-18 M668 88 h-28 M672 102 h-16" stroke="#5B83D1" stroke-width="3.5" stroke-linecap="round"/>
+  <g transform="translate(640 0)">
+    <rect x="0" y="6" width="140" height="26" rx="13" fill="#fff" stroke="#C9D6EE" stroke-width="2"/>
+    <text x="70" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#2C4F8F">2 · Pre-check sent</text>
+  </g>
+
+  <!-- 3 · the line manager signs off -->
+  <rect x="790" y="6" width="190" height="26" rx="13" fill="#1D1B18"/>
+  <text x="885" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#fff">3 · Manager signs off</text>
+  <circle cx="885" cy="100" r="56" fill="#fff" stroke="#1D1B18" stroke-width="3.5"/>
+  <circle cx="885" cy="100" r="47" fill="#E3ECFB"/>
+  <path d="M843 146 Q843 122 885 120 Q927 122 927 146 Z" fill="#2C4F8F"/>
+  <path d="M875 121 L885 140 L895 121 Z" fill="#fff"/>
+  <path d="M882 124 h6 l2 14 l-5 5 l-5 -5 z" fill="#C9A25A"/>
+  <circle cx="885" cy="92" r="24" fill="#F6D3B5"/>
+  <path d="M861 92 Q858 62 886 63 Q912 64 909 92 Q906 76 893 72 Q880 80 864 80 Z" fill="#3A2A22"/>
+  <circle cx="876" cy="95" r="3" fill="#1D1B18"/><circle cx="894" cy="95" r="3" fill="#1D1B18"/>
+  <circle cx="869" cy="103" r="4" fill="#EE9C8E" opacity=".55"/><circle cx="901" cy="103" r="4" fill="#EE9C8E" opacity=".55"/>
+  <path d="M878 105 Q885 111 892 105" fill="none" stroke="#1D1B18" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- the sign-off: a pen over a signature line -->
+  <g transform="translate(948 70)">
+    <rect x="0" y="0" width="128" height="62" rx="10" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <text x="12" y="20" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#2C4F8F">MANAGER SIGN-OFF</text>
+    <path d="M14 44 q8 -14 14 -2 q6 12 12 -4 q6 -14 12 0 q4 8 10 -2" fill="none" stroke="#2C4F8F" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M12 52 h88" stroke="#C9D6EE" stroke-width="2"/>
+    <g transform="translate(98 22) rotate(35)">
+      <rect x="0" y="0" width="9" height="40" rx="3" fill="#C9A25A" stroke="#1D1B18" stroke-width="2"/>
+      <path d="M0 40 l4.5 9 l4.5 -9 z" fill="#1D1B18"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text x="1150" y="84" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="46" fill="#1D1B18">Expense <tspan font-style="italic" fill="#2C4F8F">Claims</tspan></text>
+  <text x="1153" y="114" font-family="Arial, sans-serif" font-weight="700" font-size="15" letter-spacing="4.5" fill="#2C4F8F">POLICY PRE-CHECK</text>
+  </g>
+</svg>

@@ -37,7 +37,7 @@ window.DECK_DATA = {
 
   members: [
     { name: "Jin", agent: "mbairline" },
-    { name: "Revan", agent: "TBC" },
+    { name: "Revan", agent: "expense" },
     { name: "Minh", agent: "crm" },
     { name: "Adithi", agent: "TBC" }
   ],
@@ -71,62 +71,149 @@ window.DECK_DATA = {
     {
       id: "expense",
       quadrant: "tl",
-      name: "Expense claims agent",
-      presenter: "TBC: Revan, Minh or Adithi",
-      domain: "Finance",
       motif: "receipt",
-      oneLiner: "Checks expense claims for out-of-pocket business spending.",
+      catchphrase: "I check. You sign!",
+      theme: "expense",
+      banner: { src: "assets/brand/expense-banner.svg", alt: "Illustration: receipts from a trip and a client meal, a policy checklist with three ticks, a pre-check email to the line manager, and the manager signing off", position: "center top" },
+      name: "Expense Claim Pre-Check",
+      shortName: "Expense claims agent",
+      mapName: "Expense Claim Pre-Check",
+      presenter: "Revan",
+      domain: "Finance",
+      oneLiner: "Checks each claim against the expense policy; the line manager signs off.",
       problem: {
-        statement: "TBC: The business problem in one plain sentence (what goes wrong with expense claims today?)",
-        affected: "TBC: Who is affected (claimant, approver, finance team?)",
-        difficulty: "TBC: What makes this hard today",
-        benefit: "TBC: Expected benefit, described, not quantified unless you measured it"
+        statement: "Consultants often pay out of pocket for expenses during overseas trips or client meetups for business development. The claims officer needs an agent to help verify these claims before signing off.",
+        affected: "Consultants waiting to be reimbursed, and the line manager who must sign off every claim.",
+        difficulty: "Every claim has to be checked against the category limit, the 30-day deadline and the receipt rule before anyone signs.",
+        benefit: "Each claim arrives already checked against the policy, with PASS or FAIL and the reasons, so the manager can spend their time on the receipt, the purpose and any exceptions.",
+        scope: "A demo with made-up names and amounts. The rules cover four categories (Meal S$30, Taxi S$50, Client entertainment S$150, Medical S$300). The agent pre-checks; it never approves."
       },
       card: {
-        job: "TBC: The agent’s job in one line",
-        trigger: "TBC: App + event that starts the Zap",
-        tools: "TBC: Apps and actions, in order",
-        never: { rule: "TBC: What the agent must never do", setting: "TBC: The Zap setting that enforces it" },
-        checkpoint: "TBC: The exact step where the person signs off what the agent checked"
+        job: "Check each staff expense claim against the company policy (category limit, 30-day deadline, receipt rule) and email the result to the line manager.",
+        trigger: "A new claim on the Staff Expense Claim Google Form, which adds a row to the response sheet.",
+        tools: "Google Forms → Google Sheets formulas → Zapier New Spreadsheet Row → Gmail Send Email",
+        never: { rule: "Approve or reject a claim, or email an employee.", setting: "The Zap’s only action is Gmail Send Email, with the “To” field fixed to the manager’s address." },
+        checkpoint: "The line manager reads each pre-check email within 2 working days, checks the receipt and the business purpose, then records the decision in the Manager sign-off column."
       },
+      /* The rules are encoded in the sheet (fixed, same claim → same result); the Zap carries the result to the manager. */
       workflow: [
-        { type: "trigger", label: "Claim submitted", detail: "TBC: trigger app + event" },
-        { type: "ai", label: "AI checks the claim", detail: "TBC: what it checks against the evidence" },
-        { type: "rule", label: "Fixed rule", detail: "TBC: any filter or path condition" },
-        { type: "action", label: "Result recorded", detail: "TBC: where the check result goes" },
-        { type: "human", label: "Person signs off", detail: "TBC: who approves, and in which app" }
+        { type: "trigger", label: "Claim submitted", detail: "Google Forms: a new row in the response sheet" },
+        { type: "rule", label: "Policy rules applied", detail: "Sheet formulas: category limit, 30-day deadline, receipt rule → PASS or FAIL" },
+        { type: "action", label: "Zap picks it up", detail: "Zapier: New Spreadsheet Row" },
+        { type: "action", label: "Pre-check emailed", detail: "Gmail Send Email, “To” fixed to the line manager" },
+        { type: "human", label: "Manager signs off", detail: "Checks receipt and purpose; records the decision in the sign-off column" }
       ],
       config: [
-        { src: null, caption: "Zap editor: full workflow", missing: "Redacted screenshot of the Zap editor" },
-        { src: null, caption: "Sign-off step", missing: "Screenshot of the step where approval happens" }
+        { src: "assets/evidence/expense/zap-run-jack.png", caption: "The Zap: New Spreadsheet Row → Gmail Send Email", alt: "Zapier editor: step 1 Google Sheets New Spreadsheet Row, step 2 Gmail Send Email, run ID shown, run successful at 12:45:02 pm" },
+        { src: "assets/evidence/expense/fix-formula.webp", caption: "The rules live in the sheet: the On time formula", alt: "Google Sheets formula for On time: FUTURE DATE if days to claim is below 0, OK if 30 days or fewer, otherwise LATE", focus: "25% 50%", zoom: 2 }
       ],
       run: {
-        matchKey: { label: "Zap run ID / timestamp", value: "TBC: the run ID or exact timestamp shared by both screenshots" },
-        input: { src: null, caption: "Input: the claim submitted", missing: "Anonymised claim + receipt used in this run" },
-        output: { src: null, caption: "Output: the agent’s check", missing: "What the agent produced for that claim" },
-        record: { src: null, caption: "Zap history: same run", missing: "Zap history detail showing the same run ID/timestamp" }
+        matchKey: { label: "Run ID", value: "01ba7a48… · Successful, 19 Oct, 12:45:02 pm · it picked up Jack’s row (12:42:57), the same time the email shows" },
+        input: { src: "assets/evidence/expense/zap-run-jack.png", caption: "Input: Jack’s claim row" },
+        output: { src: "assets/evidence/expense/email-jack-over.png", caption: "Output: the pre-check email" },
+        record: { src: "assets/evidence/expense/zap-history.png", caption: "Zap history: the run" },
+        /* Three linked views: the run in history, the same run opened (run ID + Jack's row), and the email with the same submission time. */
+        recordShots: [
+          { src: "assets/evidence/expense/zap-history.png", caption: "1 · The run: successful, 12:45 pm",
+            alt: "Zap runs panel: 7 runs, the latest Successful on Oct 19, 2026 at 12:45 pm", focus: "50% 40%", zoom: 1.6,
+            pins: [{ x: 3, y: 40.7, n: 1, ring: false, text: "Successful, 19 Oct 2026, 12:45 pm" }] },
+          { src: "assets/evidence/expense/zap-run-jack.png", caption: "2 · Opened: run ID and Jack’s row",
+            alt: "Zap run 01ba7a48-c306-a42d-560c-0774d01165c4, successful at 12:45:02 pm; step 1 data out: timestamp 10/19/2026 12:42:57, name Jack, amount 214, limit 150, OVER by S$64.00", focus: "62% 42%", zoom: 1.8,
+            pins: [{ x: 52.9, y: 34.7, n: 2, ring: false, text: "Run ID 01ba7a48…, successful 12:45:02 pm" }, { x: 84, y: 40.8, n: 3, ring: false, text: "Row timestamp 12:42:57, name Jack" }] },
+          { src: "assets/evidence/expense/email-jack-over.png", caption: "3 · Its email: submitted 12:42:57",
+            alt: "Pre-check email: Submitted by Jack on 10/19/2026 12:42:57; FAIL: OVER by S$64.00", focus: "50% 15%", zoom: 1.6,
+            pins: [{ x: 75, y: 11.3, n: 4, ring: false, text: "Same submission time as the row" }] }
+        ]
       },
+      /* One run, start to finish: Jack's S$214 client-entertainment claim. */
+      journey: [
+        {
+          who: "Consultant", short: "Claim sent", title: "Jack submits a claim", time: "12:42:57",
+          note: "Jack claims S$214 for client entertainment on a business proposal, with a receipt. The form adds a new row to the response sheet.",
+          shots: [
+            { src: "assets/evidence/expense/zap-run-jack.png", caption: "Jack’s claim, as the Zap read it", alt: "Step 1 data out: timestamp 10/19/2026 12:42:57, name Jack, date of expense 10/7/2026, category Client entertainment, purpose Business proposal, amount 214, receipt Yes", focus: "84% 52%", zoom: 2.2,
+              pins: [{ x: 88, y: 44.8, n: 1, ring: false, text: "Jack" }, { x: 88, y: 52.9, n: 2, ring: false, text: "Client entertainment" }, { x: 88, y: 61, n: 3, ring: false, text: "S$214, receipt: Yes" }] }
+          ],
+          say: "Revan. Meet Jack, a consultant. He paid S$214 to entertain a client for a business proposal, and he has the receipt. He submits the claim form, and a new row lands in the sheet."
+        },
+        {
+          who: "The sheet’s rules", short: "Rules check", title: "Three fixed rules check it",
+          note: "Formulas in the sheet apply the policy the moment the row lands: the category limit, the 30-day deadline and the receipt rule. Client entertainment is capped at S$150, so Jack is S$64 over.",
+          shots: [
+            { src: "assets/evidence/expense/zap-run-jack.png", caption: "The checks on Jack’s row", alt: "Step 1 data out: limit 150, within limit OVER by S$64.00, days to claim 12, on time OK, receipt checked OK", focus: "84% 78%", zoom: 2.2,
+              pins: [{ x: 88, y: 69.1, n: 1, ring: false, text: "Limit S$150" }, { x: 88, y: 73.1, n: 2, ring: false, text: "OVER by S$64.00" }, { x: 88, y: 81.2, n: 3, ring: false, text: "On time (12 days), receipt OK" }] }
+          ],
+          say: "No AI guessing here: the rules are written into the sheet. Same claim, same answer, every time. Client entertainment is capped at S$150, so Jack is S$64 over. He was on time, and the receipt rule is fine."
+        },
+        {
+          who: "Zapier", short: "Zap fires", title: "The Zap picks it up and emails the manager", time: "12:45:02",
+          note: "One trigger, one action: New Spreadsheet Row, then Gmail Send Email. The “To” field is fixed to the manager, so nothing reaches the employee.",
+          shots: [
+            { src: "assets/evidence/expense/zap-run-jack.png", caption: "Jack’s run in Zapier", alt: "Zapier: run ID 01ba7a48-c306-a42d-560c-0774d01165c4, successful at 12:45:02 pm; Google Sheets New Spreadsheet Row, then Gmail Send Email: sent 1 new message", focus: "52% 55%", zoom: 1.8,
+              pins: [{ x: 64.5, y: 34.7, n: 1, ring: false, text: "Run ID 01ba7a48…" }, { x: 41.5, y: 53.2, n: 2, ring: false, side: "left", text: "New Spreadsheet Row" }, { x: 41.5, y: 73.2, n: 3, ring: false, side: "left", text: "Gmail: sent 1 message" }] }
+          ],
+          say: "The Zap is deliberately small: a new row starts it, and Gmail sends one email, always to the manager. It cannot approve anything and cannot email Jack."
+        },
+        {
+          who: "Manager’s inbox", short: "Pre-check arrives", title: "The pre-check lands in the manager’s inbox",
+          note: "The email shows the claim, each check and the result. The same rules gave Mei a PASS and Arjun a late FAIL.",
+          shots: [
+            { src: "assets/evidence/expense/email-jack-over.png", caption: "Jack: FAIL, over the limit", alt: "Pre-check email for Jack: FAIL: OVER by S$64.00; within category limit S$150: OVER by S$64.00; submitted within 30 days: OK; receipt: OK; your sign-off",
+              pins: [{ x: 88, y: 21.8, n: 1, ring: false, text: "FAIL: OVER by S$64.00" }, { x: 88, y: 75.4, n: 2, ring: false, text: "Your sign-off: check receipt and purpose" }] },
+            { src: "assets/evidence/expense/email-mei-pass.png", caption: "Another run: Mei, PASS", alt: "Pre-check email for Mei: S$23 meal, PASS",
+              pins: [{ x: 88, y: 21, n: 3, ring: false, text: "Mei’s S$23 meal: PASS" }] },
+            { src: "assets/evidence/expense/email-arjun-late.png", caption: "Another run: Arjun, LATE", alt: "Pre-check email for Arjun: S$45 taxi, FAIL: LATE (67 days)",
+              pins: [{ x: 88, y: 21.1, n: 4, ring: false, text: "Arjun’s taxi, 67 days later: LATE" }] }
+          ],
+          say: "The manager gets this. FAIL, over by S$64, with every check spelled out. The same rules passed Mei’s S$23 meal and flagged Arjun’s taxi as 67 days late. But look at the bottom: your sign-off. The agent stops here."
+        },
+        {
+          who: "Line manager", short: "Manager signs off", title: "The line manager signs off what the agent checked", human: true,
+          note: "A FAIL is a flag, not a rejection. The manager checks what formulas can’t, decides whether an exception is justified, and records the decision.",
+          panelLabel: "The person leads",
+          panelTitle: "The line manager",
+          options: [
+            "Checks the receipt matches the amount and the date",
+            "Checks the purpose is a genuine business expense",
+            "Decides whether a FAIL deserves an exception, then signs off in the sheet within 2 working days"
+          ],
+          say: "This is top-left. The agent does the rule-checking, but the person leads. The manager checks what no formula can: is the receipt real, was this dinner really for business, does Jack’s S$64 deserve an exception? Then they sign in the Manager sign-off column."
+        }
+      ],
       check: {
-        who: "TBC: Role of the approver",
-        what: "TBC: What they confirm in the agent’s check",
-        when: "TBC: At which step, before what happens",
-        ifFails: "TBC: What happens when they reject it"
+        who: "The line manager.",
+        what: "That the receipt matches the amount and date, that the purpose is a genuine business expense, and whether a FAIL deserves an exception.",
+        when: "Within 2 working days of each pre-check email.",
+        ifFails: "A FAIL is only a flag: the manager decides, and records the decision in the Manager sign-off column. The agent never approves or rejects."
       },
       placement: {
-        q1: { answer: "yes", why: "TBC: Why a claim has one correct outcome under policy" },
-        q2: { answer: "yes", why: "TBC: What the person knows that the agent cannot. The group site says: “only I know the rules”." },
-        concern: "A person approving the agent’s check does not by itself show the work must be done together. Show what the person adds that the agent cannot, such as unwritten rules or exception decisions. If the agent can apply every rule and the person only samples results, it fits “AI alone, with checks”."
+        q1: { answer: "yes", why: "Every check is a fixed policy rule: the same claim always gets the same result. Even the tricky case was a missing rule, not a judgement call." },
+        q2: { answer: "yes", why: "The agent can’t tell whether a receipt is real or a dinner was really for business, and policy needs a named manager to approve. The manager starts from the checked result and adds that judgement." },
+        concern: "If passing claims under S$20 were approved automatically with a monthly audit, it would move to “AI alone, with checks”. If the agent had to judge whether an expense was appropriate where no rule exists, the work would lose its right answer and move top-right."
       },
       move: {
-        change: "For routine claims with complete evidence and fully specified rules, the agent processes claims independently; finance performs weekly spot checks.",
+        change: "Claims that pass and are under S$20 are approved automatically; finance audits them monthly.",
         question: "q2",
         from: "yes",
         to: "no",
         result: "bl",
-        caveat: "TBC: no expense-claims run evidence yet; confirm the current agent needs the person’s sign-off."
+        caveat: "Hypothetical. Today every claim waits for the line manager’s sign-off."
       },
+      /* Failure → fix → retest. Appendix only. */
+      lessons: [
+        { title: "A future-dated claim passed", detail: "A medical claim dated 11 days ahead got Days to Claim −11. Since −11 is under 30, On time said OK and the claim passed. The rule only checked for late claims.", status: "Predicted before the run; captured in “Tricky case test 2”", evidence: { src: "assets/evidence/expense/tricky-email-before.png", caption: "Before: a future date passes", alt: "Pre-check email for Tricky case test 2: medical claim dated 10/30/2026, submitted within 30 days (−11 days) OK, result PASS", pins: [{ x: 86, y: 63.8, n: 1, ring: false, text: "−11 days: OK" }] } },
+        { title: "Fix: a future-date check", detail: "The On time formula now returns FUTURE DATE when Days to Claim is below 0.", status: "Formula change in the sheet (column K)", evidence: null },
+        { title: "Retested: FAIL: FUTURE DATE", detail: "The same claim, resubmitted as “Trick case solution”, now fails.", status: "Rerun email on record", evidence: { src: "assets/evidence/expense/fix-email-after.png", caption: "After: the same claim fails", alt: "Pre-check email for Trick case solution: submitted within 30 days (−11 days) FUTURE DATE, result FAIL: FUTURE DATE", pins: [{ x: 92, y: 63, n: 2, ring: false, text: "FUTURE DATE" }] } },
+        { title: "Successful runs, wrong emails", detail: "An empty column shifted every check one column to the right, so a 67-day-late taxi claim said “OK”. Deleting the column fixed it; Arjun’s later run of the same claim shows LATE.", status: "Error emails on record", evidence: null },
+        { title: "A run can succeed and still be wrong", detail: "Zap history said Successful every time. Only comparing each email with its sheet row caught the error.", status: "Lesson from testing", evidence: null }
+      ],
       notes: {
-        person: "The top-left signature: the person SIGNS OFF what the agent has checked. Show the exact step. Name who, what they check, when, and what happens if they reject. Then: right answer? Yes. Must work together? Yes, and say what the person knows that the agent cannot."
+        intro: "Revan. Open with the consultant: they pay out of pocket on trips and client meetups, and the claims officer has to verify each claim before signing off. The agent pre-checks every claim against the policy; the manager still signs (expected benefit, not measured). Names and amounts are made up.",
+        card: "Tap the card five times: the job (check each claim against three policy rules), the trigger (a new claim form), the tools (Forms, sheet formulas, Zapier, Gmail), what it must never do (approve, reject, or email an employee: its only action is an email to the manager), and where a person checks (the line manager, within 2 working days).",
+        build: "Press → for each step. The rules are fixed formulas in the sheet: same claim, same answer. Zapier only carries the result to the manager. Last step: the manager signs off. The agent checks; the person leads.",
+        run: "One real run: Jack’s S$214 client-entertainment claim, 19 October.",
+        record: "The proof, in three links. One: Zap history shows a successful run at 12:45 pm. Two: opened, it has a run ID and picked up Jack’s row, submitted 12:42:57. Three: the email says submitted by Jack at 12:42:57, the same time. Testing, including the future-date bug and fix, is in the appendix.",
+        person: "Who: the line manager. What: the receipt matches the amount and date, the purpose is genuine, and whether a FAIL deserves an exception. When: within 2 working days. If it fails: a FAIL is only a flag; the manager decides and signs in the sheet. Placement: right answer? Yes, fixed rules. Together? Yes: the agent can’t judge receipts or business purpose, and policy needs a named approver."
       }
     },
 
@@ -550,7 +637,7 @@ window.DECK_DATA = {
           cue: "Hand over: “Let’s start top-left, where a person leads with AI inside.”" }
       ]
     },
-    { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
     { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
@@ -584,6 +671,8 @@ window.DECK_DATA = {
     { id: "a-trace-crm", type: "run-trace", agent: "crm", title: "A5 · Banking CRM run trace", subtitle: "Every step of the BANK_013 run on record",
       notes: "Proof for the top-right run: Zap history at 23:05, the BANK_013 input at 23:05:10, the parsed draft at 23:05:21 and the approval request at 23:05:22. No run ID is shown, so the steps are matched by time and customer ID." },
     { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A6 · Banking CRM testing", subtitle: "Failure, fix and retest",
-      notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." }
+      notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." },
+    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A7 · Expense claims testing", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." }
   ]
 };

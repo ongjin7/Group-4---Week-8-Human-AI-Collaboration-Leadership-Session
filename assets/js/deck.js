@@ -561,7 +561,7 @@
       <div class="lesson-layout"><div class="lessons">${lessons.map((l, i) => `
         <div class="lesson"><span class="n">${i + 1}</span><div><p class="t">${t(l.title)}</p><p class="d">${t(l.detail)}</p><p class="s">Status: ${t(l.status)}</p></div></div>`).join('')}</div>
         ${shots.length > 1
-          ? `<div class="jshots stack">${shots.map((sh) => ev(sh, sh.caption)).join('')}</div>`
+          ? `<div class="jshots">${shots.map((sh) => ev(sh, sh.caption)).join('')}</div>`
           : `<div style="display:flex;flex-direction:column;min-height:0">${ev(shots[0])}</div>`}</div>`
     };
   };
