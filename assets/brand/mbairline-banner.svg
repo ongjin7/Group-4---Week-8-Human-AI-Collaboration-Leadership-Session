@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" width="1600" height="260">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FDF4F2"/>
+      <stop offset="1" stop-color="#F6DCDA"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#D47474" opacity=".2"/>
+    </pattern>
+    <g id="env">
+      <rect x="0" y="0" width="58" height="40" rx="7" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+      <path d="M3 5 L29 25 L55 5" fill="none" stroke="#1D1B18" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <path id="star" d="M0 -8 L2.4 -2.5 L8 -2.5 L3.5 1 L5 7 L0 3.6 L-5 7 L-3.5 1 L-8 -2.5 L-2.4 -2.5 Z"/>
+    <path id="spark" d="M0 -12 C2 -3 3 -2 12 0 C3 2 2 3 0 12 C-2 3 -3 2 -12 0 C-3 -2 -2 -3 0 -12Z"/>
+  </defs>
+
+  <rect width="1600" height="260" fill="url(#sky)"/>
+  <rect width="1600" height="260" fill="url(#dots)"/>
+  <circle cx="70" cy="30" r="96" fill="#F1C4C4" opacity=".4"/>
+  <circle cx="720" cy="235" r="120" fill="#F3CFCF" opacity=".35"/>
+  <circle cx="1300" cy="0" r="120" fill="#F8E0E0" opacity=".9"/>
+  <circle cx="1565" cy="210" r="80" fill="#F1C4C4" opacity=".35"/>
+
+  <g transform="translate(0 14)">
+  <path d="M400 96 C 520 20, 610 160, 760 96 S 960 40, 1100 92" fill="none" stroke="#D47474" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".75"/>
+
+  <!-- the aircraft and a cloud -->
+  <g transform="translate(60 26)">
+    <ellipse cx="60" cy="118" rx="62" ry="16" fill="#fff" opacity=".9"/>
+    <ellipse cx="34" cy="108" rx="26" ry="16" fill="#fff" opacity=".9"/>
+    <g transform="rotate(-12 70 50)">
+      <path d="M8 52 Q8 40 24 40 H118 Q140 40 146 50 Q140 60 118 60 H24 Q8 60 8 52 Z" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+      <path d="M62 56 L40 92 H56 L88 58 Z" fill="#142544"/>
+      <path d="M62 44 L48 18 H60 L84 44 Z" fill="#142544"/>
+      <path d="M14 46 L4 26 H16 L30 42 Z" fill="#C9A25A"/>
+      <g fill="#8F3434"><circle cx="78" cy="50" r="3"/><circle cx="90" cy="50" r="3"/><circle cx="102" cy="50" r="3"/><circle cx="114" cy="50" r="3"/></g>
+      <path d="M128 46 Q136 46 140 50" fill="none" stroke="#1D1B18" stroke-width="2.5"/>
+    </g>
+  </g>
+
+  <!-- the feedback form: one star -->
+  <g transform="translate(252 22) rotate(-6)">
+    <rect x="0" y="0" width="120" height="160" rx="12" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <rect x="0" y="0" width="120" height="28" rx="12" fill="#8F3434"/>
+    <rect x="0" y="16" width="120" height="12" fill="#8F3434"/>
+    <text x="60" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#fff">FEEDBACK</text>
+    <g transform="translate(22 50)">
+      <use href="#star" x="0" fill="#C9A25A"/>
+      <use href="#star" x="19" fill="#EADBD8"/><use href="#star" x="38" fill="#EADBD8"/><use href="#star" x="57" fill="#EADBD8"/><use href="#star" x="76" fill="#EADBD8"/>
+    </g>
+    <path d="M16 76 h88 M16 90 h70 M16 104 h80" stroke="#EADBD8" stroke-width="5" stroke-linecap="round"/>
+    <text x="16" y="132" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#1D1B18">Email</text>
+    <rect x="58" y="121" width="30" height="16" rx="8" fill="#6AAA5C"/><text x="73" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#fff">Yes</text>
+    <text x="16" y="152" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#1D1B18">Mobile</text>
+    <rect x="58" y="141" width="30" height="16" rx="8" fill="#B9B3A8"/><text x="73" y="153" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#fff">No</text>
+  </g>
+
+  <!-- 1 · AI suggests -->
+  <g transform="translate(456 0)">
+    <rect x="0" y="6" width="130" height="26" rx="13" fill="#fff" stroke="#EBC9C9" stroke-width="2"/>
+    <text x="65" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#8F3434">1 · AI suggests</text>
+  </g>
+  <g transform="translate(456 50)">
+    <rect x="0" y="0" width="128" height="88" rx="12" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <text x="14" y="24" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#8F3434">REPORT</text>
+    <path d="M14 40 h96 M14 54 h76 M14 68 h88" stroke="#F1D6D6" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <use href="#spark" x="590" y="52" fill="#D47474"/>
+  <use href="#spark" x="602" y="80" fill="#D47474" transform="translate(602 80) scale(.5) translate(-602 -80)"/>
+
+  <!-- 2 · reply saved as a draft -->
+  <g transform="translate(676 66) rotate(-8)"><use href="#env"/>
+    <rect x="12" y="44" width="40" height="16" rx="4" fill="#8F3434"/>
+    <text x="32" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#fff">DRAFT</text>
+  </g>
+  <g transform="translate(640 0)">
+    <rect x="0" y="6" width="140" height="26" rx="13" fill="#fff" stroke="#EBC9C9" stroke-width="2"/>
+    <text x="70" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#8F3434">2 · Draft, not sent</text>
+  </g>
+
+  <!-- 3 · the manager decides -->
+  <rect x="796" y="6" width="178" height="26" rx="13" fill="#1D1B18"/>
+  <text x="885" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#fff">3 · Manager decides</text>
+  <circle cx="885" cy="100" r="56" fill="#fff" stroke="#1D1B18" stroke-width="3.5"/>
+  <circle cx="885" cy="100" r="47" fill="#F8E0E0"/>
+  <path d="M843 146 Q843 122 885 120 Q927 122 927 146 Z" fill="#142544"/>
+  <path d="M875 121 L885 140 L895 121 Z" fill="#fff"/>
+  <path d="M882 124 h6 l2 14 l-5 5 l-5 -5 z" fill="#C9A25A"/>
+  <circle cx="885" cy="92" r="24" fill="#F6D3B5"/>
+  <path d="M861 90 Q860 64 885 63 Q911 64 909 90 Q905 76 891 74 Q877 82 863 80 Z" fill="#2B2420"/>
+  <circle cx="876" cy="94" r="3" fill="#1D1B18"/><circle cx="894" cy="94" r="3" fill="#1D1B18"/>
+  <circle cx="869" cy="102" r="4" fill="#EE9C8E" opacity=".55"/><circle cx="901" cy="102" r="4" fill="#EE9C8E" opacity=".55"/>
+  <path d="M878 104 Q885 110 892 104" fill="none" stroke="#1D1B18" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- a thought bubble: the manager's own call -->
+  <circle cx="944" cy="64" r="5" fill="#fff" stroke="#1D1B18" stroke-width="2.5"/>
+  <circle cx="956" cy="50" r="7" fill="#fff" stroke="#1D1B18" stroke-width="2.5"/>
+  <g transform="translate(964 18)">
+    <rect x="0" y="0" width="92" height="40" rx="20" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <text x="46" y="26" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-style="italic" font-size="17" fill="#8F3434">my call</text>
+  </g>
+
+  <!-- wordmark -->
+  <text x="1150" y="84" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="46" fill="#1D1B18">MB<tspan font-style="italic" fill="#8F3434">airline</tspan></text>
+  <text x="1153" y="114" font-family="Arial, sans-serif" font-weight="700" font-size="15" letter-spacing="4.5" fill="#8F3434">PRIORITY GUEST FEEDBACK</text>
+  </g>
+</svg>

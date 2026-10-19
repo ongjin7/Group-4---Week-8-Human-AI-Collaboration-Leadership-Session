@@ -862,3 +862,7 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .matchbar { align-items: baseline; }
 .jpins li { align-items: baseline; }
 .theme-leave .banner { opacity: 1; filter: none; }
+/* MBairline banner is now an illustration like the others: no photo tint */
+.theme-mbairline .banner { opacity: 1; filter: none; }
+.theme-mbairline .banner::before, .theme-mbairline .banner::after { display: none; }
+.s-intro.has-banner .banner { background-position: center, center top !important; }
