@@ -533,7 +533,7 @@ window.DECK_DATA = {
       catchphrase: "I advise. You lead and decide!",
       banner: { src: "assets/brand/mbairline-banner.svg", alt: "Illustration: an MBairline aircraft, a one-star feedback form with email Yes and mobile No, an AI report, a reply saved as a draft, and the manager making their own call", position: "center top" },
       name: "MBairline Priority Guest Relations Assistant",
-      shortName: "MBairline assistant",
+      shortName: "MBairline feedback assistant",
       mapName: "Airline Priority Customer Feedback Assistant",
       cardName: "Airline Priority Customer Feedback Assistant",
       presenter: "Jin",
@@ -692,7 +692,7 @@ window.DECK_DATA = {
       ],
       notes: {
         intro: "Jin. Open with the passenger, not the Zap: Priority feedback needs a fast, personal reply that respects consent. It helps dedicated priority-service teams and the passengers who need personal attention. It cuts preparation effort while the manager keeps full control (expected, not measured). The same pattern fits private banking, facilities defects and luxury hotels; it is not meant for high-volume general enquiries, which need different triage.",
-        card: "Meet the MBairline assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
+        card: "Meet the MBairline feedback assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
         build: "Press → for each of the six automated steps: this is AI assistance, preparing information and drafts for the manager. Two AI steps (it suggests an assessment, and prepares an optional reply draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. Last press: the manager panel. The manager owns the case, uses or rejects the suggestions, and could handle it without AI. Read the caption: no single right answer, and the manager can do it alone.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
         record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A8.",
