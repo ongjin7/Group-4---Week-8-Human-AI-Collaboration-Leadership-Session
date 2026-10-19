@@ -270,7 +270,7 @@
             <div class="tc-top"><span>Agent card</span><span class="tc-no">No. ${pad2(s.quadrantNo)}</span></div>
             <div class="tc-class">${esc(q.title)}</div>
             <div class="tc-portrait">${face(a)}${a.catchphrase ? `<span class="tc-bubble" aria-hidden="true">${esc(a.catchphrase)}</span>` : ''}</div>
-            <div class="tc-name">${esc(nameOf(a))}</div>
+            <div class="tc-name">${esc(a.cardName || nameOf(a))}</div>
             <div class="tc-sub">${t(a.domain)} · ${t(a.presenter)}</div>
             <div class="tc-stats"><span>Right answer <b>${yn(a.placement.q1.answer)}</b></span><span>Together <b>${yn(a.placement.q2.answer)}</b></span></div>
             <div class="tc-foot"><span class="tc-chip" aria-hidden="true"></span>
