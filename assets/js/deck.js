@@ -42,7 +42,7 @@
   function t(s) {
     if (s == null || s === '') return tbc('not supplied');
     if (isTBC(s)) return tbc(String(s).replace(/^\s*TBC:?\s*/, '') || 'to confirm');
-    return esc(s);
+    return esc(s).replace(/==(.+?)==/g, '<mark class="hl">$1</mark>');
   }
   function hasTBC(v) {
     if (v == null) return false;

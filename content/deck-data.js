@@ -543,7 +543,7 @@ window.DECK_DATA = {
         statement: "Priority passengers expect timely, personalised attention. Airlines need to understand passengers’ feedback quickly and respond appropriately.",
         affected: "Dedicated customer service teams supporting priority passengers, and passengers whose concerns require personalised attention.",
         difficulty: "Each response must be read, judged for urgency, checked for consent and answered personally.",
-        benefit: "The agent summarises feedback, recommends next steps, and prepares a management report and, where appropriate and permitted, a personalised email draft. This reduces preparation effort while managers retain full control over decisions and sensitive customer interactions.",
+        benefit: "The agent summarises feedback, recommends next steps, and prepares a management report and, where appropriate and permitted, a personalised email draft. This ==reduces preparation effort while managers retain full control over decisions and sensitive customer interactions.==",
         /* optional: where else the same pattern fits, and where it does not */
         alsoFor: [
           ["Private banking", "Personalised client follow-up"],
