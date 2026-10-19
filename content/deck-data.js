@@ -552,7 +552,7 @@ window.DECK_DATA = {
           ["Facilities management", "Defect review and prioritisation"],
           ["Luxury hotels", "Guest feedback and service recovery"]
         ],
-        scope: "This approach serves selected customers or cases requiring individual attention. Reviewing every assessment and draft may be impractical for high-volume general enquiries, which would require different triage and escalation arrangements."
+        scope: "This approach serves selected priority customers or cases requiring individual attention. Reviewing every assessment and draft may be impractical for high-volume general enquiries, which would require different triage and escalation arrangements."
       },
       card: {
         job: "Analyse passenger feedback to recommend follow-up actions and prepare a personalised customer response email draft.",
