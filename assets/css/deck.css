@@ -855,3 +855,9 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 /* Banking CRM banner: an illustration, shown at full strength */
 .theme-crm .banner { opacity: 1; filter: none; }
 .theme-expense .banner { opacity: 1; filter: none; }
+
+/* Labels line up with the first line of the text beside them */
+.ps-human dl { align-items: baseline; }
+.ps-human dt { line-height: 1.4; }
+.matchbar { align-items: baseline; }
+.jpins li { align-items: baseline; }
