@@ -573,7 +573,7 @@ window.DECK_DATA = {
       buildPanel: {
         groupLabel: "AI assistance: prepares information and drafts for the manager",
         title: "Manager owns the customer case",
-        text: "Reviews the feedback, uses or rejects AI suggestions, and decides the response and service-recovery action. Can handle the case independently without AI.",
+        text: "Reviews the feedback, AI suggestions, and decides the response and service-recovery action. Can handle the case independently without AI.",
         caption: "AI prepares; the manager owns the case. No single right answer, and the manager can complete the work without the agent."
       },
       config: [
