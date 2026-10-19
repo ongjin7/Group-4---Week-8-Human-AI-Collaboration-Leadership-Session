@@ -876,7 +876,7 @@ mark.hl { background: linear-gradient(transparent 18%, var(--qsoft, #F8E0E0) 18%
 mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--ink); font-weight: 600; }
 
 /* "Also works for": pushed down and toned back, a side note to the main problem */
-.s-intro .alsofor { margin-top: 56px !important; opacity: .62; }
+.s-intro .alsofor { margin-top: 96px !important; opacity: .62; }
 .s-intro .alsofor .k { font-size: 14px; }
 .s-intro .alsofor li { font-size: 18px; }
 .s-intro .alsofor li b { color: var(--ink-2); font-weight: 600; }
