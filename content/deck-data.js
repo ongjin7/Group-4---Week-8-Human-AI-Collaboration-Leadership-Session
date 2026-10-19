@@ -672,7 +672,7 @@ window.DECK_DATA = {
         decides: "How to engage the passenger, and whether, when and what to send."
       },
       placement: {
-        q1: { answer: "no", why: "An unhappy passenger might need an apology, an investigation or a call where consent allows. The right response depends on judgment." },
+        q1: { answer: "no", why: "An unhappy passenger might need an apology, an investigation, compensation or a call. The right response requires human judgment." },
         q2: { answer: "no", why: "A manager could do all of it manually, and the agent produces the report and draft unaided. Using both is faster, not required." },
         concern: "Human accountability is not what places it here. What matters is that the agent’s outputs are complete without the person, and the person decides independently."
       },
