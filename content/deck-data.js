@@ -643,7 +643,7 @@ window.DECK_DATA = {
         },
         {
           who: "Drafts", short: "Reply drafted", title: "A reply waits in Drafts", time: "22:41:19",
-          note: "Personalised action is Yes and email is allowed, so the Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft: 26 seconds after the Zap picked up the form. Nothing is sent.",
+          note: "Personalised action is Yes and email is allowed. Filter lets the run continue. AI writes a personal reply, and Gmail saves it as a draft: 26 seconds after the Zap picked up the form. Nothing is sent.",
           shots: [
             { src: "assets/evidence/mbairline/reply-draft.jpg", caption: "The personalised reply, saved as a draft", alt: "Gmail draft reply to Kerry Tan apologising and promising review by the Cabin Crew and Food and Beverage teams", focus: "50% 55%", zoom: 1.15,
               pins: [{ x: 8.6, y: 95, n: 1, text: "Not sent: waits for the manager" }] }
