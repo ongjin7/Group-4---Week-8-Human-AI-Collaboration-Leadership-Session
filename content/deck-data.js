@@ -612,7 +612,7 @@ window.DECK_DATA = {
       journey: [
         {
           who: "Passenger", short: "Feedback sent", title: "Kerry leaves feedback", time: "22:40:32",
-          note: "A first-class passenger, Kerry Tan, rates the flight 1 star, complains about the cabin crew and the food, and allows contact by email but not by mobile.",
+          note: "First-class passenger, Kerry Tan leaves a nasty negative feedback after his flight.",
           shots: [
             { src: "assets/evidence/mbairline/form-top.jpg", caption: "The feedback form", alt: "Feedback form with name Kerry Tan and a 1-star rating", focus: "50% 0%", zoom: 1.25,
               pins: [{ x: 23, y: 76.7, n: 1, side: "left", text: "1 star out of 5" }] },
