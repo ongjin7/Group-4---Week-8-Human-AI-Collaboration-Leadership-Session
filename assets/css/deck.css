@@ -861,3 +861,4 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .ps-human dt { line-height: 1.4; }
 .matchbar { align-items: baseline; }
 .jpins li { align-items: baseline; }
+.theme-leave .banner { opacity: 1; filter: none; }

@@ -39,7 +39,7 @@ window.DECK_DATA = {
     { name: "Jin", agent: "mbairline" },
     { name: "Revan", agent: "expense" },
     { name: "Minh", agent: "crm" },
-    { name: "Adithi", agent: "TBC" }
+    { name: "Adithi", agent: "leave" }
   ],
 
   /* The professor’s map. Titles are used exactly as given. */
@@ -393,63 +393,149 @@ window.DECK_DATA = {
     {
       id: "leave",
       quadrant: "bl",
-      name: "HR leave report agent",
-      presenter: "TBC: Revan, Minh or Adithi",
-      domain: "Human resources",
       motif: "calendar",
-      oneLiner: "Shares the HR leave report every day at a scheduled time.",
+      catchphrase: "I count. You spot-check!",
+      theme: "leave",
+      banner: { src: "assets/brand/leave-banner.svg", alt: "Illustration: a factory time clock, a tally of who is present, on leave and absent, the daily report email, and a Friday spot check with a magnifying glass", position: "center top" },
+      name: "Daily Manpower Report",
+      shortName: "Manpower report agent",
+      mapName: "Daily Manpower Report",
+      presenter: "Adithi",
+      domain: "Human resources",
+      oneLiner: "Emails HR the daily count of who is present, on leave or absent.",
       problem: {
-        statement: "TBC: The business problem in one plain sentence",
-        affected: "TBC: Who uses the report",
-        difficulty: "TBC: What is hard or slow without the agent",
-        benefit: "TBC: Expected benefit, described, not quantified unless measured"
+        statement: "Every morning, HR at a manufacturing company compiles the manpower report by hand: pulling punch data, matching it against approved leave, and working out who is present, on leave or absent. It has to reach the time office, the manpower head and leadership before the day starts.",
+        affected: "The HR team that compiles the report, and the time office, manpower head and leadership who need it before the day starts.",
+        difficulty: "It is repetitive, error-prone and late on busy days.",
+        benefit: "The daily manpower view lands in the inbox with no manual compiling, and is flagged when absenteeism goes above 10%.",
+        scope: "A prototype with fictional data on the Zapier free plan. Punch and leave data are not live yet, and there is no team breakdown."
       },
       card: {
-        job: "TBC: The agent’s job in one line",
-        trigger: "TBC: Schedule (time and days)",
-        tools: "TBC: Apps and actions, in order",
-        never: { rule: "TBC: What the agent must never do", setting: "TBC: The Zap setting that enforces it" },
-        checkpoint: "TBC: Who spot-checks the report, what they compare, how often"
+        job: "Email HR a daily manpower report: headcount, present, on leave, unplanned absence and absenteeism %.",
+        trigger: "A new date row in the Daily Report tab of the Manpower Data Google Sheet, added each weekday at 10 AM by a schedule.",
+        tools: "Google Sheets (New Spreadsheet Row) → Gmail (Send Email)",
+        never: { rule: "Email anyone except HR.", setting: "The “To” field is fixed to one HR address." },
+        checkpoint: "The HR executive checks one day’s numbers against attendance and leave records every Friday."
       },
       workflow: [
-        { type: "trigger", label: "Scheduled time", detail: "TBC: schedule and time zone" },
-        { type: "action", label: "Leave data read", detail: "TBC: source of the leave records" },
-        { type: "rule", label: "Fixed rules", detail: "TBC: how balances are calculated" },
-        { type: "action", label: "Report shared", detail: "TBC: where and to whom" },
-        { type: "human", label: "Spot check", detail: "TBC: who, what, how often" }
+        { type: "trigger", label: "New date row", detail: "A schedule adds a row to the Daily Report tab each weekday, 10 AM" },
+        { type: "rule", label: "Counts calculated", detail: "Sheet formulas: present, on leave, unplanned absence, absenteeism %" },
+        { type: "action", label: "Zap picks it up", detail: "Zapier: New Spreadsheet Row" },
+        { type: "action", label: "Report emailed", detail: "Gmail Send Email, “To” fixed to HR" },
+        { type: "human", label: "Friday spot check", detail: "The HR executive checks one day against the records" }
       ],
       config: [
-        { src: null, caption: "Zap editor: full workflow", missing: "Redacted screenshot of the Zap editor" },
-        { src: null, caption: "Schedule trigger", missing: "Screenshot of the schedule settings" }
+        { src: "assets/evidence/leave/zap-run.png", caption: "The Zap: New Spreadsheet Row → Gmail Send Email", alt: "Zapier editor for Daily Manpower report: step 1 Google Sheets New Spreadsheet Row, step 2 Gmail Send Email; run 01baa5ba successful at 02:45:57 pm" }
       ],
       run: {
-        matchKey: { label: "Zap run ID / timestamp", value: "TBC: the run ID or exact timestamp shared by both screenshots" },
-        input: { src: null, caption: "Input: leave records", missing: "Anonymised leave data used in this run" },
-        output: { src: null, caption: "Output: the report", missing: "The report as received, names redacted" },
-        record: { src: null, caption: "Zap history: same run", missing: "Zap history detail showing the same run ID/timestamp" }
+        matchKey: { label: "Run ID", value: "01baa5ba… · Successful, 19 Oct, 2:45:57 pm · row 3 has the email’s exact numbers. Caveat: Gmail shows the email at 2:40 PM, before this run." },
+        input: { src: "assets/evidence/leave/zap-run.png", caption: "Input: the 19 Oct row" },
+        output: { src: "assets/evidence/leave/email-report.png", caption: "Output: the report email" },
+        record: { src: "assets/evidence/leave/zap-run.png", caption: "Zap history: the run" },
+        recordShots: [
+          { src: "assets/evidence/leave/zap-run.png", caption: "1 · The run: successful, 2:45:57 pm",
+            alt: "Zap run 01baa5ba-616d-a355-1414-4652a7f798c4, successful Oct 19, 2026 02:45:57 pm; Google Sheets then Gmail, sent 1 new message", focus: "52% 45%", zoom: 1.7,
+            pins: [{ x: 65, y: 36.7, n: 1, ring: false, text: "Run ID 01baa5ba…, successful 2:45:57 pm" }] },
+          { src: "assets/evidence/leave/zap-run.png", caption: "2 · Its input: the 19 Oct row",
+            alt: "Step 1 data out: row 3, date 2026-10-19, headcount 100, present 92, on leave 3, unplanned absence 5, absenteeism 8.0%", focus: "85% 62%", zoom: 2.2,
+            pins: [{ x: 92, y: 56.7, n: 2, ring: false, text: "2026-10-19" }, { x: 92, y: 79.5, n: 3, ring: false, text: "100 / 92 / 3 / 5 / 8.0%" }] },
+          { src: "assets/evidence/leave/email-report.png", caption: "3 · The email: the same numbers",
+            alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%; received 2:40 PM", focus: "50% 50%", zoom: 1,
+            pins: [{ x: 36, y: 74, n: 4, ring: false, text: "Same numbers as row 3" }, { x: 72, y: 40.2, n: 5, ring: false, text: "2:40 PM: five minutes before the run" }] }
+        ]
       },
+      /* The 19 Oct run, step by step. Appendix proof. */
+      trace: [
+        { time: "14:45:57", step: "1 · New row picked up", src: "assets/evidence/leave/zap-run.png", focus: "85% 30%", zoom: 2.4, note: "Google Sheets step ran at 14:45:57 Singapore time" },
+        { time: "14:45:57", step: "The sheet’s counts", src: "assets/evidence/leave/zap-run.png", focus: "85% 66%", zoom: 2.2, note: "19 Oct · headcount 100 · present 92 · on leave 3 · unplanned 5 · 8.0%" },
+        { time: "2:45:57 pm", step: "2 · Gmail: report sent", src: "assets/evidence/leave/zap-run.png", focus: "52% 50%", zoom: 1.7, note: "Run ID 01baa5ba… · Successful · sent 1 new message" },
+        { time: "Inbox", step: "The report email", src: "assets/evidence/leave/email-report.png", focus: "30% 50%", zoom: 1.4, note: "Same numbers as row 3; Gmail shows 2:40 PM, before the run" }
+      ],
+      /* One run, start to finish: the 19 Oct report. */
+      journey: [
+        {
+          who: "The sheet", short: "Day’s row", title: "A new day’s row lands in the sheet", time: "14:45:57",
+          note: "A new date row for 19 October lands in the Daily Report tab. The sheet already knows the headcount: 100.",
+          shots: [
+            { src: "assets/evidence/leave/zap-run.png", caption: "The 19 Oct row, as the Zap read it", alt: "Step 1 data out: row 3, date 2026-10-19, headcount 100", focus: "85% 45%", zoom: 2.2,
+              pins: [{ x: 95, y: 31.5, n: 1, ring: false, text: "Step ran 14:45:57" }, { x: 92, y: 56.7, n: 2, ring: false, text: "Date: 19 Oct" }, { x: 92, y: 61.2, n: 3, ring: false, text: "Headcount: 100" }] }
+          ],
+          say: "Adithi. Every morning someone in HR builds this report by hand. Here, a new row for the day lands in the sheet, and the Zap picks it up."
+        },
+        {
+          who: "The sheet’s rules", short: "Counts", title: "Formulas count who is in, on leave or absent",
+          note: "Formulas match punch data against approved leave: 92 present, 3 on approved leave, 5 unplanned absences, 8.0% absenteeism. Every number can be checked against the records.",
+          shots: [
+            { src: "assets/evidence/leave/zap-run.png", caption: "The counts on the 19 Oct row", alt: "Step 1 data out: present 92, on leave 3, unplanned absence 5, absenteeism 8.0%", focus: "85% 70%", zoom: 2.2,
+              pins: [{ x: 92, y: 65.8, n: 1, ring: false, text: "92 present" }, { x: 92, y: 70.3, n: 2, ring: false, text: "3 on leave" }, { x: 92, y: 74.9, n: 3, ring: false, text: "5 unplanned" }, { x: 92, y: 79.5, n: 4, ring: false, text: "8.0% absent" }] }
+          ],
+          say: "The counting is fixed rules. 92 present, 3 on approved leave, 5 unplanned, 8 percent. There is one right answer, and you can check it against the punch and leave records."
+        },
+        {
+          who: "Zapier", short: "Zap fires", title: "The Zap emails the report to HR", time: "2:45:57 pm",
+          note: "One trigger, one action: New Spreadsheet Row, then Gmail Send Email. The “To” field is fixed to one HR address.",
+          shots: [
+            { src: "assets/evidence/leave/zap-run.png", caption: "The run in Zapier", alt: "Zapier: run ID 01baa5ba-616d-a355-1414-4652a7f798c4, successful at 02:45:57 pm; Google Sheets New Spreadsheet Row, then Gmail Send Email: sent 1 new message", focus: "52% 50%", zoom: 1.7,
+              pins: [{ x: 65, y: 36.7, n: 1, ring: false, text: "Run ID 01baa5ba…, successful" }, { x: 62, y: 52.8, n: 2, ring: false, text: "New Spreadsheet Row" }, { x: 62, y: 75.5, n: 3, ring: false, text: "Gmail: sent 1 message" }] }
+          ],
+          say: "Two steps, no person in between. The row arrives, Gmail sends the report, and it only ever goes to HR."
+        },
+        {
+          who: "HR’s inbox", short: "Report arrives", title: "The manpower report lands in HR’s inbox",
+          note: "Headcount, present, on approved leave, unplanned absence and absenteeism, with the percentage in the subject line.",
+          shots: [
+            { src: "assets/evidence/leave/email-report.png", caption: "The daily report (sender redacted)", alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%", focus: "30% 60%", zoom: 1.7,
+              pins: [{ x: 58.5, y: 25.8, n: 1, ring: false, text: "8.0% absent, in the subject" }, { x: 26, y: 74, n: 2, ring: false, text: "92 · 3 · 5 · 8.0%" }] }
+          ],
+          say: "This is what HR reads before the day starts. No one compiled it. The headline number is right in the subject."
+        },
+        {
+          who: "HR executive", short: "Friday check", title: "A person spot-checks, outside the run", human: true,
+          note: "No one approves each report. Once a week, a person checks one day’s numbers against the records.",
+          panelLabel: "The person checks, on a schedule",
+          panelTitle: "The HR executive",
+          options: [
+            "Every Friday, picks one day’s report",
+            "Checks its numbers against the attendance and leave records",
+            "The agent only reads and reports: it never changes records or decides"
+          ],
+          say: "This is bottom-left. The agent runs alone every day. The person sits outside the run: every Friday, the HR executive checks one day against the records. HR could count by hand, and the agent counts alone: either can do it."
+        }
+      ],
       check: {
-        who: "TBC: Role responsible for spot checks",
-        what: "TBC: What they compare the report against",
-        when: "TBC: How often (for example, one report a week)",
-        ifFails: "TBC: What happens when a figure is wrong"
+        who: "The HR executive.",
+        what: "One day’s numbers against the attendance and leave records.",
+        when: "Every Friday.",
+        ifFails: "The agent only reads and reports; it never changes records, so any correction is made by HR."
       },
       placement: {
-        q1: { answer: "yes", why: "Rule-based: each leave figure has one correct value (group site: “Rule-based and fully automated”)." },
-        q2: { answer: "no", why: "TBC: Confirm a person could produce the same report alone, and the agent does it unaided." },
-        concern: "Confirm the run shows real processing, not only forwarding a sheet, and that a named person actually performs the spot check."
+        q1: { answer: "yes", why: "The counts can be checked against punch and leave records. On 19 Oct: 92 present, 3 on leave, 5 unplanned, matching the answer key." },
+        q2: { answer: "no", why: "HR could count by hand, and the agent produces the report alone with no judgement needed. A person only spot-checks." },
+        concern: "If the agent recommended actions on high-absence days, the work would lose its single right answer and move right on the map."
       },
       move: {
-        change: "The task moves from reporting balances to recommending how to balance competing leave requests. The manager can evaluate requests independently.",
+        change: "On high-absence days, the agent recommends actions, such as moving staff between lines; the manpower head weighs them and decides.",
         question: "q1",
         from: "yes",
         to: "no",
         result: "br",
-        caveat: "TBC: no HR leave-report run evidence yet."
+        caveat: "Hypothetical. Today the agent only counts and reports."
       },
+      /* Failure → fix → retest. Appendix only. Run 2 and 3 screenshots are not on Adithi's site yet. */
+      lessons: [
+        { title: "12% absent, and nothing looked wrong", detail: "Run 2 (20 Oct, the tricky case) reported 12.0% absent, but the subject line looked like any other day. HR could miss it.", status: "Described on Adithi’s site; screenshot not provided yet", evidence: { src: null, caption: "Run 2: 12.0% absent, no warning", missing: "Run 2 email (not on Adithi’s site yet)" } },
+        { title: "Fix: a Status flag", detail: "A Status column shows “⚠ ABOVE 10%” when absenteeism is over 10%, and it goes at the start of the subject.", status: "Sheet and subject-line change", evidence: null },
+        { title: "Retested", detail: "Run 3 (20 Oct): “⚠ ABOVE 10% – Daily Manpower Report – 2026-10-20 – 12.0% absent”.", status: "Described on Adithi’s site; screenshot not provided yet", evidence: null },
+        { title: "Run 1 matched the answer key", detail: "19 Oct: 92 present, 3 on leave, 5 unplanned, 8.0% absent, as the records say.", status: "Zap run and email on record", evidence: null },
+        { title: "AI help needed checking too", detail: "The AI assistant gave the wrong day of the week, and the schedule showed UTC instead of Singapore time.", status: "From Adithi’s collaboration log", evidence: null }
+      ],
       notes: {
-        build: "Press → for each step. This agent is mostly fixed rules: say so. The person sits outside the run.",
-        person: "The spot check: who makes it, what they compare the report against, HOW OFTEN, and what happens when a figure is wrong. Then: right answer? Yes. Together? No: the agent runs alone."
+        intro: "Adithi. Open with the HR person compiling the report by hand every morning: punch data, approved leave, who is in, who is out, before the day starts. The agent puts it in the inbox with no manual work (expected benefit, not measured). Fictional data, free plan.",
+        card: "Tap the card five times: the job (a daily manpower report), the trigger (a new date row each weekday), the tools (Sheets and Gmail), what it must never do (email anyone but HR: the To field is fixed), and where a person checks (the HR executive, every Friday).",
+        build: "Press → for each step. The counting is fixed formulas; Zapier only carries the result. The person is not inside the run: the Friday spot check happens on its own schedule.",
+        run: "One real run: the 19 October report.",
+        record: "The proof. The run has a run ID and succeeded at 2:45:57 pm; it read row 3, and those are exactly the numbers in the email. Be honest about one thing: Gmail shows the email at 2:40 PM, five minutes before this run, so it may be from a test of the same row. Every step is in the appendix.",
+        person: "Who: the HR executive. How often: every Friday, one day. What: that day’s numbers against attendance and leave records. If wrong: the agent never changes records; HR corrects them. Placement: right answer? Yes, checkable counts. Together? No: HR could do it by hand and the agent does it alone."
       }
     },
 
@@ -649,7 +735,7 @@ window.DECK_DATA = {
     },
     { id: "seg-tl", label: "Top-left", agent: "expense", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     { id: "seg-tr", label: "Top-right", agent: "crm", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
-    { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 45, 40, 30, 60] },
+    { id: "seg-bl", label: "Bottom-left", agent: "leave", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     { id: "seg-br", label: "Bottom-right", agent: "mbairline", seconds: 240, split: [30, 35, 40, 65, 20, 50] },
     {
       id: "close", label: "Comparison", seconds: 120,
@@ -685,6 +771,10 @@ window.DECK_DATA = {
     { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A7 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
       notes: "Proof for the top-left run: Jack submits at 12:42:57, the Zap picks up the row at 12:45:01 and Gmail sends the pre-check at 12:45:02, under one run ID (01ba7a48…). Click any screenshot to enlarge it." },
     { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A8 · Expense claims testing", subtitle: "Failure, fix and retest",
-      notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." }
+      notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." },
+    { id: "a-trace-leave", type: "run-trace", agent: "leave", title: "A9 · Manpower report run trace", subtitle: "Every step of the 19 Oct run on record",
+      notes: "Proof for the bottom-left run: the row is picked up at 14:45:57 and Gmail sends at 2:45:57 pm under run ID 01baa5ba…. The email has row 3’s exact numbers, but Gmail shows 2:40 PM, five minutes earlier, so it may be from a test of the same row." },
+    { id: "a-lessons-leave", type: "lessons", agent: "leave", title: "A10 · Manpower report testing", subtitle: "Failure, fix and retest",
+      notes: "If asked what went wrong: on a 12% absence day the report looked like any other, so Adithi added a status flag that puts ⚠ ABOVE 10% at the start of the subject. The run 2 and run 3 screenshots are not provided yet; this is from Adithi’s write-up." }
   ]
 };

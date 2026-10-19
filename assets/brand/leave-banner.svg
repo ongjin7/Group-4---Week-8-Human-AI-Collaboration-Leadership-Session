@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 260" width="1600" height="260">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4FAF1"/>
+      <stop offset="1" stop-color="#DCEFD5"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#6AAA5C" opacity=".22"/>
+    </pattern>
+    <g id="env">
+      <rect x="0" y="0" width="58" height="40" rx="7" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+      <path d="M3 5 L29 25 L55 5" fill="none" stroke="#1D1B18" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g id="person">
+      <circle cx="0" cy="-9" r="6.5"/>
+      <path d="M-10 9 q0 -11 10 -11 q10 0 10 11 z"/>
+    </g>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="260" fill="url(#sky)"/>
+  <rect width="1600" height="260" fill="url(#dots)"/>
+  <circle cx="70" cy="30" r="96" fill="#C7E3BD" opacity=".4"/>
+  <circle cx="720" cy="235" r="120" fill="#CFE8C6" opacity=".35"/>
+  <circle cx="1300" cy="0" r="120" fill="#E1F0DC" opacity=".9"/>
+  <circle cx="1565" cy="210" r="80" fill="#C7E3BD" opacity=".35"/>
+
+  <g transform="translate(0 14)">
+  <path d="M400 96 C 520 20, 610 160, 760 96 S 960 40, 1100 92" fill="none" stroke="#6AAA5C" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".8"/>
+
+  <!-- the factory and its punch clock -->
+  <g transform="translate(70 40)">
+    <path d="M0 120 V60 L36 38 V60 L72 38 V60 L108 38 V120 Z" fill="#fff" stroke="#1D1B18" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="82" y="6" width="16" height="40" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <path d="M90 0 q8 -8 0 -16" fill="none" stroke="#6AAA5C" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+    <rect x="14" y="78" width="18" height="16" rx="2" fill="#E1F0DC" stroke="#1D1B18" stroke-width="2"/>
+    <rect x="44" y="78" width="18" height="16" rx="2" fill="#E1F0DC" stroke="#1D1B18" stroke-width="2"/>
+    <rect x="74" y="88" width="20" height="32" rx="2" fill="#336B2A"/>
+  </g>
+  <g transform="translate(250 22)">
+    <rect x="0" y="0" width="112" height="150" rx="16" fill="#1D1B18"/>
+    <circle cx="56" cy="50" r="34" fill="#FFFDF7"/>
+    <path d="M56 50 V28 M56 50 L72 58" stroke="#1D1B18" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="56" cy="50" r="4" fill="#336B2A"/>
+    <rect x="22" y="98" width="68" height="34" rx="6" fill="#FFFDF7"/>
+    <text x="56" y="121" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#336B2A">PUNCH</text>
+  </g>
+
+  <!-- 1 · the counts -->
+  <g transform="translate(456 0)">
+    <rect x="0" y="6" width="120" height="26" rx="13" fill="#fff" stroke="#C9E0C0" stroke-width="2"/>
+    <text x="60" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#336B2A">1 · Counted</text>
+  </g>
+  <g transform="translate(442 46)">
+    <rect x="0" y="0" width="150" height="96" rx="12" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <g fill="#6AAA5C"><use href="#person" x="22" y="30"/><use href="#person" x="44" y="30"/><use href="#person" x="66" y="30"/></g>
+    <text x="84" y="35" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1D1B18">Present</text>
+    <g fill="#C9A25A"><use href="#person" x="22" y="58"/></g>
+    <text x="40" y="63" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1D1B18">On leave</text>
+    <g fill="#B9B3A8"><use href="#person" x="22" y="84"/></g>
+    <text x="40" y="89" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#1D1B18">Absent</text>
+    <rect x="104" y="64" width="38" height="24" rx="6" fill="#336B2A"/>
+    <text x="123" y="81" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="11" fill="#fff">%</text>
+  </g>
+
+  <!-- 2 · report emailed every morning -->
+  <g transform="translate(690 64) rotate(-8)"><use href="#env"/></g>
+  <path d="M664 74 h-18 M668 88 h-28 M672 102 h-16" stroke="#6AAA5C" stroke-width="3.5" stroke-linecap="round"/>
+  <g transform="translate(646 0)">
+    <rect x="0" y="6" width="132" height="26" rx="13" fill="#fff" stroke="#C9E0C0" stroke-width="2"/>
+    <text x="66" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#336B2A">2 · Emailed to HR</text>
+  </g>
+
+  <!-- 3 · Friday spot check, outside the run -->
+  <rect x="800" y="6" width="178" height="26" rx="13" fill="#1D1B18"/>
+  <text x="889" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#fff">3 · Friday spot check</text>
+  <g transform="translate(828 46)">
+    <rect x="0" y="0" width="122" height="104" rx="12" fill="#fff" stroke="#1D1B18" stroke-width="3"/>
+    <rect x="0" y="0" width="122" height="26" rx="12" fill="#336B2A"/>
+    <rect x="0" y="14" width="122" height="12" fill="#336B2A"/>
+    <rect x="24" y="-8" width="6" height="16" rx="3" fill="#1D1B18"/><rect x="92" y="-8" width="6" height="16" rx="3" fill="#1D1B18"/>
+    <g font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#8A847A" text-anchor="middle">
+      <text x="18" y="46">M</text><text x="40" y="46">T</text><text x="62" y="46">W</text><text x="84" y="46">T</text><text x="106" y="46" fill="#336B2A">F</text>
+    </g>
+    <circle cx="106" cy="66" r="12" fill="#E1F0DC" stroke="#336B2A" stroke-width="2.5"/>
+    <path d="M100 66 l4 4 l7 -8" fill="none" stroke="#336B2A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#E8E4DA"><rect x="10" y="60" width="16" height="10" rx="2"/><rect x="32" y="60" width="16" height="10" rx="2"/><rect x="54" y="60" width="16" height="10" rx="2"/><rect x="76" y="60" width="16" height="10" rx="2"/>
+      <rect x="10" y="80" width="16" height="10" rx="2"/><rect x="32" y="80" width="16" height="10" rx="2"/><rect x="54" y="80" width="16" height="10" rx="2"/><rect x="76" y="80" width="16" height="10" rx="2"/></g>
+  </g>
+  <!-- magnifying glass -->
+  <g transform="translate(968 92)">
+    <circle cx="0" cy="0" r="24" fill="#fff" fill-opacity=".7" stroke="#1D1B18" stroke-width="4"/>
+    <path d="M17 17 L38 38" stroke="#1D1B18" stroke-width="8" stroke-linecap="round"/>
+    <text x="0" y="6" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="16" fill="#336B2A">92</text>
+  </g>
+
+  <!-- wordmark -->
+  <text x="1112" y="84" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="46" fill="#1D1B18">Daily <tspan font-style="italic" fill="#336B2A">Manpower</tspan></text>
+  <text x="1115" y="114" font-family="Arial, sans-serif" font-weight="700" font-size="15" letter-spacing="4.5" fill="#336B2A">HR ATTENDANCE REPORT</text>
+  </g>
+</svg>
