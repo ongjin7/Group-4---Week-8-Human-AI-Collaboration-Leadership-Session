@@ -874,3 +874,10 @@ mark.hl { background: linear-gradient(transparent 18%, var(--qsoft, #F8E0E0) 18%
 .theme-mbairline mark.hl { background: linear-gradient(transparent 14%, #F3C6C6 14%, #F3C6C6 94%, transparent 94%); }
 /* bold only, no highlighter band */
 mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--ink); font-weight: 600; }
+
+/* "Also works for": pushed down and toned back, a side note to the main problem */
+.s-intro .alsofor { margin-top: 56px !important; opacity: .62; }
+.s-intro .alsofor .k { font-size: 14px; }
+.s-intro .alsofor li { font-size: 18px; }
+.s-intro .alsofor li b { color: var(--ink-2); font-weight: 600; }
+.s-intro .alsofor li::before { background: #C9C2B6; }
