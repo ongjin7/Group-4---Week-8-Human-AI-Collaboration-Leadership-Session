@@ -556,7 +556,7 @@ window.DECK_DATA = {
       },
       card: {
         job: "Analyse passenger feedback to recommend follow-up actions and prepare a personalised customer response email draft.",
-        trigger: "A new or updated response to the MB Airline Feedback Form (Google Forms).",
+        trigger: "A new or updated response to the Airline Feedback Form (Google Forms).",
         tools: "Google Forms → AI by Zapier → Gmail report → Filter by Zapier → AI by Zapier → Gmail Create Draft",
         never: { rule: "Automatically send a customer reply.", setting: "The customer-facing Gmail step is Create Draft, not Send Email." },
         checkpoint: "The manager checks the feedback and assessment and fully decides on service-recovery action. Agent only advises."
