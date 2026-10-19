@@ -476,7 +476,7 @@
         const expected = m.question === 'q1' ? quadrantFor(m.to, QS[q].q2) : quadrantFor(QS[q].q1, m.to);
         const L = QLABEL[m.question];
         return `<div class="move" data-q="${q}">
-          <div class="mv-head"><span class="mv-name">${esc(nameOf(a))}</span><span class="mv-hyp">Hypothetical</span></div>
+          <div class="mv-head"><span class="mv-name">${esc(a.movesName || nameOf(a))}</span><span class="mv-hyp">Hypothetical</span></div>
           <p class="mv-change">${t(m.change)}</p>
           <p class="mv-flip"><b>${L.name}</b> ${esc(L[m.from])} <span class="mv-arrow" aria-hidden="true">→</span> <b class="mv-to">${esc(L[m.to])}</b></p>
           <div class="mv-dest" data-q="${m.result}">

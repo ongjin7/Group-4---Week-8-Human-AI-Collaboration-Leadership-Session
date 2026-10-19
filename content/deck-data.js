@@ -535,6 +535,7 @@ window.DECK_DATA = {
       name: "MBairline Priority Guest Relations Assistant",
       shortName: "MBairline feedback assistant",
       qaName: "Airline Feedback Assistant",
+      movesName: "Airline feedback assistant",
       mapName: "Airline Priority Customer Feedback Assistant",
       cardName: "Airline Priority Customer Feedback Assistant",
       presenter: "Jin",
