@@ -72,7 +72,7 @@ window.DECK_DATA = {
       id: "expense",
       quadrant: "tl",
       motif: "receipt",
-      catchphrase: "I check. You sign!",
+      catchphrase: "I verify, you sign off!",
       theme: "expense",
       banner: { src: "assets/brand/expense-banner.svg", alt: "Illustration: receipts from a trip and a client meal, a policy checklist with three ticks, a pre-check email to the line manager, and the manager signing off", position: "center top" },
       name: "Expense Claim Pre-Check",
