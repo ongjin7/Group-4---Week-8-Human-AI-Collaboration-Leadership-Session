@@ -315,7 +315,7 @@
             <p>${t(P.text)}</p>
           </div>
         </div>
-        <p class="bp-caption">${t(P.caption)}</p>
+        ${P.caption ? `<p class="bp-caption">${t(P.caption)}</p>` : ''}
         ${foot}`
       };
     }
