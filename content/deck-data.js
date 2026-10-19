@@ -210,9 +210,9 @@ window.DECK_DATA = {
       ],
       /* Failure → fix → retest. Appendix only. */
       lessons: [
-        { title: "A future-dated claim passed", detail: "A medical claim dated 11 days ahead got Days to Claim −11. Since −11 is under 30, On time said OK and the claim passed. The rule only checked for late claims.", status: "Predicted before the run; captured in “Tricky case test 2”", evidence: { src: "assets/evidence/expense/tricky-email-before.png", caption: "Before: a future date passes", alt: "Pre-check email for Tricky case test 2: medical claim dated 10/30/2026, submitted within 30 days (−11 days) OK, result PASS", pins: [{ x: 86, y: 63.8, n: 1, ring: false, text: "−11 days: OK" }] } },
+        { title: "A future-dated claim passed", detail: "A medical claim dated 11 days ahead got Days to Claim −11. Since −11 is under 30, On time said OK and the claim passed. The rule only checked for late claims.", status: "Predicted before the run; captured in “Tricky case test 2”", evidence: { src: "assets/evidence/expense/tricky-email-before.png", caption: "Before: a future date passes", alt: "Pre-check email for Tricky case test 2: medical claim dated 10/30/2026, submitted within 30 days (−11 days) OK, result PASS", pins: [{ x: 74, y: 63.8, n: 1, ring: false, text: "−11 days: OK" }] } },
         { title: "Fix: a future-date check", detail: "The On time formula now returns FUTURE DATE when Days to Claim is below 0.", status: "Formula change in the sheet (column K)", evidence: null },
-        { title: "Retested: FAIL: FUTURE DATE", detail: "The same claim, resubmitted as “Trick case solution”, now fails.", status: "Rerun email on record", evidence: { src: "assets/evidence/expense/fix-email-after.png", caption: "After: the same claim fails", alt: "Pre-check email for Trick case solution: submitted within 30 days (−11 days) FUTURE DATE, result FAIL: FUTURE DATE", pins: [{ x: 92, y: 63, n: 2, ring: false, text: "FUTURE DATE" }] } },
+        { title: "Retested: FAIL: FUTURE DATE", detail: "The same claim, resubmitted as “Trick case solution”, now fails.", status: "Rerun email on record", evidence: { src: "assets/evidence/expense/fix-email-after.png", caption: "After: the same claim fails", alt: "Pre-check email for Trick case solution: submitted within 30 days (−11 days) FUTURE DATE, result FAIL: FUTURE DATE", pins: [{ x: 78, y: 63, n: 2, ring: false, text: "FUTURE DATE" }] } },
         { title: "Successful runs, wrong emails", detail: "An empty column shifted every check one column to the right, so a 67-day-late taxi claim said “OK”. Deleting the column fixed it; Arjun’s later run of the same claim shows LATE.", status: "Error emails on record", evidence: null },
         { title: "A run can succeed and still be wrong", detail: "Zap history said Successful every time. Only comparing each email with its sheet row caught the error.", status: "Lesson from testing", evidence: null }
       ],
@@ -311,7 +311,7 @@ window.DECK_DATA = {
             { src: "assets/evidence/crm/run-2-output-bank013.webp", caption: "BANK_013: the draft, waiting for review", alt: "Run output at 23:05:21: Manager Review Check Pending; Email Subject Getting started: How to fund your new account; email body; Campaign Status SEND_FOR_APPROVAL",
               pins: [{ x: 93, y: 45.7, n: 1, ring: false, text: "A how-to-fund email" }, { x: 64, y: 95.8, n: 2, ring: false, text: "SEND_FOR_APPROVAL: passes the Filter" }] },
             { src: "assets/evidence/crm/gemini-options-bank007.webp", caption: "A different run (BANK_007): three options, one recommended", alt: "Gemini output for a different customer, BANK_007: potential barrier, Campaign A technical support outreach, Campaign B guided onboarding tutorial, Campaign C status check, and a recommendation", focus: "50% 70%", zoom: 1.2,
-              pins: [{ x: 86, y: 73, n: 3, ring: false, text: "Campaigns A, B and C" }] }
+              pins: [{ x: 76, y: 73, n: 3, ring: false, text: "Campaigns A, B and C" }] }
           ],
           say: "Gemini reads the case, suggests the barrier, proposes campaigns and recommends one. On the right is what those options look like, from a different customer. For BANK_013 it drafts a how-to-fund email and marks it SEND_FOR_APPROVAL."
         },
@@ -468,8 +468,8 @@ window.DECK_DATA = {
           shots: [
             { src: "assets/evidence/leave/zap-run.png", caption: "The run: Sheets → Gmail", alt: "Zapier: run ID 01baa5ba-616d-a355-1414-4652a7f798c4, successful at 02:45:57 pm; Google Sheets New Spreadsheet Row, then Gmail Send Email: sent 1 new message", focus: "52% 55%", zoom: 2.2,
               pins: [{ x: 59, y: 36.7, n: 1, ring: false, text: "Run ID 01baa5ba…, successful" }, { x: 61, y: 75.5, n: 2, ring: false, text: "Gmail: sent 1 message" }] },
-            { src: "assets/evidence/leave/email-report.png", caption: "The report in HR’s inbox", alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%", focus: "28% 60%", zoom: 2.2,
-              pins: [{ x: 40, y: 34, n: 3, ring: false, text: "8.0% absent, in the subject" }, { x: 26, y: 74, n: 4, ring: false, text: "92 · 3 · 5 · 8.0%" }] }
+            { src: "assets/evidence/leave/email-report.png", caption: "The report in HR’s inbox", alt: "Email: Daily Manpower Report – 2026-10-19 – 8.0% absent; headcount 100, present 92, on approved leave 3, unplanned absence 5, absenteeism 8.0%", focus: "0% 55%", zoom: 1.9,
+              pins: [{ x: 40, y: 37, n: 3, ring: false, text: "8.0% absent, in the subject" }, { x: 26, y: 74, n: 4, ring: false, text: "92 · 3 · 5 · 8.0%" }] }
           ],
           say: "Two steps, no person in between. The row arrives, Gmail sends the report to HR, and that is what HR reads before the day starts. The headline number is right in the subject."
         },
