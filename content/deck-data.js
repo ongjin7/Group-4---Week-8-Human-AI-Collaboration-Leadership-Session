@@ -652,7 +652,7 @@ window.DECK_DATA = {
         },
         {
           who: "Manager", short: "Manager decides", title: "The manager decides and can handle the case independently.", human: true,
-          note: "AI prepares the assessment and draft to reduce preparation effort; the manager can review the feedback, formulate a response, and act without the agent.",
+          note: "AI only prepares the assessment and draft to guide and reduce preparation effort.",
           panelLabel: "The person is in control",
           panelTitle: "The Customer Service Manager",
           options: [
