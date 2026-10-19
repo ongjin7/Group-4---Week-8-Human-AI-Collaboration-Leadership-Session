@@ -532,7 +532,7 @@ window.DECK_DATA = {
       avatar: "suit",
       catchphrase: "I advise. You lead and decide!",
       banner: { src: "assets/brand/mbairline-banner.svg", alt: "Illustration: an MBairline aircraft, a one-star feedback form with email Yes and mobile No, an AI report, a reply saved as a draft, and the manager making their own call", position: "center top" },
-      name: "MBairline Priority Guest Relations Assistant",
+      name: "Airline Priority Guest Feedback Assistant",
       shortName: "MBairline feedback assistant",
       qaName: "Airline Feedback Assistant",
       movesName: "Airline feedback assistant",
