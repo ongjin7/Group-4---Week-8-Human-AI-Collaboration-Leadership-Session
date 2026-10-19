@@ -186,8 +186,9 @@ p { margin: 0; }
 .s-intro.has-banner { background: var(--paper); grid-template-rows: 380px 1fr; grid-template-columns: 1fr 660px; padding: 0 96px 56px; row-gap: 0; align-items: start; }
 .s-intro .banner { grid-column: 1 / -1; margin: 0 -97px; height: 382px; background-repeat: no-repeat; background-size: 100% 100%, cover; opacity: .8; filter: saturate(.85); -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 94%); }
 .s-intro.has-banner .left { padding-top: 0; gap: 20px; margin-top: -24px; }
-.s-intro.has-banner h1 { font-size: 72px; color: var(--mb-navy); }
-.s-intro.has-banner .eyebrow { color: var(--mb-navy); }
+.s-intro.has-banner h1 { font-size: 72px; }
+.theme-mbairline.s-intro.has-banner h1 { color: var(--mb-navy); }
+.theme-mbairline.s-intro.has-banner .eyebrow { color: var(--mb-navy); }
 .s-intro.has-banner .card { margin-top: -190px; padding: 34px 40px; gap: 16px; }
 .s-intro.has-banner .card .statement { font-size: 33px; }
 .s-intro.has-banner .ghost { display: none; }
@@ -820,13 +821,13 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .dv-mascot { right: 120px; bottom: 70px; }
 
 /* MBairline banner, option 1: a soft rosy duotone so the photo sits in the deck's pastel palette */
-.s-intro .banner { filter: sepia(.35) saturate(.55) brightness(1.08) contrast(.9); opacity: .85; }
-.s-intro .banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #F8E0E0 0%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: .9; }
-.s-intro .banner::after { content: ""; position: absolute; inset: 0; background: #F8E0E0; mix-blend-mode: color; opacity: .28; }
+.theme-mbairline .banner { filter: sepia(.35) saturate(.55) brightness(1.08) contrast(.9); opacity: .85; }
+.theme-mbairline .banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #F8E0E0 0%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: .9; }
+.theme-mbairline .banner::after { content: ""; position: absolute; inset: 0; background: #F8E0E0; mix-blend-mode: color; opacity: .28; }
 .s-intro .banner { position: relative; }
-.s-intro .banner { filter: sepia(.15) saturate(.9) brightness(1.12) contrast(.82); opacity: .9; }
-.s-intro .banner::before { background: linear-gradient(180deg, #F3C6C6 0%, #F8E0D6 60%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: 1; }
-.s-intro .banner::after { background: linear-gradient(90deg, #E9B7B7, #F2D3B8); mix-blend-mode: color; opacity: .42; }
+.theme-mbairline .banner { filter: sepia(.15) saturate(.9) brightness(1.12) contrast(.82); opacity: .9; }
+.theme-mbairline .banner::before { background: linear-gradient(180deg, #F3C6C6 0%, #F8E0D6 60%, #FBECCD 100%); mix-blend-mode: soft-light; opacity: 1; }
+.theme-mbairline .banner::after { background: linear-gradient(90deg, #E9B7B7, #F2D3B8); mix-blend-mode: color; opacity: .42; }
 
 /* takeaway as the closing line of the moves slide */
 .moves { gap: 14px; }
@@ -850,3 +851,6 @@ body.reading .chrome .segs, body.reading .chrome .nav-btn { display: none; }
 .dv-mascot .dv-sign { font-size: 26px; padding: 14px 26px; }
 .dv-mascot .dv-pole { height: 34px; }
 .dv-mascot .dv-face { width: 210px; height: 210px; }
+
+/* Banking CRM banner: an illustration, shown at full strength */
+.theme-crm .banner { opacity: 1; filter: none; }

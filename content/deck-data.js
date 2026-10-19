@@ -136,6 +136,8 @@ window.DECK_DATA = {
       quadrant: "tr",
       motif: "chat",
       catchphrase: "I run it. You judge it!",
+      theme: "crm",
+      banner: { src: "assets/brand/crm-banner.svg", alt: "Illustration: a new customer’s banking app with the first deposit still to do, AI drafting an email, the CRM Manager approving it, and the email being sent", position: "center top" },
       name: "Banking CRM Onboarding Agent",
       shortName: "Banking CRM agent",
       mapName: "Banking CRM Onboarding Agent",
