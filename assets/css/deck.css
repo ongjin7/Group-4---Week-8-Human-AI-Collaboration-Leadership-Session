@@ -881,3 +881,6 @@ mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--i
 .s-intro .alsofor li { font-size: 18px; }
 .s-intro .alsofor li b { color: var(--ink-2); font-weight: 600; }
 .s-intro .alsofor li::before { background: #C9C2B6; }
+/* Number circles sit centred on the first line of their text (and stay there when the text wraps) */
+.jpins li { align-items: flex-start; line-height: 1.3; }
+.jpins .pin-dot { width: 30px; height: 30px; line-height: 30px; font-size: 15px; margin-top: calc((1.3em - 30px) / 2 + 3px); }
