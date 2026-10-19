@@ -374,7 +374,7 @@ window.DECK_DATA = {
       /* Failure → fix → retest. Appendix only. */
       lessons: [
         { title: "NO_CAMPAIGN still went to approval", detail: "BANK_012 had already deposited. Gemini correctly returned NO_CAMPAIGN, but the earlier Zap still asked for approval: a workflow-control fault, not an AI error.", status: "Before-fix screenshot", evidence: { src: "assets/evidence/crm/before-fix-wrong-approval.webp", caption: "Before the fix: BANK_012 still sent for approval", alt: "Earlier Zap: Gemini prompt for BANK_012 who already deposited; the Human in the Loop step is pending review" } },
-        { title: "Fix: a Filter before approval", detail: "The Zap now continues only when campaign status = SEND_FOR_APPROVAL.", status: "Earlier-version test shows the Filter stopping a NO_CAMPAIGN run (appendix A2)", evidence: null },
+        { title: "Fix: a Filter before approval", detail: "The Zap now continues only when campaign status = SEND_FOR_APPROVAL.", status: "Earlier-version test shows the Filter stopping a NO_CAMPAIGN run (appendix A1)", evidence: null },
         { title: "Retested", detail: "BANK_012_RETEST stopped before approval; BANK_013 went through approval and sending.", status: "Reported by Minh; the BANK_013 run is in Zap history at 23:05", evidence: null },
         { title: "Reject stops the run", detail: "When the manager rejects, nothing downstream runs and no email is sent.", status: "Earlier-version test", evidence: null },
         { title: "An unsupported security claim", detail: "An early draft offered bank-security assurances it could not back up. The prompt was tightened and human review kept.", status: "Reported by Minh; no screenshot", evidence: null }
@@ -384,7 +384,7 @@ window.DECK_DATA = {
         card: "Tap the card five times: the job, the trigger (a new Google Sheets row), the tools (six steps), what it must never do (send without approval, or target a customer who already deposited), and where a person checks (the CRM Manager, step 5, just before Gmail).",
         build: "Press → for each of the six real Zap steps. Sheets row, Gemini assesses and drafts, Code parses it, a Filter lets only SEND_FOR_APPROVAL through, then the CRM Manager judges, and only then Gmail sends. Stress the last step: the process carries on AFTER the person decides. That is what makes it top-right.",
         run: "One real run, BANK_013, 18 October at 11:05 pm.",
-        record: "The proof, in three links. One: Zap history shows a successful run at 23:05. Two: its input is BANK_013 at 23:05:10. Three: the approval request for the same customer went out at 23:05:22, one second after the draft. No run ID is shown, so we match by time. Appendix A5 has every step; A6 has the failure, fix and retest.",
+        record: "The proof, in three links. One: Zap history shows a successful run at 23:05. Two: its input is BANK_013 at 23:05:10. Three: the approval request for the same customer went out at 23:05:22, one second after the draft. No run ID is shown, so we match by time. Appendix A4 has every step; A5 has the failure, fix and retest.",
         person: "Who: the CRM Manager. What they decide: they review the three options and the recommendation, then approve or reject the recommended draft; they do not pick B or C directly. When: step 5, before Gmail. If it fails: reject, and the run stops. Placement: no single right answer, and in this workflow the process cannot finish without the person, so top-right. If asked ‘why not bottom-right?’: if Gemini only suggested and the manager did everything alone, it would be. Here the agent runs the process and waits for the judgment."
       }
     },
@@ -685,8 +685,8 @@ window.DECK_DATA = {
       },
       lessons: [
         { title: "Consent reversed", detail: "One report swapped email and mobile consent and recommended a call the passenger had declined.", status: "Failure reported in Jin’s PS5 write-up; no screenshot of the faulty report", evidence: null },
-        { title: "Fix: inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Seen in the Kerry Tan run: the form said email Yes, mobile No, and so did the report (appendix A3, steps 1–2)", evidence: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Retest: the report’s consent lines match the form", alt: "Report email for Kerry Tan: personalised action Yes, urgent Yes, email contact Yes, mobile contact No", focus: "28% 49%", zoom: 1.6, pins: [{ x: 24.3, y: 47, n: 1, text: "Email Yes, mobile No: matches the form" }] } },
-        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "The live filter now checks “contains Yes” on the HTML value (appendix A3, step 4: the Kerry Tan run passed it). The original failure itself is not on record.", evidence: null },
+        { title: "Fix: inputs relabelled, retested", detail: "Each consent answer was labelled explicitly; a later run showed Email: Yes, Mobile: No and recommended email follow-up.", status: "Seen in the Kerry Tan run: the form said email Yes, mobile No, and so did the report (appendix A2, steps 1–2)", evidence: { src: "assets/evidence/mbairline/manager-report.jpg", caption: "Retest: the report’s consent lines match the form", alt: "Report email for Kerry Tan: personalised action Yes, urgent Yes, email contact Yes, mobile contact No", focus: "28% 49%", zoom: 1.6, pins: [{ x: 24.3, y: 47, n: 1, text: "Email Yes, mobile No: matches the form" }] } },
+        { title: "HTML Yes/No broke the filter", detail: "HTML-formatted Yes/No answers caused exact-match filter conditions to fail.", status: "The live filter now checks “contains Yes” on the HTML value (appendix A2, step 4: the Kerry Tan run passed it). The original failure itself is not on record.", evidence: null },
         { title: "Satisfied customer flagged", detail: "One satisfied-customer case was wrongly flagged for personalised action.", status: "Reported in Jin’s PS5 write-up; no screenshot", evidence: null },
         { title: "Review stays necessary", detail: "Every customer reply is reviewed by the manager before it is sent; the agent can only save drafts.", status: "Design choice: enforced by Create Draft", evidence: null }
       ],
@@ -695,7 +695,7 @@ window.DECK_DATA = {
         card: "Meet the MBairline assistant. Tap the card five times: the job, the trigger (a new feedback form), the tools, what it must never do (send a reply itself: the Gmail step is Create Draft, not Send Email), and where a person checks (the manager).",
         build: "Press → for each of the six automated steps: this is AI assistance, preparing information and drafts for the manager. Two AI steps (it suggests an assessment, and prepares an optional reply draft), one fixed rule (the filter needs follow-up AND email permission), two Gmail actions. Last press: the manager panel. The manager owns the case, uses or rejects the suggestions, and could handle it without AI. Read the caption: no single right answer, and the manager can do it alone.",
         run: "What came in: one feedback form response (anonymised). What came out: the manager’s report and the saved draft.",
-        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A3.",
+        record: "The proof, in three links. One: Zap history shows one successful run, 18 October at 10:40 pm. Two: that run’s input is Kerry Tan’s form. Three: its report has exactly the subject we saw in the manager’s inbox. So the form, report and draft are all this one run. Form to draft took 26 seconds. Every step with its time is in appendix A2.",
         person: "Who: the customer service manager. What: original feedback, consent, accuracy, tone, urgency, policy. When: every report, before anything is sent. If it fails: nothing is sent. Placement: no single right answer, and either could do it alone, so bottom-right. If asked about errors: one report once swapped email and mobile consent; it was caught on review and the input labels were fixed."
       }
     }
@@ -731,7 +731,7 @@ window.DECK_DATA = {
           notes: "Hypothetical redesigns, not things our agents do today. End on the takeaway line at the bottom. For each card: the change, which question flips, and where it lands. One answer changes, the other stays. Only Question 1 moves the HR agent; the other three change Question 2. Removing an approval does not by itself move an agent: the work has to change.",
           cue: "Say “hypothetical” once, then read the four destinations." },
         { id: "closing", type: "closing", seconds: 15, title: "Q&A",
-          notes: "Read the question and stop talking. Questions follow; answer with evidence from our runs (appendix A1 lists them).",
+          notes: "Read the question and stop talking. Questions follow; answer with evidence from our runs (the appendix has each run trace and its testing).",
           cue: "Read the question exactly, then pause." }
       ]
     }
@@ -740,25 +740,23 @@ window.DECK_DATA = {
   appendix: [
     { id: "appendix", type: "divider", title: "Appendix",
       notes: "End of the presentation. Everything after this is supporting material for questions only." },
-    { id: "a-evidence", type: "evidence-status", title: "A1 · Evidence status",
-      notes: "Generated from the data file: every TBC and missing screenshot. Use it in rehearsal; hide or fill before Wednesday." },
-    { id: "a-config", type: "config", title: "A2 · Configuration evidence",
+    { id: "a-config", type: "config", title: "A1 · Configuration evidence",
       notes: "All configuration screenshots in one place, for questions about how each Zap was built." },
-    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A3 · MBairline run trace",
+    { id: "a-trace", type: "run-trace", agent: "mbairline", title: "A2 · MBairline run trace",
       notes: "Proof, step by step: every step of the Kerry Tan run with the time it ran. Click any screenshot to enlarge it. Form to draft took 26 seconds." },
-    { id: "a-lessons-mb", type: "lessons", agent: "mbairline", title: "A4 · MBairline testing", subtitle: "Failure, fix and retest",
+    { id: "a-lessons-mb", type: "lessons", agent: "mbairline", title: "A3 · MBairline testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: one report swapped email and mobile consent and recommended a call the passenger had declined. Fix: each consent answer is labelled explicitly; the Kerry Tan run shows the report matching the form. The HTML Yes/No filter now checks “contains Yes”. Say clearly which items are on record and which are only in the write-up." },
-    { id: "a-trace-crm", type: "run-trace", agent: "crm", title: "A5 · Banking CRM run trace", subtitle: "Every step of the BANK_013 run on record",
+    { id: "a-trace-crm", type: "run-trace", agent: "crm", title: "A4 · Banking CRM run trace", subtitle: "Every step of the BANK_013 run on record",
       notes: "Proof for the top-right run: Zap history at 23:05, the BANK_013 input at 23:05:10, the parsed draft at 23:05:21 and the approval request at 23:05:22. No run ID is shown, so the steps are matched by time and customer ID." },
-    { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A6 · Banking CRM testing", subtitle: "Failure, fix and retest",
+    { id: "a-lessons-crm", type: "lessons", agent: "crm", title: "A5 · Banking CRM testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: Gemini correctly said NO_CAMPAIGN for a customer who had already deposited, but the earlier Zap still asked for approval. A workflow-control fault, not an AI error. The fix was a Filter before approval. The filter screenshot is from an earlier Zap version; the retest is reported by Minh." },
-    { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A7 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
+    { id: "a-trace-expense", type: "run-trace", agent: "expense", title: "A6 · Expense claims run trace", subtitle: "Every step of Jack’s run on record",
       notes: "Proof for the top-left run: Jack submits at 12:42:57, the Zap picks up the row at 12:45:01 and Gmail sends the pre-check at 12:45:02, under one run ID (01ba7a48…). Click any screenshot to enlarge it." },
-    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A8 · Expense claims testing", subtitle: "Failure, fix and retest",
+    { id: "a-lessons-expense", type: "lessons", agent: "expense", title: "A7 · Expense claims testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: Revan predicted a future-dated claim would slip through, and it did: −11 days counted as on time. The fix adds a FUTURE DATE check; the same claim then failed. Separately, an empty sheet column shifted every field in the emails while Zap history still said Successful: a run can succeed and still be wrong." },
-    { id: "a-trace-leave", type: "run-trace", agent: "leave", title: "A9 · Manpower report run trace", subtitle: "Every step of the 19 Oct run on record",
+    { id: "a-trace-leave", type: "run-trace", agent: "leave", title: "A8 · Manpower report run trace", subtitle: "Every step of the 19 Oct run on record",
       notes: "Proof for the bottom-left run: the row is picked up at 14:45:57 and Gmail sends at 2:45:57 pm under run ID 01baa5ba…. The email has row 3’s exact numbers, but Gmail shows 2:40 PM, five minutes earlier, so it may be from a test of the same row." },
-    { id: "a-lessons-leave", type: "lessons", agent: "leave", title: "A10 · Manpower report testing", subtitle: "Failure, fix and retest",
+    { id: "a-lessons-leave", type: "lessons", agent: "leave", title: "A9 · Manpower report testing", subtitle: "Failure, fix and retest",
       notes: "If asked what went wrong: on a 12% absence day the report looked like any other, so Adithi added a status flag that puts ⚠ ABOVE 10% at the start of the subject. The run 2 and run 3 screenshots are not provided yet; this is from Adithi’s write-up." }
   ]
 };
