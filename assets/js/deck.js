@@ -391,7 +391,8 @@
     return {
       cls: 'agent journey', q: a.quadrant, theme: a.theme,
       html: `${agentHead(a, 'One run, start to *finish*')}${timeline}
-        <div class="jbody">${info}${stage}</div>`
+        <div class="jbody">${info}${stage}</div>
+        ${st.reflection ? `<p class="jreflect">${md(st.reflection)}</p>` : ''}`
     };
   };
 

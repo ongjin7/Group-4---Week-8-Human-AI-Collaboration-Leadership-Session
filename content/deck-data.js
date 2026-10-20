@@ -478,12 +478,13 @@ window.DECK_DATA = {
           note: "No one approves each report. Once a week, a person checks one day’s numbers against the records.",
           panelLabel: "The person checks, on a schedule",
           panelTitle: "The HR executive",
+          reflection: "*Tricky case (reflections): real-world attendance.* In large-scale manufacturing, time and attendance isn’t a simple count. Night shifts, rotating rosters, missed punches and late leave approvals all change who is truly present. Unless those rules are built into the logic, the agent will report confident but wrong numbers.",
           options: [
             "Every Friday, picks one day’s report",
             "Checks its numbers against the attendance and leave records",
             "The agent only reads and reports: it never changes records or decides"
           ],
-          say: "This is bottom-left. The agent runs alone every day. The person sits outside the run: every Friday, the HR executive checks one day against the records. HR could count by hand, and the agent counts alone: either can do it."
+          say: "This is bottom-left. The agent runs alone every day. The person sits outside the run: every Friday, the HR executive checks one day against the records. HR could count by hand, and the agent counts alone: either can do it. Then the reflection at the bottom: real attendance has night shifts, rotating rosters, missed punches and late leave approvals; unless those rules are in the logic, the agent reports confident but wrong numbers."
         }
       ],
       check: {
