@@ -521,7 +521,7 @@
   /* The ending: the takeaway, the question, and the four agents lined up asking to be moved. */
   R.closing = () => ({
     cls: 's-closing',
-    html: `<p class="eyebrow">Q&amp;A</p>
+    html: `<p class="eyebrow">Q<span class="amp">&amp;</span>A</p>
       <h1>${md(D.meta.closingQuestion)}</h1>
       <div class="lineup">${ORDER.map((q, k) => {
         const a = byQ(q);
