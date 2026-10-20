@@ -931,3 +931,7 @@ mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--i
 @keyframes mvdraw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
 .s-moves:not([data-step="0"]) .mvhint { opacity: 0; }
 @media print { .mvface { transform: none !important; opacity: 1 !important; } }
+/* Q&A: "Q&A" as the headline, the question a step smaller */
+.s-closing > .eyebrow { font: 400 132px/1 var(--serif); letter-spacing: -.01em; text-transform: none; color: var(--ink); }
+.s-closing h1 { font-size: 64px; line-height: 1.12; margin-top: 22px; max-width: 1300px; }
+.s-closing .lineup { margin-top: 64px; }
