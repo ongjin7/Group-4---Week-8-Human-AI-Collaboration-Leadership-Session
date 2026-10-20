@@ -135,7 +135,7 @@
       if (!a) return `<div class="qcell" data-q="${q}"><span class="qt">${esc(Qd.title)}</span>${tbc('no agent placed here yet')}</div>`;
       const num = `<span class="num" aria-hidden="true">${pad2(ORDER.indexOf(q) + 1)}</span>`;
       const tag = `<span class="tag">${Qd.q1 === 'yes' ? 'Right answer' : 'No single answer'} · ${Qd.q2 === 'yes' ? 'Work together' : 'Either alone'}</span>`;
-      const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">${t(a.presenter)}</span><span class="job"><b>${t(a.domain)}:</b> ${t(a.oneLiner)}</span>`;
+      const basics = `${num}${tag}<span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span><span class="dm">${t(a.presenter)}</span><span class="job">${t(a.oneLiner)}</span>`;
       if (mode === 'compare') {
         return `<div class="qcell" data-q="${q}"><span class="cface" aria-hidden="true">${face(a)}</span><span class="qt">${esc(Qd.title)}</span><span class="an">${esc(a.mapName || nameOf(a))}</span>
           <span class="cmp-ans">Right answer? <b>${yn(a.placement.q1.answer)}</b> · Must work together? <b>${yn(a.placement.q2.answer)}</b>${mismatchChip(a)}</span>
