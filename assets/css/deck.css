@@ -937,4 +937,4 @@ mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--i
 .s-closing .lineup { margin-top: 64px; }
 .s-closing > .eyebrow .amp { font-size: .62em; vertical-align: .12em; margin: 0 -.06em; }
 .s-closing h1 { text-align: center; align-self: center; margin-left: auto; margin-right: auto; }
-.s-closing > .eyebrow { text-align: left; align-self: flex-start; margin: 0; }
+.s-closing > .eyebrow { text-align: center; align-self: center; margin: 0 auto; }
