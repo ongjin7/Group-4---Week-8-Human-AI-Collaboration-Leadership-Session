@@ -467,16 +467,42 @@
     q1: { name: 'Question 1', yes: 'a right answer', no: 'no single right answer' },
     q2: { name: 'Question 2', yes: 'must work together', no: 'either can do it alone' }
   };
+  /* A small map for the moves slide: each → slides one agent from its quadrant to where the redesign would put it. */
+  const MV = { x0: 84, y0: 22, cw: 140, ch: 62, gap: 6, face: 44, offset: 26 };
+  const mvCentre = (q) => {
+    const col = q === 'tl' || q === 'bl' ? 0 : 1, row = q === 'tl' || q === 'tr' ? 0 : 1;
+    return [MV.x0 + col * (MV.cw + MV.gap) + MV.cw / 2, MV.y0 + row * (MV.ch + MV.gap) + MV.ch / 2];
+  };
+  function movesMap() {
+    const W = MV.x0 + 2 * MV.cw + MV.gap, H = MV.y0 + 2 * MV.ch + MV.gap;
+    let arrows = '', faces = '';
+    ORDER.forEach((q, k) => {
+      const a = byQ(q);
+      if (!a) return;
+      const [hx, hy] = mvCentre(q), [tx0, ty] = mvCentre(a.move.result), tx = tx0 + MV.offset;
+      const bend = hx === tx0 ? 46 : 0, bendY = hy === ty ? -30 : 0;
+      arrows += `<path class="mvarrow" data-k="${k + 1}" data-q="${q}" d="M${hx} ${hy} Q${(hx + tx) / 2 + bend} ${(hy + ty) / 2 + bendY} ${tx} ${ty}" />`;
+      faces += `<span class="mvface" data-k="${k + 1}" data-q="${q}" style="left:${hx - MV.face / 2}px;top:${hy - MV.face / 2}px;--dx:${tx - hx}px;--dy:${ty - hy}px">${face(a)}</span>`;
+    });
+    return `<div class="mvmap" aria-hidden="true" style="width:${W}px;height:${H}px">
+        <span class="mvx" style="left:${MV.x0}px;width:${MV.cw}px">Right answer</span><span class="mvx" style="left:${MV.x0 + MV.cw + MV.gap}px;width:${MV.cw}px">No single answer</span>
+        <span class="mvy" style="top:${MV.y0}px;height:${MV.ch}px">Together</span><span class="mvy" style="top:${MV.y0 + MV.ch + MV.gap}px;height:${MV.ch}px">Either alone</span>
+        ${ORDER.map((q) => { const [cx, cy] = mvCentre(q); return `<span class="mvcell" data-q="${q}" style="left:${cx - MV.cw / 2}px;top:${cy - MV.ch / 2}px;width:${MV.cw}px;height:${MV.ch}px"></span>`; }).join('')}
+        <svg class="mvarrows" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${arrows}</svg>
+        ${faces}
+      </div>`;
+  }
   R.moves = () => ({
-    html: `${head('Conclusion and reflections', 'What would *move* each agent?')}
-      <div class="moves">${ORDER.map((q) => {
+    cls: 's-moves', steps: 4,
+    html: `${head('Conclusion and reflections', 'What would *move* each agent?')}${movesMap()}
+      <div class="moves">${ORDER.map((q, k) => {
         const a = byQ(q);
         if (!a) return '';
         const m = a.move;
         const other = m.question === 'q1' ? 'q2' : 'q1';
         const expected = m.question === 'q1' ? quadrantFor(m.to, QS[q].q2) : quadrantFor(QS[q].q1, m.to);
         const L = QLABEL[m.question];
-        return `<div class="move" data-q="${q}">
+        return `<div class="move" data-q="${q}" data-mv="${k + 1}">
           <div class="mv-head"><span class="mv-name">${esc(a.movesName || nameOf(a))}</span><span class="mv-hyp">Hypothetical</span></div>
           <p class="mv-change">${t(m.change)}</p>
           <p class="mv-flip"><b>${L.name}</b> ${esc(L[m.from])} <span class="mv-arrow" aria-hidden="true">→</span> <b class="mv-to">${esc(L[m.to])}</b></p>
@@ -693,6 +719,7 @@
     const tapped = s.type === 'agent-card' && i === state.i && step > state.step;
     state.i = i; state.step = step;
     applyFrags(s, step);
+    s.el.dataset.step = String(step);
     if (tapped) {
       const card = s.el.querySelector('.tcard');
       card.classList.remove('tap');
@@ -794,7 +821,7 @@
   }
 
   document.addEventListener('click', (e) => {
-    const el = e.target.closest('button, [data-move], [data-focus-q], [data-tap]');
+    const el = e.target.closest('button, [data-move], [data-mv], [data-focus-q], [data-tap]');
     if (!el || el.closest('.chrome')) return;
     const slide = el.closest('.slide');
     if (el.matches('[data-tap]')) {
@@ -812,6 +839,7 @@
       return;
     }
     if (el.matches('[data-move]')) { stepMove(el); return; }
+    if (el.matches('[data-mv]')) { const k = Number(el.dataset.mv); go(state.i, state.step === k ? 0 : k); return; }
     if (el.matches('[data-focus-q]')) { if (!el.classList.contains('sel')) focusMap(slide, el.dataset.focusQ); }
   });
 
@@ -970,7 +998,7 @@
   if (params.get('mode') === 'reading' || (window.innerWidth < 760 && params.get('mode') !== 'present')) setReading(true);
   fit();
   const startAt = indexOf(location.hash.slice(1));
-  go(startAt >= 0 ? startAt : 0, 0, { noHash: startAt < 0 });
+  go(startAt >= 0 ? startAt : 0, Number(params.get('step')) || 0, { noHash: startAt < 0 });
   if (!TIMING.ok) console.warn('[deck] Timing check:', TIMING.problems.join(' '));
 
   window.__deck = { SLIDES, go, state, timing: TIMING };

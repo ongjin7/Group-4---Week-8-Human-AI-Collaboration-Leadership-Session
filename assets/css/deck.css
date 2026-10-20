@@ -893,3 +893,41 @@ mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--i
 .slide.journey:has(.jreflect) .jhuman { padding-top: 28px; padding-bottom: 28px; gap: 14px; }
 .slide.journey:has(.jreflect) .jhuman li { font-size: 24px; }
 .slide.journey:has(.jreflect) .jhuman ul { gap: 12px; }
+
+/* Moves slide: mini map; each step slides one agent to its new quadrant */
+.s-moves .mvmap { position: absolute; top: 50px; right: 96px; z-index: 2; }
+.mvmap > * { position: absolute; }
+.mvx { top: 0; text-align: center; font: 600 12px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.mvy { left: 0; width: 76px; display: flex; align-items: center; font: 600 12px/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mvcell { background: var(--qsoft); border-radius: 10px; border: 1px solid rgba(0,0,0,.04); transition: opacity .4s var(--ease); }
+.mvarrows { left: 0; top: 0; pointer-events: none; overflow: visible; }
+.mvarrow { fill: none; stroke: var(--qdot); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 2 8; opacity: 0; transition: opacity .3s; }
+.mvface { width: 44px; height: 44px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--qdot), 0 6px 14px -6px rgba(0,0,0,.35); padding: 3px; transition: transform .9s cubic-bezier(.5,0,.2,1), opacity .4s var(--ease); z-index: 2; }
+.mvface svg { width: 100%; height: 100%; display: block; }
+.mvhint { right: 0; bottom: -20px; font: 500 12px/1 var(--sans); color: var(--muted); white-space: nowrap; }
+.s-moves .move { cursor: pointer; transition: opacity .4s var(--ease), box-shadow .3s; }
+.s-moves .moves .move:hover { box-shadow: 0 0 0 2px var(--qdot), var(--shadow); }
+.s-moves .head h2 { max-width: 900px; }
+.s-moves[data-step="1"] .mvface[data-k="1"] { transform: translate(var(--dx), var(--dy)) scale(1.12); z-index: 3; }
+.s-moves[data-step="1"] .mvface:not([data-k="1"]) { opacity: .28; }
+.s-moves[data-step="1"] .mvarrow[data-k="1"] { opacity: 1; animation: mvdraw 1s ease both; }
+.s-moves[data-step="1"] .moves .move:not(:nth-child(1)) { opacity: .4; }
+.s-moves[data-step="1"] .moves .move:nth-child(1) { box-shadow: 0 0 0 3px var(--qdot), var(--shadow); }
+.s-moves[data-step="2"] .mvface[data-k="2"] { transform: translate(var(--dx), var(--dy)) scale(1.12); z-index: 3; }
+.s-moves[data-step="2"] .mvface:not([data-k="2"]) { opacity: .28; }
+.s-moves[data-step="2"] .mvarrow[data-k="2"] { opacity: 1; animation: mvdraw 1s ease both; }
+.s-moves[data-step="2"] .moves .move:not(:nth-child(2)) { opacity: .4; }
+.s-moves[data-step="2"] .moves .move:nth-child(2) { box-shadow: 0 0 0 3px var(--qdot), var(--shadow); }
+.s-moves[data-step="3"] .mvface[data-k="3"] { transform: translate(var(--dx), var(--dy)) scale(1.12); z-index: 3; }
+.s-moves[data-step="3"] .mvface:not([data-k="3"]) { opacity: .28; }
+.s-moves[data-step="3"] .mvarrow[data-k="3"] { opacity: 1; animation: mvdraw 1s ease both; }
+.s-moves[data-step="3"] .moves .move:not(:nth-child(3)) { opacity: .4; }
+.s-moves[data-step="3"] .moves .move:nth-child(3) { box-shadow: 0 0 0 3px var(--qdot), var(--shadow); }
+.s-moves[data-step="4"] .mvface[data-k="4"] { transform: translate(var(--dx), var(--dy)) scale(1.12); z-index: 3; }
+.s-moves[data-step="4"] .mvface:not([data-k="4"]) { opacity: .28; }
+.s-moves[data-step="4"] .mvarrow[data-k="4"] { opacity: 1; animation: mvdraw 1s ease both; }
+.s-moves[data-step="4"] .moves .move:not(:nth-child(4)) { opacity: .4; }
+.s-moves[data-step="4"] .moves .move:nth-child(4) { box-shadow: 0 0 0 3px var(--qdot), var(--shadow); }
+@keyframes mvdraw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+.s-moves:not([data-step="0"]) .mvhint { opacity: 0; }
+@media print { .mvface { transform: none !important; opacity: 1 !important; } }
