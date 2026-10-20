@@ -884,3 +884,5 @@ mark.hl, .theme-mbairline mark.hl { background: none; padding: 0; color: var(--i
 /* Number circles sit centred on the first line of their text (and stay there when the text wraps) */
 .jpins li { align-items: flex-start; line-height: 1.3; }
 .jpins .pin-dot { width: 30px; height: 30px; line-height: 30px; font-size: 15px; margin-top: calc((1.3em - 30px) / 2 + 3px); }
+.lesson-layout .jshots.stack { gap: 14px; }
+.lesson-layout .jshots.stack figure.ev, .lesson-layout .jshots.stack figure.ev:first-child { flex: 1 1 0; min-height: 0; }
